@@ -829,6 +829,1254 @@ const L10_B17 = {
 /* ============================================================
    DATA TREE — điều hướng đầy đủ 10–12
    ============================================================ */
+/* ============================================================
+   LỚP 11 — Chương 1: Cân bằng hoá học
+   ============================================================ */
+const L11_B1 = {
+  title:"Bài 1: Khái niệm về cân bằng hoá học", ready:true,
+  sections:[
+    sec("1. Phản ứng một chiều và phản ứng thuận nghịch", `
+      <p><b>Phản ứng một chiều</b> là phản ứng chỉ xảy ra theo một chiều từ chất đầu tạo thành sản phẩm, chất sản phẩm không phản ứng lại tạo ra chất đầu (kí hiệu mũi tên một chiều →).</p>
+      <p><b>Phản ứng thuận nghịch</b> là phản ứng trong cùng điều kiện xảy ra đồng thời theo hai chiều trái ngược nhau (kí hiệu ⇌): chiều từ trái sang phải gọi là <b>chiều thuận</b>, chiều từ phải sang trái gọi là <b>chiều nghịch</b>. Ví dụ: N₂(g) + 3H₂(g) ⇌ 2NH₃(g).</p>`),
+    sec("2. Trạng thái cân bằng hoá học", `
+      <p>Trong phản ứng thuận nghịch, khi tốc độ phản ứng thuận bằng tốc độ phản ứng nghịch, nồng độ các chất trong hệ không đổi theo thời gian, hệ đạt tới <b>trạng thái cân bằng hoá học</b>.</p>
+      <p>Cân bằng hoá học là <b>cân bằng động</b>: phản ứng thuận và nghịch vẫn tiếp diễn nhưng với tốc độ bằng nhau nên nồng độ các chất không thay đổi.</p>`),
+    sec("3. Hằng số cân bằng K", `
+      <p>Xét phản ứng tổng quát: aA + bB ⇌ cC + dD. Tại trạng thái cân bằng:</p>
+      <p style="text-align:center;font-weight:600;">K = ([C]<sup>c</sup>[D]<sup>d</sup>) / ([A]<sup>a</sup>[B]<sup>b</sup>)</p>
+      <p>Trong đó [X] là nồng độ mol/L của chất X tại thời điểm cân bằng. K chỉ phụ thuộc vào nhiệt độ và bản chất phản ứng, không phụ thuộc nồng độ đầu. Chất rắn không có mặt trong biểu thức K.</p>`),
+    sec("4. Nguyên lí chuyển dịch cân bằng Le Chatelier", `
+      <p>Khi một hệ đang ở trạng thái cân bằng, nếu thay đổi nồng độ, nhiệt độ, áp suất thì cân bằng sẽ <b>chuyển dịch</b> theo chiều làm giảm tác động của sự thay đổi đó.</p>
+      <ul>
+        <li>Tăng nồng độ một chất → cân bằng chuyển dịch theo chiều làm giảm chất đó.</li>
+        <li>Tăng áp suất → cân bằng chuyển dịch theo chiều làm giảm số mol khí.</li>
+        <li>Tăng nhiệt độ → cân bằng chuyển dịch theo chiều thu nhiệt (phản ứng thu nhiệt).</li>
+        <li>Chất xúc tác không làm chuyển dịch cân bằng, chỉ giúp cân bằng đạt tới nhanh hơn.</li>
+      </ul>`)
+  ],
+  examples:[
+    {problem:"Cho cân bằng: N₂(g) + 3H₂(g) ⇌ 2NH₃(g), ΔH < 0. Nếu tăng áp suất của hệ, cân bằng chuyển dịch theo chiều nào?",
+     solution:"Phía trái có 4 mol khí, phía phải có 2 mol khí. Tăng áp suất → cân bằng chuyển dịch theo chiều giảm số mol khí, tức là chiều thuận (tạo thêm NH₃)."},
+    {problem:"Ở một nhiệt độ, cân bằng H₂(g)+I₂(g) ⇌ 2HI(g) có [H₂]=[I₂]=0,1M, [HI]=0,8M. Tính K.",
+     solution:"K = [HI]²/([H₂][I₂]) = 0,8²/(0,1×0,1) = 0,64/0,01 = 64."}
+  ],
+  exercises:[
+    ex("Vì sao nói cân bằng hoá học là cân bằng động?", "Vì ở trạng thái cân bằng, phản ứng thuận và nghịch vẫn xảy ra liên tục nhưng với tốc độ bằng nhau nên nồng độ các chất không đổi, chứ phản ứng không dừng lại."),
+    ex("Cho cân bằng thu nhiệt: N₂O₄(g) ⇌ 2NO₂(g), ΔH>0. Tăng nhiệt độ ảnh hưởng thế nào đến cân bằng?", "Tăng nhiệt độ làm cân bằng chuyển dịch theo chiều thu nhiệt, tức chiều thuận, làm tăng lượng NO₂."),
+    ex("Chất xúc tác có làm thay đổi giá trị hằng số cân bằng K không? Vì sao?", "Không. Chất xúc tác làm tăng tốc độ cả phản ứng thuận và nghịch như nhau nên chỉ giúp hệ đạt cân bằng nhanh hơn, không làm thay đổi vị trí cân bằng hay giá trị K."),
+    ex("Viết biểu thức hằng số cân bằng K cho phản ứng: CaCO₃(s) ⇌ CaO(s) + CO₂(g).", "Vì CaCO₃ và CaO là chất rắn nên không có mặt trong biểu thức: K = [CO₂].")
+  ],
+  quiz:[
+    {q:"Ở trạng thái cân bằng hoá học thì:", options:["Phản ứng dừng lại hoàn toàn","Tốc độ thuận bằng tốc độ nghịch","Chỉ còn phản ứng thuận xảy ra","Nồng độ các chất bằng nhau"], correct:1, explain:"Cân bằng là trạng thái động, tốc độ phản ứng thuận bằng tốc độ phản ứng nghịch."},
+    {q:"Hằng số cân bằng K phụ thuộc vào:", options:["Nồng độ ban đầu","Áp suất hệ","Nhiệt độ","Chất xúc tác"], correct:2, explain:"K chỉ phụ thuộc vào nhiệt độ và bản chất phản ứng."},
+    {q:"Theo nguyên lí Le Chatelier, khi tăng áp suất hệ khí, cân bằng chuyển dịch theo chiều:", options:["Tăng số mol khí","Giảm số mol khí","Không đổi","Không xác định"], correct:1, explain:"Tăng áp suất → cân bằng dịch theo chiều làm giảm số mol khí để giảm áp suất."},
+    {q:"Chất nào không có mặt trong biểu thức hằng số cân bằng K?", options:["Chất khí","Chất tan trong dung dịch","Chất rắn","Chất lỏng nguyên chất tham gia phản ứng đồng thể"], correct:2, explain:"Chất rắn (và chất lỏng nguyên chất) có nồng độ không đổi nên không xuất hiện trong biểu thức K."}
+  ]
+};
+
+const L11_B2 = {
+  title:"Bài 2: Cân bằng trong dung dịch nước", ready:true,
+  sections:[
+    sec("1. Sự điện li", `
+      <p><b>Sự điện li</b> là quá trình phân li các chất trong nước (hoặc khi nóng chảy) tạo thành ion. Chất khi tan trong nước phân li ra ion gọi là <b>chất điện li</b>.</p>
+      <p><b>Chất điện li mạnh</b> phân li hoàn toàn (acid mạnh, base mạnh, hầu hết muối tan). <b>Chất điện li yếu</b> chỉ phân li một phần, tồn tại cân bằng giữa phân tử và ion (acid yếu, base yếu, ví dụ CH₃COOH ⇌ CH₃COO⁻ + H⁺).</p>`),
+    sec("2. Thuyết acid – base Brønsted–Lowry", `
+      <p><b>Acid</b> là chất có khả năng cho proton (H⁺); <b>base</b> là chất có khả năng nhận proton. Ví dụ: HCl là acid vì cho H⁺, NH₃ là base vì nhận H⁺ tạo NH₄⁺.</p>
+      <p>Nước có tính <b>lưỡng tính</b>, vừa có thể cho vừa có thể nhận proton: H₂O ⇌ H⁺ + OH⁻ (tự ion hoá).</p>`),
+    sec("3. Tích số ion của nước và pH", `
+      <p>Ở 25°C: K<sub>w</sub> = [H⁺][OH⁻] = 10⁻¹⁴. Trong nước nguyên chất [H⁺]=[OH⁻]=10⁻⁷ M (môi trường trung tính).</p>
+      <p><b>pH</b> = −log[H⁺]. Môi trường acid: pH &lt; 7; trung tính: pH = 7; base (kiềm): pH &gt; 7. pH càng nhỏ, tính acid càng mạnh.</p>
+      <table class="chem"><tr><th>Chất chỉ thị</th><th>Quỳ tím</th><th>Phenolphthalein</th></tr>
+      <tr><td>Môi trường acid (pH&lt;7)</td><td>Đỏ</td><td>Không màu</td></tr>
+      <tr><td>Môi trường trung tính (pH=7)</td><td>Tím</td><td>Không màu</td></tr>
+      <tr><td>Môi trường base (pH&gt;7)</td><td>Xanh</td><td>Hồng</td></tr></table>`),
+    sec("4. Sự thuỷ phân của muối", `<p>Muối tạo bởi acid mạnh–base yếu (ví dụ NH₄Cl) khi tan trong nước cho môi trường acid; muối tạo bởi acid yếu–base mạnh (ví dụ CH₃COONa) cho môi trường base; muối tạo bởi acid mạnh–base mạnh (NaCl) cho môi trường trung tính.</p>`)
+  ],
+  examples:[
+    {problem:"Tính pH của dung dịch HCl 0,01M (coi HCl điện li hoàn toàn).",
+     solution:"HCl → H⁺ + Cl⁻ nên [H⁺]=0,01=10⁻² M. pH = −log(10⁻²) = 2."},
+    {problem:"Một dung dịch có [OH⁻]=10⁻³ M ở 25°C. Tính [H⁺] và pH, cho biết môi trường gì.",
+     solution:"[H⁺] = Kw/[OH⁻] = 10⁻¹⁴/10⁻³ = 10⁻¹¹ M → pH = 11. Vì pH>7 nên môi trường base."}
+  ],
+  exercises:[
+    ex("Phân biệt chất điện li mạnh và chất điện li yếu, cho ví dụ.", "Chất điện li mạnh phân li hoàn toàn thành ion (HCl, NaOH, NaCl); chất điện li yếu chỉ phân li một phần, tồn tại cân bằng (CH₃COOH, NH₃)."),
+    ex("Theo thuyết Brønsted–Lowry, vì sao nước được coi là chất lưỡng tính?", "Vì nước vừa có thể nhường proton (đóng vai trò acid) vừa có thể nhận proton (đóng vai trò base) tuỳ chất phản ứng cùng nó."),
+    ex("Dung dịch NH₄Cl có môi trường acid, base hay trung tính? Giải thích.", "Môi trường acid, vì NH₄Cl là muối của acid mạnh (HCl) và base yếu (NH₃); ion NH₄⁺ thuỷ phân tạo H⁺."),
+    ex("Tính [H⁺] của dung dịch có pH = 4.", "[H⁺] = 10⁻pH = 10⁻⁴ M.")
+  ],
+  quiz:[
+    {q:"Chất điện li yếu là chất khi tan trong nước:", options:["Phân li hoàn toàn thành ion","Chỉ phân li một phần thành ion","Không phân li","Chỉ tồn tại dạng rắn"], correct:1, explain:"Chất điện li yếu chỉ phân li một phần, tồn tại cân bằng giữa phân tử và ion."},
+    {q:"Theo Brønsted–Lowry, acid là chất:", options:["Cho electron","Nhận electron","Cho proton (H⁺)","Nhận proton (H⁺)"], correct:2, explain:"Acid Brønsted–Lowry là chất có khả năng nhường proton."},
+    {q:"Ở 25°C, tích số ion của nước Kw = [H⁺][OH⁻] có giá trị:", options:["10⁻⁷","10⁻¹⁴","10⁷","1"], correct:1, explain:"Kw = 10⁻¹⁴ ở 25°C."},
+    {q:"Dung dịch có pH = 9 có môi trường:", options:["Acid","Trung tính","Base (kiềm)","Không xác định"], correct:2, explain:"pH > 7 ứng với môi trường base."}
+  ]
+};
+
+/* ============================================================
+   LỚP 11 — Chương 2: Nitrogen – Sulfur
+   ============================================================ */
+const L11_B3 = {
+  title:"Bài 3: Đơn chất nitrogen", ready:true,
+  sections:[
+    sec("1. Cấu tạo phân tử và tính chất vật lí", `
+      <p>Nitrogen (N) có Z=7, cấu hình electron 1s²2s²2p³, có 5 electron lớp ngoài cùng. Phân tử N₂ gồm 2 nguyên tử liên kết với nhau bằng <b>liên kết ba (N≡N)</b> rất bền.</p>
+      <p>N₂ là chất khí không màu, không mùi, không vị, nhẹ hơn không khí một chút, tan rất ít trong nước, chiếm khoảng 78% thể tích không khí.</p>`),
+    sec("2. Tính chất hoá học", `
+      <p>Do có liên kết ba bền vững, N₂ khá <b>trơ về mặt hoá học</b> ở nhiệt độ thường, chỉ phản ứng ở nhiệt độ cao hoặc có xúc tác.</p>
+      <ul>
+        <li>Tác dụng với hydrogen (có xúc tác, nhiệt độ, áp suất cao): N₂ + 3H₂ ⇌ 2NH₃</li>
+        <li>Tác dụng với oxygen ở nhiệt độ rất cao (tia lửa điện, sấm sét): N₂ + O₂ ⇌ 2NO (không màu, hoá nâu ngoài không khí do tạo NO₂)</li>
+      </ul>`),
+    sec("3. Ứng dụng và vai trò", `<p>N₂ dùng làm môi trường trơ trong công nghiệp (bảo quản thực phẩm, hàn, luyện kim), sản xuất amoniac (nguyên liệu làm phân đạm). Khí N₂ lỏng dùng để bảo quản mẫu sinh học ở nhiệt độ rất thấp.</p>`)
+  ],
+  examples:[
+    {problem:"Vì sao N₂ khá trơ ở điều kiện thường dù có độ âm điện lớn?",
+     solution:"Vì liên kết ba N≡N có năng lượng liên kết rất lớn (~946 kJ/mol), cần năng lượng lớn để phá vỡ nên N₂ chỉ phản ứng ở nhiệt độ cao hoặc có xúc tác."},
+    {problem:"Viết phương trình phản ứng tạo NO từ N₂ và O₂, và giải thích hiện tượng khí này hoá nâu trong không khí.",
+     solution:"N₂ + O₂ ⇌(to cao) 2NO. Khí NO không màu, khi ra không khí phản ứng với O₂: 2NO + O₂ → 2NO₂ (khí màu nâu đỏ)."}
+  ],
+  exercises:[
+    ex("Giải thích vì sao nitrogen được dùng để bảo quản thực phẩm.", "Vì N₂ trơ, không phản ứng với thực phẩm, giúp ngăn thực phẩm tiếp xúc với oxygen nên hạn chế oxi hoá, ôi thiu."),
+    ex("Tính phần trăm thể tích N₂ trong không khí gần đúng và nêu vai trò của nó với sự sống.", "N₂ chiếm khoảng 78% thể tích không khí; là nguồn nguyên tố nitrogen để thực vật (qua vi khuẩn cố định đạm) tổng hợp protein."),
+    ex("Vì sao phản ứng giữa N₂ và H₂ tạo NH₃ cần xúc tác và áp suất cao?", "Vì liên kết ba trong N₂ rất bền, phản ứng khó xảy ra ở điều kiện thường; cần xúc tác (Fe) và áp suất, nhiệt độ thích hợp để tăng tốc độ và hiệu suất phản ứng.")
+  ],
+  quiz:[
+    {q:"Trong phân tử N₂, hai nguyên tử N liên kết với nhau bằng:", options:["Liên kết đơn","Liên kết đôi","Liên kết ba","Liên kết ion"], correct:2, explain:"N₂ có liên kết ba N≡N rất bền."},
+    {q:"Nitrogen chiếm khoảng bao nhiêu % thể tích không khí?", options:["21%","78%","1%","50%"], correct:1, explain:"N₂ chiếm khoảng 78% thể tích không khí."},
+    {q:"Khí NO khi ra ngoài không khí sẽ:", options:["Không đổi màu","Hoá nâu do tạo NO₂","Hoá xanh","Cháy nổ"], correct:1, explain:"2NO + O₂ → 2NO₂ (màu nâu đỏ)."},
+    {q:"N₂ trơ về mặt hoá học ở điều kiện thường chủ yếu do:", options:["Khối lượng phân tử nhỏ","Liên kết ba N≡N bền vững","Không tan trong nước","Là khí không màu"], correct:1, explain:"Năng lượng liên kết ba rất lớn khiến N₂ khó phản ứng ở nhiệt độ thường."}
+  ]
+};
+
+const L11_B4 = {
+  title:"Bài 4: Ammonia và muối ammonium", ready:true,
+  sections:[
+    sec("1. Cấu tạo và tính chất vật lí của ammonia", `
+      <p>Phân tử NH₃ có nguyên tử N liên kết với 3 nguyên tử H bằng 3 liên kết cộng hoá trị, còn 1 cặp electron chưa liên kết, phân tử có dạng chóp tam giác.</p>
+      <p>NH₃ là khí không màu, mùi khai xốc, tan rất nhiều trong nước (tạo dung dịch ammonia), nhẹ hơn không khí.</p>`),
+    sec("2. Tính chất hoá học của ammonia", `
+      <ul>
+        <li><b>Tính base yếu:</b> NH₃ + H₂O ⇌ NH₄⁺ + OH⁻ (làm quỳ tím ẩm hoá xanh); NH₃ + HCl → NH₄Cl (khói trắng).</li>
+        <li><b>Tính khử:</b> N trong NH₃ có số oxi hoá −3 (thấp nhất) nên có thể bị oxi hoá: 4NH₃ + 3O₂ →(to) 2N₂ + 6H₂O; xúc tác Pt: 4NH₃+5O₂→4NO+6H₂O (dùng sản xuất HNO₃).</li>
+      </ul>`),
+    sec("3. Muối ammonium", `
+      <p>Muối ammonium (chứa NH₄⁺) tan tốt trong nước, điện li hoàn toàn. Khi đun nóng, muối ammonium dễ bị phân huỷ (NH₄Cl →(to) NH₃ + HCl); tác dụng với dung dịch kiềm giải phóng khí NH₃ có mùi khai — đây là phản ứng dùng để nhận biết ion NH₄⁺.</p>`),
+    sec("4. Ứng dụng", `<p>NH₃ là nguyên liệu quan trọng sản xuất phân đạm (urea, ammonium nitrate, ammonium sulfate), acid nitric, làm chất làm lạnh trong công nghiệp.</p>`)
+  ],
+  examples:[
+    {problem:"Nêu hiện tượng và viết phương trình khi cho NH₃ tác dụng với khí HCl.",
+     solution:"Xuất hiện khói trắng do tạo tinh thể NH₄Cl: NH₃(g) + HCl(g) → NH₄Cl(s)."},
+    {problem:"Làm sao để nhận biết dung dịch chứa ion NH₄⁺?",
+     solution:"Cho tác dụng với dung dịch kiềm (NaOH) và đun nhẹ, nếu thấy khí thoát ra có mùi khai làm xanh quỳ tím ẩm thì có ion NH₄⁺: NH₄⁺ + OH⁻ →(to) NH₃↑ + H₂O."}
+  ],
+  exercises:[
+    ex("Vì sao NH₃ vừa thể hiện tính base vừa thể hiện tính khử?", "Vì N trong NH₃ còn cặp electron chưa liên kết nên dễ nhận proton (tính base); đồng thời N có số oxi hoá −3 là mức thấp nhất nên dễ nhường electron, bị oxi hoá (tính khử)."),
+    ex("Viết phương trình nhiệt phân NH₄HCO₃ (bột nở dùng trong làm bánh).", "NH₄HCO₃ →(to) NH₃↑ + H₂O + CO₂↑."),
+    ex("Vì sao dung dịch ammonia có thể làm xanh giấy quỳ tím ẩm?", "Vì NH₃ tan trong nước tạo NH₄⁺ và OH⁻ (NH₃+H₂O⇌NH₄⁺+OH⁻), OH⁻ làm quỳ tím hoá xanh."),
+    ex("So sánh tính tan của NH₃ trong nước với các khí khác như O₂, N₂.", "NH₃ tan rất nhiều trong nước (do tạo liên kết hydrogen với nước và phản ứng tạo NH₄⁺, OH⁻), trong khi O₂, N₂ tan rất ít vì là phân tử không phân cực.")
+  ],
+  quiz:[
+    {q:"Trong phân tử NH₃, nguyên tử N có số oxi hoá:", options:["+3","0","−3","+5"], correct:2, explain:"N trong NH₃ có số oxi hoá −3, mức thấp nhất nên NH₃ có tính khử."},
+    {q:"Hiện tượng khi cho khí NH₃ gặp khí HCl là:", options:["Không hiện tượng","Xuất hiện khói trắng","Xuất hiện kết tủa vàng","Có khí không màu mùi hắc"], correct:1, explain:"Tạo tinh thể NH₄Cl dạng khói trắng."},
+    {q:"Thuốc thử để nhận biết ion NH₄⁺ trong dung dịch là:", options:["Dung dịch AgNO₃","Dung dịch kiềm, đun nhẹ","Dung dịch BaCl₂","Quỳ tím khô"], correct:1, explain:"NH₄⁺ + OH⁻ đun nóng sinh khí NH₃ mùi khai, làm xanh quỳ ẩm."},
+    {q:"NH₃ có tính base yếu vì:", options:["N có độ âm điện lớn","Còn cặp electron chưa liên kết có thể nhận proton","Có 3 liên kết N–H","Tan nhiều trong nước"], correct:1, explain:"Cặp electron tự do trên N giúp NH₃ nhận proton, thể hiện tính base."}
+  ]
+};
+
+const L11_B5 = {
+  title:"Bài 5: Nitric acid và muối nitrate", ready:true,
+  sections:[
+    sec("1. Cấu tạo và tính chất vật lí", `<p>HNO₃ là chất lỏng không màu, tan vô hạn trong nước, bốc khói trong không khí ẩm, kém bền, dễ bị phân huỷ khi có ánh sáng: 4HNO₃ →(as) 4NO₂ + O₂ + 2H₂O (nên dung dịch HNO₃ đặc thường có màu vàng do lẫn NO₂).</p>`),
+    sec("2. Tính acid mạnh", `<p>HNO₃ là một trong các acid mạnh nhất, điện li hoàn toàn trong nước, có đầy đủ tính chất của một acid: đổi màu quỳ tím sang đỏ, tác dụng với base, oxide base, muối của acid yếu hơn.</p>`),
+    sec("3. Tính oxi hoá mạnh", `
+      <p>N trong HNO₃ có số oxi hoá +5 (cao nhất) nên HNO₃ là chất oxi hoá rất mạnh, oxi hoá được hầu hết kim loại (trừ Au, Pt) và nhiều phi kim, hợp chất.</p>
+      <ul>
+        <li>Với kim loại: kim loại + HNO₃ → muối nitrate + sản phẩm khử của N (NO₂, NO, N₂O, N₂, NH₄NO₃ tuỳ nồng độ acid và độ mạnh kim loại) + H₂O.</li>
+        <li>Fe, Al, Cr bị thụ động hoá trong HNO₃ đặc, nguội (tạo lớp oxide bảo vệ trên bề mặt).</li>
+      </ul>`),
+    sec("4. Muối nitrate và ứng dụng", `<p>Muối nitrate (NO₃⁻) đều tan tốt trong nước. Khi nung nóng, muối nitrate bị phân huỷ giải phóng O₂, dùng làm thuốc nổ đen, phân bón. HNO₃ là nguyên liệu sản xuất phân đạm, thuốc nổ TNT, tơ sợi.</p>`)
+  ],
+  examples:[
+    {problem:"Viết phương trình phản ứng của Cu với dung dịch HNO₃ loãng.",
+     solution:"3Cu + 8HNO₃(loãng) → 3Cu(NO₃)₂ + 2NO↑ + 4H₂O."},
+    {problem:"Vì sao dung dịch HNO₃ đặc để lâu ngoài ánh sáng thường có màu vàng?",
+     solution:"Vì HNO₃ kém bền, bị ánh sáng phân huỷ một phần tạo khí NO₂ màu nâu đỏ tan lại vào dung dịch làm dung dịch có màu vàng: 4HNO₃ → 4NO₂ + O₂ + 2H₂O."}
+  ],
+  exercises:[
+    ex("Vì sao HNO₃ vừa có tính acid mạnh vừa có tính oxi hoá mạnh?", "Vì HNO₃ điện li hoàn toàn cho H⁺ (tính acid mạnh); đồng thời N có số oxi hoá +5 là mức cao nhất nên dễ nhận electron, thể hiện tính oxi hoá mạnh."),
+    ex("Vì sao Al, Fe không tan trong HNO₃ đặc, nguội?", "Vì HNO₃ đặc nguội oxi hoá bề mặt kim loại tạo lớp oxide mỏng, bền, bảo vệ kim loại không phản ứng tiếp — hiện tượng thụ động hoá."),
+    ex("Viết phương trình nhiệt phân KNO₃.", "2KNO₃ →(to) 2KNO₂ + O₂↑."),
+    ex("Kể hai ứng dụng quan trọng của HNO₃ trong đời sống, sản xuất.", "Sản xuất phân đạm (như NH₄NO₃), sản xuất thuốc nổ (TNT) và tơ sợi tổng hợp.")
+  ],
+  quiz:[
+    {q:"Số oxi hoá của N trong HNO₃ là:", options:["+3","+4","+5","−3"], correct:2, explain:"N trong HNO₃ có số oxi hoá +5, mức cao nhất."},
+    {q:"Kim loại nào sau đây bị thụ động hoá trong HNO₃ đặc, nguội?", options:["Cu","Al, Fe","Ag","Zn"], correct:1, explain:"Al, Fe (và Cr) bị thụ động hoá trong HNO₃ đặc nguội."},
+    {q:"Muối nitrate có đặc điểm chung là:", options:["Không tan trong nước","Đều tan tốt trong nước","Chỉ tan trong acid","Có màu đặc trưng"], correct:1, explain:"Tất cả muối nitrate đều tan tốt trong nước."},
+    {q:"Dung dịch HNO₃ đặc để lâu chuyển màu vàng vì:", options:["Hoà tan bụi","Bị phân huỷ tạo NO₂ tan lại vào dung dịch","Phản ứng với O₂ không khí","Kết tinh"], correct:1, explain:"HNO₃ phân huỷ dưới ánh sáng sinh NO₂ hoà tan làm dung dịch vàng."}
+  ]
+};
+
+const L11_B6 = {
+  title:"Bài 6: Sulfur và sulfur dioxide", ready:true,
+  sections:[
+    sec("1. Đơn chất sulfur", `<p>Sulfur (S) là chất rắn màu vàng, không tan trong nước, có các dạng thù hình (tà phương, đơn tà). S vừa có tính oxi hoá (tác dụng với kim loại, H₂ tạo hợp chất số oxi hoá −2: Fe+S→FeS) vừa có tính khử (tác dụng với O₂, chất oxi hoá mạnh tạo số oxi hoá +4, +6: S+O₂→SO₂).</p>`),
+    sec("2. Cấu tạo và tính chất vật lí của SO₂", `<p>SO₂ (sulfur dioxide) là khí không màu, mùi hắc, độc, nặng hơn không khí, tan nhiều trong nước.</p>`),
+    sec("3. Tính chất hoá học của SO₂", `
+      <ul>
+        <li><b>Là oxide acid:</b> SO₂ + H₂O ⇌ H₂SO₃ (acid sulfurơ, yếu, không bền); tác dụng với dung dịch base: SO₂+2NaOH→Na₂SO₃+H₂O.</li>
+        <li><b>Tính khử:</b> S trong SO₂ có số oxi hoá +4 (trung gian) nên có thể bị oxi hoá lên +6: 2SO₂+O₂⇌(xúc tác,to)2SO₃ (giai đoạn quan trọng sản xuất H₂SO₄); làm mất màu dung dịch nước bromine, thuốc tím.</li>
+        <li><b>Tính oxi hoá:</b> tác dụng với chất khử mạnh hơn như H₂S: SO₂+2H₂S→3S+2H₂O.</li>
+      </ul>`),
+    sec("4. Ứng dụng và tác hại", `<p>SO₂ dùng để sản xuất H₂SO₄, tẩy trắng giấy, bột giấy, chống nấm mốc. SO₂ là khí độc, một trong các nguyên nhân chính gây mưa acid và ô nhiễm không khí.</p>`)
+  ],
+  examples:[
+    {problem:"Viết phương trình chứng minh SO₂ vừa có tính khử vừa có tính oxi hoá.",
+     solution:"Tính khử: SO₂+Br₂+2H₂O→H₂SO₄+2HBr (S từ +4 lên +6). Tính oxi hoá: SO₂+2H₂S→3S↓+2H₂O (S từ +4 xuống 0)."},
+    {problem:"Giải thích vì sao SO₂ làm mất màu dung dịch nước bromine.",
+     solution:"SO₂ khử Br₂ (màu vàng cam) thành HBr không màu, đồng thời SO₂ bị oxi hoá lên H₂SO₄: SO₂+Br₂+2H₂O→2HBr+H₂SO₄."}
+  ],
+  exercises:[
+    ex("Vì sao S vừa thể hiện tính oxi hoá vừa thể hiện tính khử?", "Vì S có số oxi hoá 0, là mức trung gian giữa −2 và +6, nên có thể tăng (thể hiện tính khử khi gặp chất oxi hoá) hoặc giảm số oxi hoá (thể hiện tính oxi hoá khi gặp kim loại, H₂)."),
+    ex("Viết phương trình phản ứng SO₂ với dung dịch Ca(OH)₂ dư.", "SO₂ + Ca(OH)₂ → CaSO₃↓ + H₂O."),
+    ex("Vì sao SO₂ là một trong các khí gây mưa acid?", "SO₂ thải ra khí quyển bị oxi hoá và kết hợp hơi nước tạo H₂SO₃, H₂SO₄, rơi xuống cùng mưa gây mưa acid, ảnh hưởng đến cây trồng, công trình."),
+    ex("Phân biệt SO₂ và CO₂ bằng thuốc thử nào? Viết phương trình.", "Dùng dung dịch nước bromine hoặc thuốc tím: SO₂ làm mất màu (SO₂+Br₂+2H₂O→H₂SO₄+2HBr), còn CO₂ không phản ứng, không làm mất màu.")
+  ],
+  quiz:[
+    {q:"Trong phản ứng SO₂ + Br₂ + 2H₂O → H₂SO₄ + 2HBr, SO₂ đóng vai trò:", options:["Chất oxi hoá","Chất khử","Acid","Base"], correct:1, explain:"S tăng số oxi hoá từ +4 lên +6 nên SO₂ là chất khử."},
+    {q:"SO₂ là oxide của loại nào?", options:["Oxide base","Oxide acid","Oxide lưỡng tính","Oxide trung tính"], correct:1, explain:"SO₂ tác dụng với base và nước tạo acid nên là oxide acid."},
+    {q:"Khí nào sau đây là nguyên nhân chính gây mưa acid cùng với NOx?", options:["CO₂","SO₂","N₂","O₂"], correct:1, explain:"SO₂ (và NOx) là nguyên nhân chính gây mưa acid."},
+    {q:"Phản ứng 2SO₂ + O₂ ⇌ 2SO₃ được ứng dụng trong công nghiệp để:", options:["Điều chế oxygen","Sản xuất sulfuric acid","Sản xuất phân đạm","Tẩy trắng vải"], correct:1, explain:"Đây là giai đoạn oxi hoá SO₂ thành SO₃ trong quy trình sản xuất H₂SO₄."}
+  ]
+};
+
+const L11_B7 = {
+  title:"Bài 7: Sulfuric acid và muối sulfate", ready:true,
+  sections:[
+    sec("1. Tính chất vật lí", `<p>H₂SO₄ tinh khiết là chất lỏng sánh như dầu, không màu, không bay hơi, nặng gần gấp đôi nước, tan vô hạn trong nước và toả rất nhiều nhiệt. <b>Khi pha loãng phải rót từ từ acid vào nước, khuấy đều, tuyệt đối không làm ngược lại</b> để tránh acid bắn ra gây bỏng.</p>`),
+    sec("2. Tính chất của dung dịch H₂SO₄ loãng", `<p>H₂SO₄ loãng là acid mạnh, có đầy đủ tính chất chung của acid: đổi màu quỳ tím sang đỏ, tác dụng với kim loại đứng trước H (giải phóng H₂), base, oxide base, muối.</p>`),
+    sec("3. Tính chất của H₂SO₄ đặc", `
+      <ul>
+        <li><b>Tính oxi hoá mạnh:</b> H₂SO₄ đặc, nóng oxi hoá được hầu hết kim loại (kể cả Cu, Ag) tạo muối sulfate ứng với hoá trị cao nhất và sản phẩm khử SO₂ (thường gặp), S hoặc H₂S; không giải phóng H₂. Ví dụ: Cu+2H₂SO₄(đặc,nóng)→CuSO₄+SO₂↑+2H₂O.</li>
+        <li><b>Tính háo nước:</b> H₂SO₄ đặc hút nước mạnh, có thể lấy nước kết hợp trong hợp chất hữu cơ (ví dụ than hoá đường: C₁₂H₂₂O₁₁ →(H₂SO₄ đặc) 12C+11H₂O), gây bỏng nặng khi tiếp xúc da.</li>
+      </ul>`),
+    sec("4. Muối sulfate và nhận biết ion SO₄²⁻", `<p>Đa số muối sulfate tan tốt (trừ BaSO₄, PbSO₄ không tan; CaSO₄, Ag₂SO₄ ít tan). Thuốc thử nhận biết ion SO₄²⁻ là dung dịch BaCl₂ (hoặc Ba(NO₃)₂): tạo kết tủa trắng BaSO₄ không tan trong acid.</p>`)
+  ],
+  examples:[
+    {problem:"Viết phương trình phản ứng của Cu với H₂SO₄ đặc, nóng.",
+     solution:"Cu + 2H₂SO₄(đặc,nóng) → CuSO₄ + SO₂↑ + 2H₂O."},
+    {problem:"Nêu cách nhận biết dung dịch chứa ion SO₄²⁻.",
+     solution:"Nhỏ dung dịch BaCl₂ vào mẫu thử, nếu xuất hiện kết tủa trắng không tan trong HCl dư thì có ion SO₄²⁻: BaCl₂+Na₂SO₄→BaSO₄↓+2NaCl."}
+  ],
+  exercises:[
+    ex("Vì sao khi pha loãng H₂SO₄ đặc phải rót acid vào nước mà không làm ngược lại?", "Vì phản ứng hoà tan H₂SO₄ đặc vào nước toả nhiệt rất mạnh; nếu rót nước vào acid, nước sôi đột ngột bắn acid ra ngoài gây bỏng nguy hiểm. Rót từ từ acid vào nước và khuấy đều giúp nhiệt toả ra từ từ, an toàn hơn."),
+    ex("Giải thích hiện tượng đường bị hoá đen khi cho H₂SO₄ đặc vào.", "H₂SO₄ đặc có tính háo nước rất mạnh, hút các nguyên tử H và O trong phân tử đường (theo tỉ lệ tạo nước) ra khỏi hợp chất, chỉ để lại carbon màu đen (than hoá)."),
+    ex("Vì sao Fe, Al không tan trong H₂SO₄ đặc, nguội nhưng tan trong H₂SO₄ loãng?", "Fe, Al bị thụ động hoá trong H₂SO₄ đặc nguội do lớp oxide bảo vệ hình thành trên bề mặt; còn trong H₂SO₄ loãng, chúng phản ứng bình thường giải phóng khí H₂."),
+    ex("Viết phương trình phản ứng giữa Fe và dung dịch H₂SO₄ loãng.", "Fe + H₂SO₄(loãng) → FeSO₄ + H₂↑.")
+  ],
+  quiz:[
+    {q:"Khi pha loãng H₂SO₄ đặc, thao tác đúng là:", options:["Đổ nước vào acid","Đổ acid từ từ vào nước, khuấy đều","Đổ cả hai cùng lúc","Đun nóng trước khi pha"], correct:1, explain:"Phải rót từ từ acid vào nước để tránh bắn acid gây bỏng."},
+    {q:"H₂SO₄ đặc, nóng tác dụng với Cu tạo khí:", options:["H₂","SO₂","H₂S","O₂"], correct:1, explain:"Cu+2H₂SO₄ đặc nóng→CuSO₄+SO₂+2H₂O, sản phẩm khử phổ biến là SO₂."},
+    {q:"Thuốc thử dùng để nhận biết ion sulfate (SO₄²⁻) là:", options:["Dung dịch NaOH","Dung dịch BaCl₂","Dung dịch AgNO₃","Quỳ tím"], correct:1, explain:"BaCl₂ tạo kết tủa trắng BaSO₄ không tan trong acid với ion SO₄²⁻."},
+    {q:"Tính chất đặc trưng giúp H₂SO₄ đặc làm than hoá đường, giấy là:", options:["Tính acid mạnh","Tính oxi hoá mạnh","Tính háo nước","Tính khử"], correct:2, explain:"H₂SO₄ đặc hút nước rất mạnh (tính háo nước), lấy đi H và O trong hợp chất hữu cơ."}
+  ]
+};
+
+/* ============================================================
+   LỚP 11 — Chương 3: Đại cương về hoá học hữu cơ
+   ============================================================ */
+const L11_B8 = {
+  title:"Bài 8: Hợp chất hữu cơ và hoá học hữu cơ", ready:true,
+  sections:[
+    sec("1. Khái niệm hợp chất hữu cơ", `<p><b>Hợp chất hữu cơ</b> là hợp chất của carbon (trừ một số hợp chất đơn giản như CO, CO₂, muối carbonate, cyanide, carbide...). <b>Hoá học hữu cơ</b> là ngành hoá học nghiên cứu các hợp chất hữu cơ.</p>`),
+    sec("2. Đặc điểm chung của hợp chất hữu cơ", `
+      <ul>
+        <li>Luôn chứa carbon, thường có thêm H, O, N, halogen...; liên kết trong phân tử chủ yếu là <b>liên kết cộng hoá trị</b>.</li>
+        <li>Nhiệt độ nóng chảy, nhiệt độ sôi thường thấp hơn hợp chất vô cơ tương ứng; nhiều chất dễ bay hơi, dễ cháy.</li>
+        <li>Phần lớn không tan hoặc tan ít trong nước, tan tốt trong dung môi hữu cơ.</li>
+        <li>Phản ứng hoá học thường xảy ra chậm, theo nhiều hướng, tạo hỗn hợp sản phẩm.</li>
+      </ul>`),
+    sec("3. Phân loại hợp chất hữu cơ", `
+      <p>Dựa vào thành phần nguyên tố, chia thành: <b>hydrocarbon</b> (chỉ chứa C, H) và <b>dẫn xuất của hydrocarbon</b> (có thêm O, N, halogen...). Hydrocarbon lại chia thành hydrocarbon no, không no, thơm.</p>`)
+  ],
+  examples:[
+    {problem:"Trong các chất sau, chất nào là hợp chất hữu cơ: CO₂, CH₄, NaHCO₃, C₂H₅OH?",
+     solution:"CH₄ và C₂H₅OH là hợp chất hữu cơ (chứa C liên kết H theo kiểu hữu cơ); CO₂ và NaHCO₃ tuy chứa carbon nhưng thuộc loại hợp chất vô cơ theo quy ước."},
+    {problem:"Vì sao hợp chất hữu cơ thường dễ cháy hơn hợp chất vô cơ tương ứng?",
+     solution:"Vì hợp chất hữu cơ chứa carbon và hydrogen liên kết cộng hoá trị, khi cháy các liên kết C–C, C–H bị phá vỡ và kết hợp O₂ tạo CO₂, H₂O, toả nhiều nhiệt."}
+  ],
+  exercises:[
+    ex("Nêu 3 đặc điểm khác biệt cơ bản giữa hợp chất hữu cơ và hợp chất vô cơ.", "Hợp chất hữu cơ: liên kết cộng hoá trị là chủ yếu, nhiệt độ nóng chảy/sôi thấp, phản ứng chậm và không hoàn toàn theo một hướng; trong khi nhiều hợp chất vô cơ có liên kết ion, nhiệt độ nóng chảy cao, phản ứng thường nhanh và hoàn toàn."),
+    ex("Vì sao CO₂, CO, muối carbonate không được xếp vào hợp chất hữu cơ dù chứa carbon?", "Đây là quy ước lịch sử: các hợp chất này có tính chất giống hợp chất vô cơ (không cháy được như CO₂, hoặc là muối vô cơ), do đó xếp riêng vào nhóm hợp chất vô cơ của carbon."),
+    ex("Phân loại các chất sau vào hydrocarbon hay dẫn xuất hydrocarbon: C₂H₆, C₂H₅Cl, C₆H₆, CH₃COOH.", "Hydrocarbon: C₂H₆ (ethane), C₆H₆ (benzene). Dẫn xuất hydrocarbon: C₂H₅Cl (có halogen), CH₃COOH (có oxygen).")
+  ],
+  quiz:[
+    {q:"Hợp chất hữu cơ là hợp chất của nguyên tố nào (trừ một số ngoại lệ)?", options:["Nitrogen","Carbon","Oxygen","Hydrogen"], correct:1, explain:"Hợp chất hữu cơ là hợp chất của carbon."},
+    {q:"Liên kết chủ yếu trong hợp chất hữu cơ là:", options:["Liên kết ion","Liên kết cộng hoá trị","Liên kết kim loại","Liên kết hydrogen"], correct:1, explain:"Hợp chất hữu cơ chủ yếu có liên kết cộng hoá trị."},
+    {q:"Hydrocarbon là hợp chất chỉ chứa hai nguyên tố:", options:["C và O","C và N","C và H","C và halogen"], correct:2, explain:"Hydrocarbon chỉ gồm carbon và hydrogen."},
+    {q:"Đặc điểm chung nào sau đây KHÔNG đúng với hợp chất hữu cơ?", options:["Dễ bay hơi, dễ cháy","Phản ứng thường xảy ra nhanh, hoàn toàn theo một hướng","Nhiệt độ nóng chảy thường thấp","Tan tốt trong dung môi hữu cơ"], correct:1, explain:"Trái lại, phản ứng hữu cơ thường xảy ra chậm và theo nhiều hướng."}
+  ]
+};
+
+const L11_B9 = {
+  title:"Bài 9: Phương pháp tách biệt và tinh chế hợp chất hữu cơ", ready:true,
+  sections:[
+    sec("1. Chưng cất", `<p><b>Chưng cất</b> dùng để tách các chất lỏng có nhiệt độ sôi khác nhau đáng kể, dựa trên nguyên tắc đun sôi hỗn hợp, chất có nhiệt độ sôi thấp hơn bay hơi trước, ngưng tụ thu riêng. Dùng để tách rượu khỏi nước, tinh chế dung môi.</p>`),
+    sec("2. Chiết", `<p><b>Chiết</b> dùng để tách các chất lỏng không tan (hoặc ít tan) vào nhau, dựa vào độ tan khác nhau trong hai dung môi không trộn lẫn. Dùng phễu chiết để tách riêng hai lớp chất lỏng.</p>`),
+    sec("3. Kết tinh", `<p><b>Kết tinh</b> dùng để tách và tinh chế chất rắn, dựa vào sự khác nhau về độ tan theo nhiệt độ: hoà tan chất rắn vào dung môi nóng đến bão hoà, để nguội từ từ, chất cần tinh chế kết tinh trở lại, tách khỏi tạp chất tan tốt hơn.</p>`),
+    sec("4. Sắc kí", `<p><b>Sắc kí</b> (sắc kí cột, sắc kí bản mỏng) dùng để tách các chất trong hỗn hợp dựa trên sự khác nhau về khả năng hấp phụ và di chuyển của chúng qua một pha tĩnh dưới tác dụng của pha động.</p>`)
+  ],
+  examples:[
+    {problem:"Muốn tách rượu (ethanol) ra khỏi hỗn hợp rượu – nước, nên dùng phương pháp nào? Vì sao?",
+     solution:"Dùng chưng cất, vì ethanol (sôi ở 78,3°C) và nước (sôi ở 100°C) có nhiệt độ sôi khác nhau đủ lớn để tách bằng cách đun và ngưng tụ hơi."},
+    {problem:"Muốn tách dầu ăn lẫn trong nước, nên dùng phương pháp nào?",
+     solution:"Dùng phương pháp chiết, vì dầu ăn không tan trong nước, tạo thành hai lớp chất lỏng phân biệt có thể tách riêng bằng phễu chiết."}
+  ],
+  exercises:[
+    ex("Vì sao phương pháp kết tinh thường dùng để tinh chế chất rắn mà không dùng cho chất lỏng?", "Vì kết tinh dựa vào sự thay đổi độ tan của chất rắn theo nhiệt độ trong dung môi; chất lỏng không có hiện tượng kết tinh tương tự nên phương pháp này chỉ phù hợp với chất rắn."),
+    ex("Nêu nguyên tắc chung của phương pháp sắc kí.", "Dựa vào sự khác nhau về khả năng bị hấp phụ và tốc độ di chuyển của các chất trong hỗn hợp khi đi qua một pha tĩnh (cột, bản mỏng) dưới tác dụng của một pha động, nhờ đó các chất được tách ra."),
+    ex("Đề xuất phương pháp tinh chế muối ăn có lẫn cát.", "Hoà tan hỗn hợp vào nước, cát không tan được lọc bỏ; sau đó cô cạn hoặc kết tinh dung dịch nước muối để thu muối ăn tinh khiết.")
+  ],
+  quiz:[
+    {q:"Phương pháp chưng cất dựa trên sự khác nhau về:", options:["Độ tan","Nhiệt độ sôi","Khối lượng riêng","Khả năng hấp phụ"], correct:1, explain:"Chưng cất tách các chất lỏng dựa vào nhiệt độ sôi khác nhau."},
+    {q:"Để tách hai chất lỏng không tan vào nhau, nên dùng:", options:["Chưng cất","Chiết","Kết tinh","Sắc kí"], correct:1, explain:"Chiết dùng phễu chiết để tách các chất lỏng không trộn lẫn."},
+    {q:"Kết tinh là phương pháp tinh chế dựa vào:", options:["Sự khác nhau về độ tan theo nhiệt độ","Sự khác nhau về nhiệt độ sôi","Sự bay hơi","Từ tính"], correct:0, explain:"Kết tinh dựa vào độ tan của chất rắn thay đổi theo nhiệt độ."},
+    {q:"Sắc kí bản mỏng thường dùng để:", options:["Tách hỗn hợp khí","Phân tích, tách các chất trong hỗn hợp dựa vào khả năng hấp phụ","Đo nhiệt độ sôi","Đo khối lượng riêng"], correct:1, explain:"Sắc kí dựa trên sự khác nhau về hấp phụ và di chuyển qua pha tĩnh."}
+  ]
+};
+
+const L11_B10 = {
+  title:"Bài 10: Công thức phân tử hợp chất hữu cơ", ready:true,
+  sections:[
+    sec("1. Phân tích nguyên tố", `<p>Để xác định công thức phân tử hợp chất hữu cơ, trước tiên cần xác định phần trăm khối lượng các nguyên tố (C, H, O, N...) bằng phương pháp phân tích định lượng (đốt cháy mẫu, hấp thụ CO₂, H₂O...).</p>`),
+    sec("2. Công thức đơn giản nhất", `
+      <p><b>Công thức đơn giản nhất (CTĐGN)</b> biểu thị tỉ lệ tối giản số nguyên tử các nguyên tố trong phân tử. Từ % khối lượng, tính tỉ lệ số mol các nguyên tố rồi rút gọn về tỉ lệ nguyên tối giản.</p>`),
+    sec("3. Công thức phân tử", `
+      <p><b>Công thức phân tử</b> cho biết đúng số nguyên tử mỗi nguyên tố trong một phân tử. Công thức phân tử là bội số nguyên dương của công thức đơn giản nhất: (CTĐGN)ₙ = công thức phân tử.</p>
+      <p>Để xác định n, cần biết thêm khối lượng mol phân tử M (xác định bằng phổ khối hoặc tỉ khối hơi).</p>`)
+  ],
+  examples:[
+    {problem:"Đốt cháy hoàn toàn 1 chất hữu cơ X thu được CO₂ và H₂O theo tỉ lệ mol 1:2. X chỉ chứa C, H. Xác định công thức đơn giản nhất của X.",
+     solution:"Tỉ lệ mol CO₂:H₂O = 1:2 → n(C):n(H) = n(CO₂) : 2n(H₂O) = 1 : 4. Công thức đơn giản nhất là CH₄."},
+    {problem:"Chất hữu cơ Y có công thức đơn giản nhất CH₂O và khối lượng mol M=60. Xác định công thức phân tử của Y.",
+     solution:"Khối lượng CH₂O = 12+2+16=30. n = M/30 = 60/30 = 2. Công thức phân tử: C₂H₄O₂."}
+  ],
+  exercises:[
+    ex("Vì sao cần xác định thêm khối lượng mol phân tử mới suy ra được công thức phân tử từ công thức đơn giản nhất?", "Vì công thức đơn giản nhất chỉ cho tỉ lệ nguyên tử tối giản, trong khi nhiều hợp chất có cùng tỉ lệ này nhưng khối lượng phân tử khác nhau (là bội số n lần); biết M mới xác định được giá trị n cụ thể."),
+    ex("Một hợp chất hữu cơ chứa 40% C, 6,67% H, còn lại là O về khối lượng. Xác định công thức đơn giản nhất.", "%O=100−40−6,67=53,33%. Tỉ lệ mol: C:H:O = 40/12 : 6,67/1 : 53,33/16 = 3,33:6,67:3,33 = 1:2:1. Công thức đơn giản nhất: CH₂O."),
+    ex("Phân biệt khái niệm công thức đơn giản nhất và công thức phân tử.", "Công thức đơn giản nhất chỉ biểu diễn tỉ lệ tối giản số nguyên tử các nguyên tố; công thức phân tử biểu diễn đúng số nguyên tử thực có trong một phân tử, có thể là bội nguyên của công thức đơn giản nhất.")
+  ],
+  quiz:[
+    {q:"Công thức đơn giản nhất biểu thị:", options:["Số nguyên tử thực trong phân tử","Tỉ lệ tối giản số nguyên tử các nguyên tố","Khối lượng mol phân tử","Cấu trúc không gian phân tử"], correct:1, explain:"CTĐGN chỉ cho tỉ lệ tối giản, không phải số nguyên tử thực."},
+    {q:"Để xác định công thức phân tử từ công thức đơn giản nhất, cần biết thêm:", options:["Nhiệt độ sôi","Khối lượng mol phân tử","Màu sắc","Độ tan trong nước"], correct:1, explain:"Cần M để tìm hệ số n trong (CTĐGN)ₙ."},
+    {q:"Chất có CTĐGN là CH₂ và M=42 có công thức phân tử là:", options:["CH₂","C₂H₄","C3H6","C4H8"], correct:2, explain:"Khối lượng CH₂=14; n=42/14=3 → C₃H₆."},
+    {q:"Phương pháp nào dùng để xác định phần trăm khối lượng các nguyên tố trong hợp chất hữu cơ?", options:["Chưng cất","Phân tích nguyên tố (đốt cháy)","Chiết","Kết tinh"], correct:1, explain:"Phân tích nguyên tố (đốt cháy mẫu, đo CO₂, H₂O sinh ra) xác định % khối lượng nguyên tố."}
+  ]
+};
+
+const L11_B11 = {
+  title:"Bài 11: Cấu tạo hoá học hợp chất hữu cơ", ready:true,
+  sections:[
+    sec("1. Thuyết cấu tạo hoá học", `
+      <ul>
+        <li>Trong phân tử hợp chất hữu cơ, các nguyên tử liên kết với nhau theo đúng hoá trị và theo một thứ tự nhất định gọi là <b>cấu tạo hoá học</b>. Thứ tự liên kết thay đổi thì tính chất chất cũng thay đổi.</li>
+        <li>Carbon có hoá trị IV, các nguyên tử C có thể liên kết trực tiếp với nhau tạo thành mạch carbon (mạch thẳng, nhánh hoặc vòng).</li>
+        <li>Tính chất của chất phụ thuộc vào thành phần phân tử (bản chất, số lượng nguyên tử) và cấu tạo hoá học (thứ tự liên kết).</li>
+      </ul>`),
+    sec("2. Công thức cấu tạo", `<p><b>Công thức cấu tạo</b> biểu diễn thứ tự và cách thức liên kết của các nguyên tử trong phân tử. Có công thức cấu tạo đầy đủ (ghi rõ mọi liên kết) và công thức cấu tạo thu gọn (chỉ ghi nhóm nguyên tử theo mạch chính).</p>`),
+    sec("3. Đồng phân", `<p><b>Đồng phân</b> là các hợp chất khác nhau nhưng có cùng công thức phân tử. Ví dụ C₂H₆O có 2 đồng phân: CH₃–CH₂–OH (ethanol, chất lỏng, tác dụng với Na) và CH₃–O–CH₃ (dimethyl ether, chất khí, không tác dụng với Na) — minh chứng cấu tạo hoá học quyết định tính chất.</p>`)
+  ],
+  examples:[
+    {problem:"Vì sao C₂H₆O có hai chất với tính chất khác hẳn nhau (ethanol và dimethyl ether)?",
+     solution:"Vì tuy cùng công thức phân tử C₂H₆O nhưng thứ tự liên kết các nguyên tử khác nhau (CH₃CH₂OH có nhóm –OH; CH₃OCH₃ có liên kết C–O–C), đây là hiện tượng đồng phân, minh chứng cấu tạo hoá học quyết định tính chất chất."},
+    {problem:"Viết công thức cấu tạo thu gọn có thể có của C₃H₈.",
+     solution:"C₃H₈ chỉ có một cấu tạo: CH₃–CH₂–CH₃ (propane), vì mạch carbon 3 nguyên tử chỉ có một cách sắp xếp mạch thẳng."}
+  ],
+  exercises:[
+    ex("Thế nào là đồng phân? Cho một ví dụ minh hoạ ngoài ethanol/dimethyl ether.", "Đồng phân là các chất có cùng công thức phân tử nhưng khác nhau về cấu tạo hoá học nên có tính chất khác nhau. Ví dụ: C₄H₁₀ có 2 đồng phân là butane mạch thẳng (CH₃CH₂CH₂CH₃) và isobutane mạch nhánh."),
+    ex("Vì sao carbon có thể tạo được rất nhiều hợp chất hữu cơ khác nhau?", "Vì carbon có hoá trị IV, có thể liên kết với nhau tạo mạch thẳng, nhánh, vòng dài ngắn khác nhau, đồng thời liên kết với nhiều nguyên tố khác (H,O,N,halogen) theo nhiều cách khác nhau, tạo vô số cấu trúc phân tử."),
+    ex("Phân biệt công thức phân tử và công thức cấu tạo.", "Công thức phân tử chỉ cho biết số lượng nguyên tử mỗi nguyên tố trong phân tử; công thức cấu tạo còn cho biết thứ tự, cách thức liên kết giữa các nguyên tử đó.")
+  ],
+  quiz:[
+    {q:"Đồng phân là các chất:", options:["Có cùng tính chất, khác công thức phân tử","Có cùng công thức phân tử, khác cấu tạo","Có cùng cấu tạo, khác công thức phân tử","Có cùng khối lượng mol"], correct:1, explain:"Đồng phân: cùng công thức phân tử, cấu tạo hoá học khác nhau."},
+    {q:"Trong hợp chất hữu cơ, carbon có hoá trị:", options:["II","III","IV","V"], correct:2, explain:"Carbon luôn có hoá trị IV trong hợp chất hữu cơ."},
+    {q:"Ethanol (CH₃CH₂OH) và dimethyl ether (CH₃OCH₃) là ví dụ về:", options:["Đồng vị","Đồng phân","Đồng đẳng","Đồng khối"], correct:1, explain:"Hai chất cùng công thức phân tử C₂H₆O nhưng cấu tạo khác nhau → đồng phân."},
+    {q:"Tính chất của một hợp chất hữu cơ phụ thuộc vào:", options:["Chỉ thành phần nguyên tố","Chỉ khối lượng phân tử","Thành phần phân tử và cấu tạo hoá học","Màu sắc của chất"], correct:2, explain:"Cả thành phần và trật tự liên kết (cấu tạo hoá học) đều quyết định tính chất chất."}
+  ]
+};
+
+/* ============================================================
+   LỚP 11 — Chương 4: Hydrocarbon
+   ============================================================ */
+const L11_B12 = {
+  title:"Bài 12: Alkane", ready:true,
+  sections:[
+    sec("1. Khái niệm, đồng đẳng, đồng phân", `
+      <p><b>Alkane</b> là hydrocarbon no, mạch hở, chỉ có liên kết đơn C–C, công thức chung CₙH₂ₙ₊₂ (n≥1). Các alkane hợp thành dãy đồng đẳng, hơn kém nhau một hay nhiều nhóm CH₂.</p>
+      <p>Từ C₄ trở đi, alkane có đồng phân mạch carbon (mạch thẳng, mạch nhánh).</p>`),
+    sec("2. Danh pháp", `<p>Tên alkane mạch thẳng: gốc chỉ số C (meth, eth, prop, but, pent, hex, hept, oct...) + đuôi <b>-ane</b>. Ví dụ: CH₄ methane, C₂H₆ ethane, C₃H₈ propane, C₄H₁₀ butane. Với mạch nhánh, gọi tên theo mạch chính dài nhất + tên nhánh + số chỉ vị trí (danh pháp IUPAC).</p>`),
+    sec("3. Tính chất vật lí", `<p>Ở điều kiện thường, C₁–C₄ là chất khí, C₅–C₁₇ là chất lỏng, từ C₁₈ trở lên là chất rắn. Alkane không tan trong nước, tan trong dung môi hữu cơ, nhẹ hơn nước.</p>`),
+    sec("4. Tính chất hoá học", `
+      <ul>
+        <li><b>Phản ứng thế (halogen hoá):</b> CH₄+Cl₂→(as)CH₃Cl+HCl — phản ứng đặc trưng của alkane, xảy ra theo cơ chế gốc tự do dưới ánh sáng.</li>
+        <li><b>Phản ứng cháy:</b> CₙH₂ₙ₊₂+((3n+1)/2)O₂→nCO₂+(n+1)H₂O, toả nhiều nhiệt — cơ sở dùng alkane làm nhiên liệu.</li>
+        <li><b>Phản ứng tách (cracking, tách hydrogen):</b> ở nhiệt độ cao, xúc tác, alkane mạch dài bị bẻ gãy tạo alkane và alkene mạch ngắn hơn — ứng dụng trong lọc hoá dầu.</li>
+      </ul>`)
+  ],
+  examples:[
+    {problem:"Viết phương trình đốt cháy hoàn toàn propane (C₃H₈).",
+     solution:"C₃H₈+5O₂→3CO₂+4H₂O."},
+    {problem:"Viết phương trình phản ứng thế của methane với Cl₂ (askt), tỉ lệ mol 1:1.",
+     solution:"CH₄+Cl₂→(askt)CH₃Cl+HCl."}
+  ],
+  exercises:[
+    ex("Viết công thức cấu tạo các đồng phân của C₄H₁₀.", "CH₃CH₂CH₂CH₃ (butane, mạch thẳng) và CH₃CH(CH₃)CH₃ (isobutane, mạch nhánh)."),
+    ex("Vì sao alkane được gọi là hydrocarbon no?", "Vì trong phân tử alkane chỉ có liên kết đơn (liên kết σ), mỗi carbon đã bão hoà hoá trị bằng liên kết với H hoặc C khác, không còn khả năng cộng thêm."),
+    ex("Nêu ứng dụng chính của phản ứng cracking alkane trong công nghiệp.", "Cracking dùng để bẻ gãy các phân tử alkane mạch dài (trong dầu mỏ) thành các phân tử alkane và alkene mạch ngắn hơn, phù hợp làm nhiên liệu (xăng) và nguyên liệu tổng hợp hoá dầu (ethylene, propylene)."),
+    ex("Đốt cháy hoàn toàn 2,24 lít CH₄ (đktc). Tính thể tích CO₂ sinh ra.", "n(CH₄)=2,24/22,4=0,1 mol. CH₄+2O₂→CO₂+2H₂O, n(CO₂)=0,1 mol → V=0,1×22,4=2,24 lít.")
+  ],
+  quiz:[
+    {q:"Công thức chung của alkane là:", options:["CₙH₂ₙ","CₙH₂ₙ₊₂","CₙH₂ₙ₋₂","CₙH₂ₙ₊₁"], correct:1, explain:"Alkane no, mạch hở có công thức chung CₙH₂ₙ₊₂."},
+    {q:"Phản ứng đặc trưng của alkane là:", options:["Phản ứng cộng","Phản ứng thế","Phản ứng trùng hợp","Phản ứng oxi hoá không hoàn toàn"], correct:1, explain:"Vì chỉ có liên kết đơn, alkane tham gia phản ứng thế (halogen hoá) là đặc trưng."},
+    {q:"Alkane từ C₁ đến C₄ ở điều kiện thường tồn tại ở trạng thái:", options:["Rắn","Lỏng","Khí","Không xác định"], correct:2, explain:"C₁–C₄ là chất khí ở điều kiện thường."},
+    {q:"Phản ứng cracking alkane dùng để:", options:["Tạo alkane mạch dài hơn","Bẻ gãy mạch tạo phân tử nhỏ hơn (alkane, alkene)","Tạo alcohol","Tạo acid"], correct:1, explain:"Cracking bẻ gãy alkane mạch dài thành các phân tử ngắn hơn phục vụ lọc hoá dầu."}
+  ]
+};
+
+const L11_B13 = {
+  title:"Bài 13: Alkene và Alkyne", ready:true,
+  sections:[
+    sec("1. Khái niệm, cấu tạo, đồng phân", `
+      <p><b>Alkene</b> là hydrocarbon không no, mạch hở, có 1 liên kết đôi C=C, công thức chung CₙH₂ₙ (n≥2). <b>Alkyne</b> là hydrocarbon không no có 1 liên kết ba C≡C, công thức chung CₙH₂ₙ₋₂ (n≥2). Ví dụ: CH₂=CH₂ (ethylene), CH≡CH (acetylene).</p>
+      <p>Alkene có đồng phân cấu tạo (vị trí liên kết đôi, mạch carbon) và đồng phân hình học (cis–trans) khi hai carbon của liên kết đôi mỗi bên gắn 2 nhóm thế khác nhau.</p>`),
+    sec("2. Tính chất hoá học của alkene", `
+      <ul>
+        <li><b>Phản ứng cộng</b> (đặc trưng): cộng H₂ (xúc tác Ni), cộng halogen (làm mất màu nước bromine — dùng để nhận biết alkene): CH₂=CH₂+Br₂→CH₂Br–CH₂Br; cộng HX theo quy tắc Markovnikov.</li>
+        <li><b>Phản ứng trùng hợp:</b> nCH₂=CH₂ →(xúc tác,to,p) (–CH₂–CH₂–)ₙ (polyethylene, PE) — cơ sở sản xuất polymer.</li>
+        <li><b>Phản ứng oxi hoá:</b> alkene làm mất màu dung dịch KMnO₄ (phản ứng oxi hoá tạo diol); cháy toả nhiệt tạo CO₂, H₂O.</li>
+      </ul>`),
+    sec("3. Tính chất hoá học của alkyne", `
+      <p>Tương tự alkene, alkyne có phản ứng cộng (H₂, halogen, HX — có thể cộng 1 hoặc 2 lần do có 2 liên kết π), làm mất màu nước bromine, dung dịch KMnO₄.</p>
+      <p>Alkyne đầu mạch (có H gắn C liên kết ba) có phản ứng đặc trưng riêng: thế bằng ion kim loại, ví dụ CH≡CH + 2AgNO₃ + 2NH₃ → AgC≡CAg↓(vàng) + 2NH₄NO₃ — dùng để nhận biết alk-1-yne.</p>`)
+  ],
+  examples:[
+    {problem:"Viết phương trình phản ứng ethylene tác dụng với dung dịch bromine.",
+     solution:"CH₂=CH₂ + Br₂ → CH₂Br–CH₂Br (làm mất màu da cam của nước bromine)."},
+    {problem:"Trình bày cách phân biệt khí ethane và acetylene bằng một thuốc thử.",
+     solution:"Dẫn qua dung dịch AgNO₃/NH₃: acetylene (CH≡CH) tạo kết tủa vàng AgC≡CAg, còn ethane không phản ứng, không hiện tượng."}
+  ],
+  exercises:[
+    ex("Vì sao alkene, alkyne được gọi là hydrocarbon không no?", "Vì trong phân tử còn liên kết π (liên kết đôi hoặc liên kết ba) chưa bão hoà, có khả năng cộng thêm nguyên tử/nhóm nguyên tử khác."),
+    ex("Viết phương trình trùng hợp propylene (CH₂=CH–CH₃) tạo polypropylene.", "nCH₂=CH–CH₃ →(xúc tác,to,p) (–CH₂–CH(CH₃)–)ₙ."),
+    ex("Nêu thuốc thử để phân biệt alkane với alkene.", "Dùng dung dịch nước bromine (hoặc KMnO₄): alkene làm mất màu do phản ứng cộng (oxi hoá), alkane không phản ứng ở điều kiện thường."),
+    ex("Vì sao chỉ alk-1-yne (có nối ba ở đầu mạch) mới phản ứng với dung dịch AgNO₃/NH₃?", "Vì chỉ nguyên tử H gắn trực tiếp với carbon mang liên kết ba đầu mạch mới đủ linh động (do C lai hoá sp hút electron mạnh) để bị thay thế bởi ion Ag⁺.")
+  ],
+  quiz:[
+    {q:"Công thức chung của alkyne là:", options:["CₙH₂ₙ","CₙH₂ₙ₊₂","CₙH₂ₙ₋₂","CₙH₂ₙ₋₆"], correct:2, explain:"Alkyne có 1 liên kết ba, công thức chung CₙH₂ₙ₋₂."},
+    {q:"Phản ứng đặc trưng của alkene và alkyne là:", options:["Phản ứng thế","Phản ứng cộng","Phản ứng trùng ngưng","Phản ứng tráng gương"], correct:1, explain:"Do có liên kết π chưa no, alkene/alkyne dễ tham gia phản ứng cộng."},
+    {q:"Thuốc thử dùng để nhận biết alk-1-yne (như acetylene) là:", options:["Dung dịch Br₂","Dung dịch AgNO₃/NH₃","Quỳ tím","Dung dịch NaOH"], correct:1, explain:"Alk-1-yne tạo kết tủa vàng với AgNO₃/NH₃, alkane và alkene thường không phản ứng này."},
+    {q:"Phản ứng trùng hợp ethylene tạo ra sản phẩm nào?", options:["Ethanol","Polyethylene (PE)","Acetic acid","Ethane"], correct:1, explain:"nCH₂=CH₂ trùng hợp tạo polyethylene (PE), một loại polymer phổ biến."}
+  ]
+};
+
+const L11_B14 = {
+  title:"Bài 14: Arene (hydrocarbon thơm)", ready:true,
+  sections:[
+    sec("1. Cấu tạo benzene", `<p>Benzene (C₆H₆) có cấu trúc vòng 6 carbon phẳng, các liên kết C–C trong vòng có độ dài bằng nhau (trung gian giữa đơn và đôi) do hệ electron π giải toả đều trên cả vòng, tạo nên tính bền đặc biệt gọi là <b>tính thơm</b>.</p>`),
+    sec("2. Tính chất vật lí", `<p>Benzene và các arene đơn giản là chất lỏng không màu, mùi thơm đặc trưng, nhẹ hơn nước, không tan trong nước, tan tốt trong dung môi hữu cơ, độc.</p>`),
+    sec("3. Tính chất hoá học", `
+      <ul>
+        <li><b>Phản ứng thế (đặc trưng của vòng thơm):</b> thế với Br₂ (xúc tác Fe): C₆H₆+Br₂→(Fe,to)C₆H₅Br+HBr; phản ứng nitro hoá với HNO₃ đặc (xúc tác H₂SO₄ đặc) tạo nitrobenzene.</li>
+        <li><b>Phản ứng cộng</b> (khó hơn alkene, cần điều kiện khắc nghiệt): cộng H₂ (Ni, to, p cao) tạo cyclohexane; benzene <b>không làm mất màu</b> dung dịch nước bromine ở điều kiện thường — khác hẳn alkene, dùng để phân biệt.</li>
+        <li>Vòng benzene bền, khó bị oxi hoá bởi KMnO₄ ở điều kiện thường (khác với alkene, alkyne).</li>
+      </ul>`)
+  ],
+  examples:[
+    {problem:"Vì sao benzene không làm mất màu dung dịch nước bromine ở điều kiện thường trong khi ethylene lại làm mất màu?",
+     solution:"Vì hệ electron π trong vòng benzene giải toả đều, bền vững (tính thơm) nên khó tham gia phản ứng cộng ở điều kiện thường; còn ethylene có liên kết đôi C=C kém bền hơn, dễ cộng Br₂."},
+    {problem:"Viết phương trình phản ứng benzene tác dụng với Br₂ khan, xúc tác bột Fe.",
+     solution:"C₆H₆+Br₂→(Fe,to)C₆H₅Br+HBr (phản ứng thế, không phải phản ứng cộng)."}
+  ],
+  exercises:[
+    ex("Nêu thuốc thử để phân biệt benzene và hex-1-ene (một alkene).", "Dùng dung dịch nước bromine: hex-1-ene làm mất màu (phản ứng cộng), còn benzene không làm mất màu ở điều kiện thường."),
+    ex("Vì sao benzene được xếp vào loại hydrocarbon thơm dù công thức phân tử C₆H₆ có độ bất bão hoà cao?", "Vì cấu trúc vòng phẳng với hệ electron π giải toả đều tạo nên tính bền đặc biệt (tính thơm), khiến benzene có tính chất hoá học đặc trưng khác hẳn hydrocarbon không no mạch hở, dù về công thức có vẻ 'thiếu no'."),
+    ex("Viết phương trình phản ứng nitro hoá benzene tạo nitrobenzene.", "C₆H₆+HNO₃(đặc)→(H₂SO₄ đặc,to)C₆H₅NO₂+H₂O.")
+  ],
+  quiz:[
+    {q:"Đặc điểm cấu tạo tạo nên 'tính thơm' của benzene là:", options:["Có liên kết ba","Hệ electron π giải toả đều trên vòng 6 cạnh phẳng","Có nhánh alkyl","Không có liên kết π"], correct:1, explain:"Sự giải toả electron π trên vòng phẳng tạo tính bền đặc biệt gọi là tính thơm."},
+    {q:"Ở điều kiện thường, benzene phản ứng với dung dịch nước bromine như thế nào?", options:["Làm mất màu nhanh","Không làm mất màu","Tạo kết tủa trắng","Tạo khí thoát ra"], correct:1, explain:"Vòng thơm bền, khó cộng Br₂ ở điều kiện thường nên không làm mất màu."},
+    {q:"Phản ứng đặc trưng của benzene là:", options:["Phản ứng cộng dễ dàng","Phản ứng thế (có xúc tác)","Phản ứng trùng hợp","Phản ứng tráng bạc"], correct:1, explain:"Vòng benzene ưu tiên phản ứng thế hơn phản ứng cộng."},
+    {q:"Sản phẩm phản ứng benzene với HNO₃ đặc (xúc tác H₂SO₄ đặc) là:", options:["Toluene","Nitrobenzene","Aniline","Phenol"], correct:1, explain:"Phản ứng nitro hoá benzene tạo nitrobenzene C₆H₅NO₂."}
+  ]
+};
+
+/* ============================================================
+   LỚP 11 — Chương 5: Dẫn xuất halogen – Alcohol – Phenol
+   ============================================================ */
+const L11_B15 = {
+  title:"Bài 15: Dẫn xuất halogen", ready:true,
+  sections:[
+    sec("1. Khái niệm, phân loại, danh pháp", `<p><b>Dẫn xuất halogen</b> là hợp chất hữu cơ khi thay thế một hay nhiều nguyên tử H trong phân tử hydrocarbon bằng nguyên tử halogen (F, Cl, Br, I). Ví dụ: CH₃Cl (chloromethane), C₂H₅Br (bromoethane). Tên gọi thay thế: halogeno + tên hydrocarbon tương ứng.</p>`),
+    sec("2. Tính chất vật lí", `<p>Ở điều kiện thường, dẫn xuất halogen có thể là khí, lỏng hoặc rắn tuỳ khối lượng phân tử; không tan trong nước, tan trong dung môi hữu cơ; nhiều chất có mùi đặc trưng, một số độc.</p>`),
+    sec("3. Tính chất hoá học", `
+      <ul>
+        <li><b>Phản ứng thế nguyên tử halogen bằng nhóm –OH</b> (thuỷ phân trong môi trường kiềm): R–X + NaOH →(to) R–OH + NaX. Đây là phản ứng quan trọng để điều chế alcohol.</li>
+        <li><b>Phản ứng tách hydrogen halide (tách HX)</b> khi đun với kiềm/ancol trong alcohol, tạo alkene: CH₃–CH₂Br + NaOH →(ethanol,to) CH₂=CH₂ + NaBr + H₂O.</li>
+      </ul>`),
+    sec("4. Ứng dụng", `<p>Dẫn xuất halogen dùng làm dung môi, chất làm lạnh (freon — nay hạn chế do phá huỷ tầng ozone), nguyên liệu tổng hợp hữu cơ (điều chế alcohol, alkene), sản xuất PVC (từ vinyl chloride), thuốc trừ sâu (DDT, đã cấm ở nhiều nước do độc hại, khó phân huỷ).</p>`)
+  ],
+  examples:[
+    {problem:"Viết phương trình thuỷ phân CH₃Cl trong dung dịch NaOH, đun nóng.",
+     solution:"CH₃Cl + NaOH →(to) CH₃OH + NaCl."},
+    {problem:"Viết phương trình phản ứng tách HBr từ C₂H₅Br khi đun với NaOH/ethanol.",
+     solution:"C₂H₅Br + NaOH →(ethanol,to) CH₂=CH₂ + NaBr + H₂O."}
+  ],
+  exercises:[
+    ex("Vì sao dẫn xuất halogen có phản ứng thế dễ dàng bởi nhóm –OH?", "Vì liên kết C–halogen phân cực (halogen có độ âm điện lớn hơn C), carbon mang một phần điện tích dương dễ bị tấn công bởi tác nhân giàu electron như ion OH⁻, dẫn tới phản ứng thế."),
+    ex("Vì sao freon (CFC) bị hạn chế sử dụng trên toàn cầu?", "Vì các hợp chất CFC bền, khi thoát lên tầng bình lưu bị phân huỷ bởi tia UV giải phóng gốc Cl• phá huỷ tầng ozone bảo vệ Trái Đất."),
+    ex("So sánh điều kiện của phản ứng thế bằng OH⁻ và phản ứng tách HX từ cùng một dẫn xuất halogen.", "Phản ứng thế thường dùng dung dịch NaOH (trong nước), đun nóng vừa phải, tạo alcohol; phản ứng tách dùng NaOH tan trong alcohol (ethanol), đun nóng, tạo alkene và nước.")
+  ],
+  quiz:[
+    {q:"Dẫn xuất halogen là sản phẩm thay thế nguyên tử nào trong hydrocarbon bằng halogen?", options:["Carbon","Hydrogen","Oxygen","Nitrogen"], correct:1, explain:"Halogen thay thế nguyên tử H trong phân tử hydrocarbon."},
+    {q:"Sản phẩm của phản ứng R–X + NaOH (trong nước, đun nóng) là:", options:["Alkene","Alcohol","Acid carboxylic","Ester"], correct:1, explain:"Phản ứng thế nhóm halogen bằng OH tạo alcohol tương ứng."},
+    {q:"Phản ứng tách HX từ dẫn xuất halogen tạo ra loại hợp chất nào?", options:["Alkane","Alkene","Alcohol","Aldehyde"], correct:1, explain:"Phản ứng tách HX (đun với NaOH/alcohol) tạo alkene."},
+    {q:"Vì sao CFC (freon) gây hại cho tầng ozone?", options:["Do phản ứng cháy tạo CO₂","Do phân huỷ dưới UV giải phóng gốc Cl• phá huỷ ozone","Do có tính acid mạnh","Do phản ứng với nước mưa"], correct:1, explain:"Gốc Cl• sinh ra từ phân huỷ CFC dưới tia UV phá huỷ phân tử ozone theo chuỗi phản ứng."}
+  ]
+};
+
+const L11_B16 = {
+  title:"Bài 16: Alcohol", ready:true,
+  sections:[
+    sec("1. Khái niệm, phân loại, danh pháp", `
+      <p><b>Alcohol</b> là hợp chất hữu cơ có nhóm –OH liên kết trực tiếp với carbon no. Alcohol no, đơn chức, mạch hở có công thức chung CₙH₂ₙ₊₁OH (n≥1).</p>
+      <p>Tên thay thế: tên hydrocarbon tương ứng (bỏ e) + <b>-ol</b> + số chỉ vị trí nhóm OH. Ví dụ: CH₃OH methanol, C₂H₅OH ethanol.</p>`),
+    sec("2. Tính chất vật lí", `<p>Các alcohol nhỏ (methanol, ethanol...) tan vô hạn trong nước do tạo được liên kết hydrogen với nước; độ tan giảm khi mạch carbon dài hơn. Alcohol có nhiệt độ sôi cao hơn hydrocarbon có khối lượng phân tử tương đương do có liên kết hydrogen giữa các phân tử alcohol.</p>`),
+    sec("3. Tính chất hoá học", `
+      <ul>
+        <li><b>Phản ứng với kim loại kiềm:</b> 2C₂H₅OH+2Na→2C₂H₅ONa+H₂↑ (chứng minh có nhóm –OH linh động).</li>
+        <li><b>Phản ứng tách nước tạo alkene</b> (xúc tác H₂SO₄ đặc, 170°C): C₂H₅OH→(H₂SO₄đặc,170°C)CH₂=CH₂+H₂O.</li>
+        <li><b>Phản ứng ester hoá</b> với acid carboxylic (xúc tác H₂SO₄ đặc, đun nóng): CH₃COOH+C₂H₅OH⇌(H₂SO₄đặc,to)CH₃COOC₂H₅+H₂O.</li>
+        <li><b>Phản ứng oxi hoá:</b> alcohol bậc I bị oxi hoá tạo aldehyde rồi acid carboxylic; alcohol bậc II tạo ketone; alcohol cháy toả nhiều nhiệt.</li>
+      </ul>`),
+    sec("4. Ứng dụng", `<p>Ethanol dùng làm dung môi, nhiên liệu sinh học (xăng E5), nguyên liệu công nghiệp, sát khuẩn y tế. Methanol là nguyên liệu tổng hợp hữu cơ nhưng độc, có thể gây mù mắt, tử vong nếu uống nhầm.</p>`)
+  ],
+  examples:[
+    {problem:"Viết phương trình phản ứng ethanol với sodium.",
+     solution:"2C₂H₅OH + 2Na → 2C₂H₅ONa + H₂↑."},
+    {problem:"Viết phương trình phản ứng tách nước từ ethanol tạo ethylene.",
+     solution:"C₂H₅OH →(H₂SO₄ đặc, 170°C) CH₂=CH₂ + H₂O."}
+  ],
+  exercises:[
+    ex("Vì sao ethanol tan vô hạn trong nước còn các alcohol mạch dài (như C₈H₁₇OH) lại tan rất ít?", "Vì ethanol có mạch carbon ngắn, nhóm –OH phân cực chiếm tỉ lệ lớn trong phân tử nên dễ tạo liên kết hydrogen với nước; alcohol mạch dài có phần gốc hydrocarbon không phân cực lớn, làm giảm khả năng hoà tan trong nước."),
+    ex("Vì sao uống phải methanol rất nguy hiểm?", "Vì methanol trong cơ thể bị oxi hoá thành formaldehyde và acid formic — các chất độc gây tổn thương thần kinh thị giác (có thể gây mù) và có thể gây tử vong."),
+    ex("Viết phương trình phản ứng ester hoá giữa acetic acid và methanol.", "CH₃COOH + CH₃OH ⇌(H₂SO₄ đặc, to) CH₃COOCH₃ + H₂O."),
+    ex("Phân biệt alcohol bậc I và bậc II dựa vào sản phẩm oxi hoá.", "Alcohol bậc I khi oxi hoá tạo aldehyde (rồi tiếp tục thành acid carboxylic); alcohol bậc II khi oxi hoá tạo ketone, không tạo tiếp acid.")
+  ],
+  quiz:[
+    {q:"Nhóm chức đặc trưng của alcohol là:", options:["–COOH","–OH liên kết C no","–CHO","–NH₂"], correct:1, explain:"Alcohol có nhóm –OH gắn với carbon no."},
+    {q:"Phản ứng chứng minh nhóm –OH của alcohol có H linh động là phản ứng với:", options:["Kim loại kiềm (Na)","Nước bromine","HCl","O₂"], correct:0, explain:"2ROH+2Na→2RONa+H₂ chứng minh H trong nhóm OH linh động."},
+    {q:"Điều kiện của phản ứng tách nước từ ethanol tạo ethylene là:", options:["H₂SO₄ đặc, 170°C","Na, nhiệt độ thường","H₂SO₄ loãng, nguội","NaOH đặc"], correct:0, explain:"Cần H₂SO₄ đặc và nhiệt độ khoảng 170°C để tách nước tạo alkene."},
+    {q:"Oxi hoá alcohol bậc I tạo sản phẩm chính là:", options:["Ketone","Aldehyde","Ether","Alkane"], correct:1, explain:"Alcohol bậc I bị oxi hoá tạo aldehyde (có thể tiếp tục oxi hoá thành acid)."}
+  ]
+};
+
+const L11_B17 = {
+  title:"Bài 17: Phenol", ready:true,
+  sections:[
+    sec("1. Khái niệm và cấu tạo", `<p><b>Phenol</b> là hợp chất hữu cơ có nhóm –OH liên kết trực tiếp với nguyên tử carbon của vòng benzene. Phenol đơn giản nhất là C₆H₅OH.</p>`),
+    sec("2. Tính chất vật lí", `<p>Phenol là chất rắn, không màu, tan ít trong nước lạnh nhưng tan tốt trong nước nóng và dung môi hữu cơ; để lâu trong không khí bị oxi hoá, chuyển màu hồng; có tính độc, gây bỏng da khi tiếp xúc.</p>`),
+    sec("3. Tính chất hoá học", `
+      <ul>
+        <li><b>Tính acid yếu</b> (mạnh hơn alcohol do ảnh hưởng vòng benzene, nhưng yếu hơn acid carboxylic): C₆H₅OH + NaOH → C₆H₅ONa + H₂O; phenol không đổi màu quỳ tím vì tính acid quá yếu, nhưng phản ứng được với dung dịch kiềm mạnh (khác với alcohol không phản ứng với NaOH).</li>
+        <li><b>Phản ứng thế trên vòng thơm</b> (dễ hơn benzene do nhóm –OH đẩy electron vào vòng): phenol phản ứng ngay với nước bromine ở điều kiện thường tạo kết tủa trắng 2,4,6-tribromophenol — dùng để nhận biết phenol: C₆H₅OH+3Br₂→C₆H₂Br₃OH↓+3HBr.</li>
+      </ul>`),
+    sec("4. Ứng dụng", `<p>Phenol dùng để sản xuất nhựa phenol-formaldehyde (bakelite), phẩm nhuộm, thuốc diệt cỏ, thuốc nổ (picric acid), chất khử trùng.</p>`)
+  ],
+  examples:[
+    {problem:"Viết phương trình phản ứng phenol với dung dịch NaOH.",
+     solution:"C₆H₅OH + NaOH → C₆H₅ONa + H₂O."},
+    {problem:"Nêu hiện tượng và viết phương trình khi nhỏ dung dịch bromine vào phenol.",
+     solution:"Xuất hiện ngay kết tủa trắng: C₆H₅OH + 3Br₂ → C₆H₂Br₃OH↓ + 3HBr (2,4,6-tribromophenol), phản ứng dùng để nhận biết phenol."}
+  ],
+  exercises:[
+    ex("Vì sao phenol có tính acid còn alcohol thì không (đều có nhóm OH)?", "Vì nhóm –OH của phenol gắn trực tiếp vào vòng benzene, vòng benzene hút electron làm liên kết O–H phân cực mạnh hơn, dễ ion hoá tạo H⁺ hơn so với alcohol, nên phenol có tính acid yếu còn alcohol thì không."),
+    ex("Vì sao phenol phản ứng thế với dung dịch bromine dễ dàng hơn hẳn benzene (không cần xúc tác Fe)?", "Vì nhóm –OH đẩy electron vào vòng benzene làm tăng mật độ electron trên vòng, đặc biệt ở vị trí ortho, para, khiến phản ứng thế electrophin xảy ra dễ dàng hơn, không cần xúc tác."),
+    ex("Đề xuất cách phân biệt phenol và ethanol bằng một thuốc thử.", "Dùng dung dịch nước bromine: phenol tạo ngay kết tủa trắng, còn ethanol không phản ứng, không hiện tượng.")
+  ],
+  quiz:[
+    {q:"Phenol có nhóm –OH liên kết trực tiếp với:", options:["Carbon no (mạch hở)","Carbon của vòng benzene","Nitrogen","Carbon carbonyl"], correct:1, explain:"Đặc trưng của phenol là nhóm OH gắn trực tiếp vào vòng thơm."},
+    {q:"Phenol phản ứng được với chất nào mà ethanol không phản ứng?", options:["Na","HBr","Dung dịch NaOH","O₂ (đốt cháy)"], correct:2, explain:"Phenol có tính acid yếu nên phản ứng với NaOH, còn ethanol (alcohol) thì không."},
+    {q:"Thuốc thử dùng để nhận biết phenol là:", options:["Quỳ tím","Dung dịch nước bromine","Na kim loại","Dung dịch HCl"], correct:1, explain:"Phenol phản ứng ngay với nước bromine tạo kết tủa trắng, dùng để nhận biết."},
+    {q:"Vì sao phenol có tính acid mạnh hơn alcohol nhưng yếu hơn acid carboxylic?", options:["Do vòng benzene hút electron làm O–H phân cực hơn alcohol, nhưng kém hơn nhóm COOH","Do phenol có khối lượng phân tử lớn hơn","Do phenol tan tốt hơn trong nước","Do phenol có nhiều nhóm OH hơn"], correct:0, explain:"Ảnh hưởng hút electron của vòng thơm làm phenol có tính acid hơn alcohol nhưng nhóm carboxyl (COOH) vẫn có tính acid mạnh hơn nhiều."}
+  ]
+};
+
+/* ============================================================
+   LỚP 11 — Chương 6: Hợp chất carbonyl – Carboxylic acid
+   ============================================================ */
+const L11_B18 = {
+  title:"Bài 18: Hợp chất carbonyl (aldehyde – ketone)", ready:true,
+  sections:[
+    sec("1. Khái niệm, phân loại, danh pháp", `
+      <p><b>Hợp chất carbonyl</b> chứa nhóm chức >C=O. Nếu nhóm C=O gắn với ít nhất 1 nguyên tử H (–CHO) gọi là <b>aldehyde</b>; nếu nhóm C=O gắn với 2 gốc hydrocarbon gọi là <b>ketone</b>.</p>
+      <p>Tên aldehyde: tên hydrocarbon tương ứng + <b>-al</b> (ví dụ HCHO formaldehyde/methanal, CH₃CHO acetaldehyde/ethanal). Tên ketone: tên hydrocarbon + <b>-one</b> (ví dụ CH₃COCH₃ propanone/acetone).</p>`),
+    sec("2. Tính chất vật lí", `<p>HCHO là chất khí, các aldehyde/ketone khác thường là chất lỏng có mùi đặc trưng; tan tốt trong nước ở mạch ngắn (do liên kết hydrogen với nước), độ tan giảm khi mạch dài hơn.</p>`),
+    sec("3. Tính chất hoá học", `
+      <ul>
+        <li><b>Phản ứng cộng H₂</b> (xúc tác Ni, to): khử nhóm C=O thành C–OH, tạo alcohol tương ứng: CH₃CHO+H₂→(Ni,to)CH₃CH₂OH.</li>
+        <li><b>Phản ứng oxi hoá — phản ứng tráng bạc (chỉ aldehyde có):</b> RCHO+2AgNO₃+3NH₃+H₂O→(to)RCOONH₄+2Ag↓+2NH₄NO₃. Kết tủa Ag sáng bóng dùng để nhận biết và phân biệt aldehyde với ketone (ketone không có phản ứng này vì không còn H trên carbon carbonyl).</li>
+      </ul>`),
+    sec("4. Ứng dụng", `<p>Formaldehyde (HCHO) dùng sản xuất nhựa, chất bảo quản mẫu sinh học (formalin — dung dịch HCHO trong nước); acetone dùng làm dung môi hoà tan sơn, tẩy sơn móng tay.</p>`)
+  ],
+  examples:[
+    {problem:"Viết phương trình phản ứng tráng bạc của acetaldehyde (CH₃CHO).",
+     solution:"CH₃CHO+2AgNO₃+3NH₃+H₂O→(to)CH₃COONH₄+2Ag↓+2NH₄NO₃."},
+    {problem:"Vì sao ketone (như acetone) không tham gia phản ứng tráng bạc?",
+     solution:"Vì trong ketone, nhóm carbonyl (C=O) gắn với 2 gốc hydrocarbon, không còn nguyên tử H gắn trực tiếp trên carbon carbonyl để bị oxi hoá theo cơ chế của phản ứng tráng bạc."}
+  ],
+  exercises:[
+    ex("Phân biệt aldehyde và ketone về cấu tạo.", "Aldehyde có nhóm –CHO (carbon carbonyl gắn ít nhất 1 H); ketone có nhóm >C=O gắn với 2 gốc hydrocarbon, không có H trên carbon carbonyl."),
+    ex("Đề xuất thuốc thử để phân biệt CH₃CHO và CH₃COCH₃.", "Dùng dung dịch AgNO₃/NH₃ đun nhẹ: CH₃CHO tạo kết tủa bạc sáng bóng (phản ứng tráng bạc), CH₃COCH₃ không phản ứng, không hiện tượng."),
+    ex("Viết phương trình phản ứng cộng H₂ vào acetone (xúc tác Ni).", "CH₃COCH₃+H₂→(Ni,to)CH₃CH(OH)CH₃ (propan-2-ol)."),
+    ex("Vì sao formalin (dung dịch formaldehyde) được dùng để bảo quản mẫu sinh vật?", "Vì formaldehyde có khả năng làm biến tính protein, tiêu diệt vi sinh vật gây thối rữa, giúp giữ mẫu vật không bị phân huỷ trong thời gian dài.")
+  ],
+  quiz:[
+    {q:"Nhóm chức đặc trưng của hợp chất carbonyl là:", options:["–OH",">C=O","–COOH","–NH₂"], correct:1, explain:"Cả aldehyde và ketone đều chứa nhóm carbonyl C=O."},
+    {q:"Phản ứng tráng bạc là phản ứng đặc trưng của:", options:["Alcohol","Aldehyde","Ketone","Alkane"], correct:1, explain:"Chỉ aldehyde có H trên carbon carbonyl nên tham gia phản ứng tráng bạc, ketone thì không."},
+    {q:"Sản phẩm của phản ứng cộng H₂ (xúc tác Ni) vào aldehyde là:", options:["Acid carboxylic","Alcohol bậc I","Alcohol bậc II","Ether"], correct:1, explain:"Aldehyde + H₂ →(Ni) alcohol bậc I."},
+    {q:"Formaldehyde có công thức là:", options:["CH₃CHO","HCHO","CH₃COCH₃","HCOOH"], correct:1, explain:"Formaldehyde (methanal) có công thức HCHO."}
+  ]
+};
+
+const L11_B19 = {
+  title:"Bài 19: Carboxylic acid", ready:true,
+  sections:[
+    sec("1. Khái niệm, danh pháp", `<p><b>Carboxylic acid</b> là hợp chất hữu cơ chứa nhóm chức –COOH liên kết với gốc hydrocarbon (hoặc H). Tên thay thế: tên hydrocarbon tương ứng + <b>-oic acid</b>. Ví dụ: HCOOH (formic acid/methanoic acid), CH₃COOH (acetic acid/ethanoic acid).</p>`),
+    sec("2. Tính chất vật lí", `<p>Các carboxylic acid có nhiệt độ sôi cao hơn hẳn alcohol có cùng số carbon do tạo được liên kết hydrogen liên phân tử bền hơn (có thể tạo dimer). Acid mạch ngắn tan tốt trong nước; giấm ăn là dung dịch acetic acid khoảng 2–5%.</p>`),
+    sec("3. Tính chất hoá học", `
+      <p>Carboxylic acid có đầy đủ tính chất của một acid yếu (yếu hơn HCl, H₂SO₄ nhưng mạnh hơn phenol, carbonic acid):</p>
+      <ul>
+        <li>Đổi màu quỳ tím sang đỏ.</li>
+        <li>Tác dụng với kim loại đứng trước H: 2CH₃COOH+Zn→(CH₃COO)₂Zn+H₂↑.</li>
+        <li>Tác dụng với base, oxide base: CH₃COOH+NaOH→CH₃COONa+H₂O.</li>
+        <li>Tác dụng với muối carbonate: 2CH₃COOH+Na₂CO₃→2CH₃COONa+CO₂↑+H₂O (dùng để nhận biết muối carbonate).</li>
+        <li><b>Phản ứng ester hoá</b> với alcohol (xúc tác H₂SO₄ đặc, đun nóng): CH₃COOH+C₂H₅OH⇌(H₂SO₄đặc,to)CH₃COOC₂H₅+H₂O.</li>
+      </ul>`),
+    sec("4. Ứng dụng", `<p>Acetic acid dùng làm giấm ăn, sản xuất tơ acetate, dược phẩm. Formic acid có trong nọc kiến, dùng trong công nghiệp thuộc da, cao su.</p>`)
+  ],
+  examples:[
+    {problem:"Viết phương trình phản ứng của acetic acid với Na₂CO₃.",
+     solution:"2CH₃COOH+Na₂CO₃→2CH₃COONa+CO₂↑+H₂O."},
+    {problem:"Vì sao carboxylic acid có nhiệt độ sôi cao hơn alcohol tương ứng cùng số carbon?",
+     solution:"Vì phân tử carboxylic acid có thể tạo 2 liên kết hydrogen liên phân tử (tạo thành dimer bền) qua cả nhóm C=O và O–H, mạnh hơn liên kết hydrogen đơn của alcohol, nên cần nhiều năng lượng hơn để tách các phân tử ra khi sôi."}
+  ],
+  exercises:[
+    ex("Vì sao carboxylic acid được xếp là acid yếu?", "Vì trong nước, carboxylic acid chỉ điện li một phần thành ion H⁺ và RCOO⁻ (⇌), không điện li hoàn toàn như acid mạnh HCl, H₂SO₄."),
+    ex("Viết phương trình phản ứng ester hoá giữa formic acid và methanol.", "HCOOH+CH₃OH⇌(H₂SO₄ đặc,to)HCOOCH₃+H₂O."),
+    ex("Đề xuất thuốc thử để phân biệt dung dịch CH₃COOH và C₂H₅OH.", "Dùng quỳ tím hoặc Na₂CO₃/NaHCO₃: CH₃COOH làm quỳ tím hoá đỏ và tạo bọt khí CO₂ với Na₂CO₃; C₂H₅OH không có các hiện tượng này."),
+    ex("Tính khối lượng CH₃COONa tạo thành khi cho 6 gam CH₃COOH tác dụng vừa đủ với NaOH.", "n(CH₃COOH)=6/60=0,1 mol → n(CH₃COONa)=0,1 mol → m=0,1×82=8,2 gam.")
+  ],
+  quiz:[
+    {q:"Nhóm chức của carboxylic acid là:", options:["–OH","–CHO","–COOH","–COO–"], correct:2, explain:"Nhóm chức đặc trưng là –COOH (carboxyl)."},
+    {q:"Carboxylic acid có thể phản ứng với chất nào sau đây để nhận biết bằng hiện tượng sủi bọt khí?", options:["NaOH","Na₂CO₃","C₂H₅OH","H₂O"], correct:1, explain:"RCOOH + Na₂CO₃ sinh khí CO₂ (sủi bọt), dùng để nhận biết."},
+    {q:"Phản ứng giữa carboxylic acid và alcohol (xúc tác H₂SO₄ đặc) gọi là phản ứng:", options:["Ester hoá","Xà phòng hoá","Trùng hợp","Cracking"], correct:0, explain:"Đây là phản ứng ester hoá, tạo ester và nước."},
+    {q:"Vì sao carboxylic acid có nhiệt độ sôi cao hơn alcohol tương ứng?", options:["Khối lượng phân tử lớn hơn","Tạo được liên kết hydrogen liên phân tử bền hơn (dimer)","Có nhóm C=O","Tan tốt hơn trong nước"], correct:1, explain:"Carboxylic acid tạo liên kết hydrogen kép bền vững hơn alcohol."}
+  ]
+};
+
+/* ============================================================
+   LỚP 12 — Chương 1: Ester – Lipid
+   ============================================================ */
+const L12_B1 = {
+  title:"Bài 1: Ester", ready:true,
+  sections:[
+    sec("1. Khái niệm, danh pháp", `
+      <p><b>Ester</b> là sản phẩm thay thế nhóm –OH ở nhóm carboxyl của carboxylic acid bằng nhóm –OR' của alcohol. Công thức tổng quát: R–COO–R'.</p>
+      <p>Tên ester: tên gốc R' (từ alcohol) + tên gốc acid (đổi đuôi -ic thành -at/-ate). Ví dụ: CH₃COOC₂H₅ ethyl acetate.</p>`),
+    sec("2. Tính chất vật lí", `<p>Ester là chất lỏng hoặc rắn, nhẹ hơn nước, hầu như không tan trong nước, nhiệt độ sôi thấp hơn acid và alcohol có khối lượng phân tử tương đương (do không tạo liên kết hydrogen liên phân tử). Nhiều ester có mùi thơm đặc trưng của hoa quả, dùng làm hương liệu.</p>`),
+    sec("3. Tính chất hoá học — phản ứng thuỷ phân", `
+      <ul>
+        <li><b>Thuỷ phân trong môi trường acid</b> (thuận nghịch): RCOOR'+H₂O⇌(H⁺,to)RCOOH+R'OH.</li>
+        <li><b>Thuỷ phân trong môi trường base (phản ứng xà phòng hoá, một chiều):</b> RCOOR'+NaOH→(to)RCOONa+R'OH.</li>
+      </ul>`),
+    sec("4. Ứng dụng", `<p>Ester dùng làm dung môi (sơn, tổng hợp), hương liệu thực phẩm và mĩ phẩm (mùi chuối, dứa, táo...), làm nguyên liệu sản xuất chất dẻo (thuỷ tinh hữu cơ, PVA).</p>`)
+  ],
+  examples:[
+    {problem:"Viết phương trình xà phòng hoá ethyl acetate bằng dung dịch NaOH.",
+     solution:"CH₃COOC₂H₅+NaOH→(to)CH₃COONa+C₂H₅OH."},
+    {problem:"Vì sao ester có nhiệt độ sôi thấp hơn acid carboxylic có cùng số carbon?",
+     solution:"Vì phân tử ester không còn nhóm O–H nên không tạo được liên kết hydrogen liên phân tử như acid, do đó lực liên kết giữa các phân tử ester yếu hơn, nhiệt độ sôi thấp hơn."}
+  ],
+  exercises:[
+    ex("Viết công thức cấu tạo và gọi tên ester tạo bởi acetic acid và methanol.", "CH₃COOCH₃ — methyl acetate."),
+    ex("Vì sao phản ứng xà phòng hoá được coi là phản ứng một chiều, còn thuỷ phân trong acid là thuận nghịch?", "Trong môi trường base, ion RCOO⁻ tạo thành rất bền (không tái tạo lại ester), nên phản ứng xảy ra hoàn toàn theo một chiều; còn thuỷ phân trong acid không tiêu tốn base để 'khoá' sản phẩm nên phản ứng đạt trạng thái cân bằng thuận nghịch."),
+    ex("Tính khối lượng CH₃COONa thu được khi xà phòng hoá hoàn toàn 8,8 gam ethyl acetate bằng NaOH dư.", "n(CH₃COOC₂H₅)=8,8/88=0,1 mol → n(CH₃COONa)=0,1 mol → m=0,1×82=8,2 gam.")
+  ],
+  quiz:[
+    {q:"Công thức tổng quát của ester đơn chức là:", options:["RCOOH","RCOOR'","ROH","RCHO"], correct:1, explain:"Ester có dạng RCOOR', gốc R' từ alcohol thay thế H trong nhóm COOH."},
+    {q:"Phản ứng xà phòng hoá là phản ứng ester với:", options:["Nước (xúc tác acid)","Dung dịch kiềm","Alcohol","Kim loại kiềm"], correct:1, explain:"Xà phòng hoá là thuỷ phân ester trong môi trường kiềm, phản ứng một chiều."},
+    {q:"Ester thường có tính chất vật lí đặc trưng nào?", options:["Tan tốt trong nước","Có mùi thơm đặc trưng của hoa quả","Nhiệt độ sôi rất cao","Có tính acid mạnh"], correct:1, explain:"Nhiều ester có mùi thơm tự nhiên, dùng làm hương liệu."},
+    {q:"Vì sao ester hầu như không tan trong nước?", options:["Do không có nhóm phân cực để tạo liên kết hydrogen với nước","Do khối lượng phân tử quá lớn","Do có màu đặc trưng","Do là chất rắn"], correct:0, explain:"Ester thiếu nhóm O–H nên khó tạo liên kết hydrogen với nước, ít tan."}
+  ]
+};
+
+const L12_B2 = {
+  title:"Bài 2: Lipid – Chất béo", ready:true,
+  sections:[
+    sec("1. Khái niệm và cấu tạo chất béo", `<p><b>Chất béo (triglyceride)</b> là trieste của glycerol với các acid béo (carboxylic acid mạch dài, thường không phân nhánh). Công thức chung: (RCOO)₃C₃H₅, trong đó R là gốc hydrocarbon của acid béo.</p>`),
+    sec("2. Phân loại và tính chất vật lí", `<p>Chất béo chứa nhiều gốc acid béo <b>no</b> (như stearic, palmitic) thường ở thể rắn (mỡ động vật); chứa nhiều gốc acid béo <b>không no</b> (như oleic, linoleic) thường ở thể lỏng (dầu thực vật). Chất béo nhẹ hơn nước, không tan trong nước, tan tốt trong dung môi hữu cơ (benzene, xăng...).</p>`),
+    sec("3. Tính chất hoá học", `
+      <ul>
+        <li><b>Phản ứng thuỷ phân</b> (môi trường acid, thuận nghịch) hoặc <b>phản ứng xà phòng hoá</b> (môi trường kiềm, một chiều) tạo glycerol và muối của acid béo (xà phòng): (RCOO)₃C₃H₅+3NaOH→(to)3RCOONa+C₃H₅(OH)₃.</li>
+        <li><b>Phản ứng cộng H₂</b> vào chất béo lỏng (dầu, chứa gốc acid béo không no) với xúc tác Ni, tạo chất béo rắn (bơ thực vật) — quá trình <b>hydrogen hoá dầu</b>.</li>
+      </ul>`),
+    sec("4. Ứng dụng", `<p>Chất béo là nguồn cung cấp năng lượng quan trọng cho cơ thể, nguyên liệu sản xuất xà phòng, glycerol (dùng trong mĩ phẩm, dược phẩm), sản xuất biodiesel.</p>`)
+  ],
+  examples:[
+    {problem:"Viết phương trình xà phòng hoá tristearin ((C₁₇H₃₅COO)₃C₃H₅) bằng NaOH.",
+     solution:"(C₁₇H₃₅COO)₃C₃H₅+3NaOH→(to)3C₁₇H₃₅COONa+C₃H₅(OH)₃."},
+    {problem:"Vì sao dầu thực vật ở thể lỏng còn mỡ động vật ở thể rắn tại điều kiện thường?",
+     solution:"Vì dầu thực vật chứa nhiều gốc acid béo không no (có liên kết đôi, làm phân tử 'gãy khúc' khó xếp khít) nên nhiệt độ nóng chảy thấp, tồn tại thể lỏng; mỡ động vật chứa nhiều gốc acid béo no, phân tử thẳng, xếp khít dễ dàng nên nhiệt độ nóng chảy cao hơn, tồn tại thể rắn."}
+  ],
+  exercises:[
+    ex("Vì sao xà phòng có tác dụng làm sạch dầu mỡ trên bề mặt?", "Vì phân tử xà phòng (muối RCOONa) có đầu ưa nước (COO⁻Na⁺) và đuôi kị nước, ưa dầu (gốc R dài); đuôi kị nước chui vào giọt dầu mỡ, đầu ưa nước hướng ra ngoài kéo giọt dầu phân tán vào nước, bị rửa trôi."),
+    ex("Viết phương trình phản ứng hydrogen hoá một chất béo không no có một liên kết đôi trong gốc acid béo (dạng tổng quát).", "(gốc acid béo không no)₃C₃H₅ + 3H₂ →(Ni,to) (gốc acid béo no)₃C₃H₅ (làm no hoá gốc acid béo, chuyển từ dầu lỏng thành mỡ rắn)."),
+    ex("Tính khối lượng glycerol thu được khi thuỷ phân hoàn toàn 1 mol chất béo bất kì.", "Mỗi phân tử chất béo (triglyceride) thuỷ phân luôn tạo đúng 1 mol glycerol, vậy 1 mol chất béo tạo 1 mol glycerol, khối lượng = 92 gam.")
+  ],
+  quiz:[
+    {q:"Chất béo là trieste của glycerol với:", options:["Alcohol đơn chức","Acid béo (carboxylic acid mạch dài)","Amino acid","Glucose"], correct:1, explain:"Chất béo (triglyceride) là ester của glycerol với 3 phân tử acid béo."},
+    {q:"Phản ứng xà phòng hoá chất béo tạo ra:", options:["Glycerol và acid béo","Muối của acid béo (xà phòng) và glycerol","Ester và nước","Alcohol và acid vô cơ"], correct:1, explain:"Chất béo + NaOH → muối acid béo (xà phòng) + glycerol."},
+    {q:"Dầu thực vật thường ở thể lỏng vì chứa nhiều:", options:["Gốc acid béo no","Gốc acid béo không no","Glycerol tự do","Nước"], correct:1, explain:"Gốc acid béo không no làm giảm nhiệt độ nóng chảy của chất béo."},
+    {q:"Phản ứng hydrogen hoá dầu thực vật dùng xúc tác nào?", options:["Fe","Ni","Pt/Pd ở nhiệt độ thường","H₂SO₄"], correct:1, explain:"Ni, nhiệt độ, áp suất là xúc tác/điều kiện thường dùng để hydrogen hoá dầu thành mỡ rắn."}
+  ]
+};
+
+/* ============================================================
+   LỚP 12 — Chương 2: Carbohydrate
+   ============================================================ */
+const L12_B3 = {
+  title:"Bài 3: Glucose và fructose", ready:true,
+  sections:[
+    sec("1. Trạng thái tự nhiên, cấu tạo", `
+      <p><b>Glucose</b> và <b>fructose</b> là monosaccharide có cùng công thức phân tử C₆H₁₂O₆. Glucose có mạch hở dạng CH₂OH–(CHOH)₄–CHO (nhóm –CHO ở C1, là aldehyde đa chức); fructose có mạch hở dạng CH₂OH–(CHOH)₃–CO–CH₂OH (nhóm ketone ở C2). Trong dung dịch, cả hai chủ yếu tồn tại ở dạng mạch vòng.</p>
+      <p>Glucose có nhiều trong quả nho chín (còn gọi là đường nho); fructose có nhiều trong mật ong, quả chín (đường quả), ngọt hơn glucose.</p>`),
+    sec("2. Tính chất hoá học của glucose", `
+      <ul>
+        <li><b>Tính chất của alcohol đa chức (polyol):</b> hoà tan Cu(OH)₂ ở nhiệt độ thường tạo dung dịch xanh lam đặc trưng (do có nhiều nhóm –OH kề nhau).</li>
+        <li><b>Tính chất của aldehyde:</b> có phản ứng tráng bạc: CH₂OH(CHOH)₄CHO+2AgNO₃+3NH₃+H₂O→(to)CH₂OH(CHOH)₄COONH₄+2Ag↓+2NH₄NO₃; làm mất màu nước bromine.</li>
+        <li><b>Phản ứng lên men rượu</b> (xúc tác enzyme): C₆H₁₂O₆→(enzyme)2C₂H₅OH+2CO₂↑.</li>
+      </ul>`),
+    sec("3. Fructose", `<p>Fructose có các nhóm OH kề nhau nên cũng hoà tan Cu(OH)₂ tạo dung dịch xanh lam. Trong môi trường kiềm, fructose có thể chuyển hoá thành glucose nên vẫn có phản ứng tráng bạc dù không có nhóm –CHO trực tiếp.</p>`)
+  ],
+  examples:[
+    {problem:"Viết phương trình phản ứng tráng bạc của glucose.",
+     solution:"CH₂OH(CHOH)₄CHO+2AgNO₃+3NH₃+H₂O→(to)CH₂OH(CHOH)₄COONH₄+2Ag↓+2NH₄NO₃."},
+    {problem:"Đề xuất thuốc thử để phân biệt dung dịch glucose và dung dịch glycerol.",
+     solution:"Dùng dung dịch AgNO₃/NH₃, đun nhẹ: glucose có phản ứng tráng bạc tạo kết tủa Ag sáng bóng; glycerol không có nhóm –CHO nên không phản ứng."}
+  ],
+  exercises:[
+    ex("Vì sao glucose vừa thể hiện tính chất của alcohol đa chức vừa thể hiện tính chất của aldehyde?", "Vì phân tử glucose mạch hở có nhiều nhóm –OH kề nhau (tính chất polyol) đồng thời có 1 nhóm –CHO (tính chất aldehyde)."),
+    ex("Viết phương trình lên men rượu từ glucose.", "C₆H₁₂O₆ →(enzyme) 2C₂H₅OH + 2CO₂↑."),
+    ex("Vì sao glucose hoà tan được Cu(OH)₂ ở nhiệt độ thường tạo dung dịch màu xanh lam?", "Vì glucose có nhiều nhóm –OH liền kề, tạo phức chất tan màu xanh lam với Cu(OH)₂, tương tự như glycerol.")
+  ],
+  quiz:[
+    {q:"Công thức phân tử của glucose là:", options:["C₆H₁₂O₆","C₁₂H₂₂O₁₁","C₆H₁₀O₅","C₅H₁₀O₅"], correct:0, explain:"Glucose và fructose đều có công thức C₆H₁₂O₆."},
+    {q:"Phản ứng nào chứng minh glucose có nhóm chức aldehyde?", options:["Hoà tan Cu(OH)₂","Phản ứng tráng bạc","Phản ứng ester hoá","Phản ứng thuỷ phân"], correct:1, explain:"Phản ứng tráng bạc là đặc trưng của nhóm –CHO."},
+    {q:"Sản phẩm của phản ứng lên men rượu từ glucose là:", options:["CH₃COOH và H₂O","C₂H₅OH và CO₂","CH₃CHO và H₂","CO₂ và H₂O"], correct:1, explain:"Glucose lên men rượu tạo ethanol và khí carbon dioxide."},
+    {q:"Chất nào ngọt hơn: glucose hay fructose?", options:["Glucose ngọt hơn","Fructose ngọt hơn","Ngọt như nhau","Không so sánh được"], correct:1, explain:"Fructose là đường tự nhiên ngọt nhất, ngọt hơn glucose."}
+  ]
+};
+
+const L12_B4 = {
+  title:"Bài 4: Saccharose và maltose", ready:true,
+  sections:[
+    sec("1. Saccharose", `
+      <p><b>Saccharose</b> (đường mía, đường kính) có công thức phân tử C₁₂H₂₂O₁₁, là <b>disaccharide</b> tạo bởi 1 gốc glucose và 1 gốc fructose liên kết với nhau qua nguyên tử oxygen (liên kết glycoside), không còn nhóm –CHO/–OH hemiacetal tự do nên <b>không có phản ứng tráng bạc</b>.</p>
+      <p>Saccharose có tính chất của polyol (hoà tan Cu(OH)₂ tạo dung dịch xanh lam) nhưng không có tính khử.</p>`),
+    sec("2. Phản ứng thuỷ phân saccharose", `<p>Khi đun nóng với xúc tác acid hoặc enzyme, saccharose bị thuỷ phân: C₁₂H₂₂O₁₁+H₂O→(H⁺,to)C₆H₁₂O₆(glucose)+C₆H₁₂O₆(fructose). Sau thuỷ phân, dung dịch thu được có phản ứng tráng bạc do tạo ra glucose.</p>`),
+    sec("3. Maltose", `<p><b>Maltose</b> (đường mạch nha) cũng có công thức C₁₂H₂₂O₁₁, tạo bởi 2 gốc glucose liên kết với nhau, nhưng vẫn còn 1 nhóm –OH hemiacetal tự do nên maltose <b>có tính khử</b>, có phản ứng tráng bạc (khác với saccharose). Thuỷ phân maltose chỉ tạo glucose.</p>`)
+  ],
+  examples:[
+    {problem:"Vì sao saccharose không có phản ứng tráng bạc còn maltose lại có?",
+     solution:"Vì trong phân tử saccharose, cả 2 nhóm chức có khả năng mở vòng tạo –CHO (của glucose và fructose) đều đã tham gia liên kết glycoside, không còn nhóm hemiacetal tự do; trong khi maltose vẫn còn 1 gốc glucose có nhóm –OH hemiacetal tự do, có thể mở vòng tạo nhóm –CHO nên có tính khử."},
+    {problem:"Viết phương trình thuỷ phân saccharose.",
+     solution:"C₁₂H₂₂O₁₁+H₂O→(H⁺,to)C₆H₁₂O₆(glucose)+C₆H₁₂O₆(fructose)."}
+  ],
+  exercises:[
+    ex("Nêu cách phân biệt dung dịch saccharose và dung dịch maltose bằng một thuốc thử.", "Dùng dung dịch AgNO₃/NH₃, đun nhẹ: maltose có phản ứng tráng bạc (kết tủa Ag), saccharose không phản ứng."),
+    ex("Vì sao sau khi thuỷ phân saccharose, dung dịch thu được lại có phản ứng tráng bạc?", "Vì sản phẩm thuỷ phân gồm glucose và fructose, cả hai đều có khả năng tham gia phản ứng tráng bạc (glucose trực tiếp có –CHO, fructose chuyển hoá thành glucose trong môi trường kiềm khi đun với AgNO₃/NH₃)."),
+    ex("Saccharose và maltose có cùng công thức phân tử không? Chúng có phải đồng phân của nhau không?", "Có, cả hai đều có công thức C₁₂H₂₂O₁₁ nhưng cấu tạo khác nhau (khác loại liên kết glycoside và đơn vị monosaccharide cấu thành), nên chúng là đồng phân của nhau.")
+  ],
+  quiz:[
+    {q:"Saccharose được cấu tạo từ:", options:["2 gốc glucose","1 gốc glucose và 1 gốc fructose","2 gốc fructose","1 gốc glucose và 1 gốc galactose"], correct:1, explain:"Saccharose là disaccharide của glucose và fructose."},
+    {q:"Saccharose không có phản ứng tráng bạc vì:", options:["Không tan trong nước","Không còn nhóm hemiacetal tự do trong phân tử","Không có carbon","Không phản ứng với Cu(OH)₂"], correct:1, explain:"Cả 2 nhóm chức tạo –CHO tiềm năng đã tham gia liên kết glycoside."},
+    {q:"Maltose có tính khử vì:", options:["Có 2 gốc fructose","Còn nhóm –OH hemiacetal tự do có thể mở vòng tạo –CHO","Không tan trong nước","Có liên kết đôi"], correct:1, explain:"Một gốc glucose trong maltose còn nhóm OH hemiacetal tự do, tạo tính khử."},
+    {q:"Thuỷ phân hoàn toàn maltose thu được:", options:["Glucose và fructose","Chỉ glucose","Chỉ fructose","Glucose và galactose"], correct:1, explain:"Maltose gồm 2 gốc glucose, thuỷ phân chỉ tạo glucose."}
+  ]
+};
+
+const L12_B5 = {
+  title:"Bài 5: Tinh bột và cellulose", ready:true,
+  sections:[
+    sec("1. Cấu tạo", `
+      <p><b>Tinh bột</b> và <b>cellulose</b> đều là <b>polysaccharide</b>, công thức chung (C₆H₁₀O₅)ₙ, tạo thành từ nhiều gốc α-glucose (tinh bột) hoặc β-glucose (cellulose) liên kết với nhau.</p>
+      <p>Tinh bột gồm 2 thành phần: <b>amylose</b> (mạch không phân nhánh, xoắn lò xo) và <b>amylopectin</b> (mạch phân nhánh). Cellulose có mạch không phân nhánh, các mạch liên kết chặt chẽ với nhau qua liên kết hydrogen tạo thành sợi bền chắc.</p>`),
+    sec("2. Tính chất vật lí", `<p>Tinh bột là chất rắn màu trắng, không tan trong nước lạnh, tan một phần trong nước nóng tạo dung dịch keo (hồ tinh bột). Cellulose là chất rắn, dạng sợi, không tan trong nước và hầu hết dung môi thông thường.</p>`),
+    sec("3. Tính chất hoá học", `
+      <ul>
+        <li><b>Phản ứng thuỷ phân</b> (xúc tác acid hoặc enzyme): (C₆H₁₀O₅)ₙ+nH₂O→(H⁺,to)nC₆H₁₂O₆ (glucose) — cả tinh bột và cellulose đều bị thuỷ phân hoàn toàn thành glucose.</li>
+        <li><b>Phản ứng màu với iodine</b> (đặc trưng của tinh bột): hồ tinh bột + dung dịch iodine → hợp chất màu xanh tím (dùng để nhận biết tinh bột); mất màu khi đun nóng, xuất hiện lại khi để nguội.</li>
+      </ul>`),
+    sec("4. Ứng dụng", `<p>Tinh bột là nguồn lương thực chính (gạo, ngô, khoai, sắn), nguyên liệu sản xuất glucose, ethanol sinh học. Cellulose là thành phần chính của gỗ, bông; dùng sản xuất giấy, tơ sợi (tơ visco, tơ acetate), thuốc súng không khói.</p>`)
+  ],
+  examples:[
+    {problem:"Nêu hiện tượng khi nhỏ vài giọt dung dịch iodine vào hồ tinh bột.",
+     solution:"Xuất hiện màu xanh tím đặc trưng, do phân tử amylose tạo cấu trúc xoắn giữ các phân tử iodine bên trong."},
+    {problem:"Viết phương trình thuỷ phân hoàn toàn tinh bột.",
+     solution:"(C₆H₁₀O₅)ₙ+nH₂O→(H⁺,to)nC₆H₁₂O₆."}
+  ],
+  exercises:[
+    ex("Vì sao tinh bột và cellulose có cùng công thức (C₆H₁₀O₅)ₙ nhưng tính chất vật lí khác nhau nhiều?", "Vì tinh bột được tạo từ α-glucose còn cellulose từ β-glucose, khác nhau về cấu hình liên kết glycoside dẫn đến cấu trúc không gian khác nhau: tinh bột có mạch xoắn/nhánh, còn cellulose có mạch thẳng liên kết hydrogen chặt chẽ tạo sợi bền, không tan trong nước."),
+    ex("Nêu thuốc thử để nhận biết hồ tinh bột.", "Dùng dung dịch iodine (I₂/KI): hồ tinh bột chuyển màu xanh tím đặc trưng."),
+    ex("Vì sao con người tiêu hoá được tinh bột nhưng không tiêu hoá được cellulose?", "Vì cơ thể người có enzyme amylase thuỷ phân liên kết α-glycoside trong tinh bột nhưng không có enzyme thuỷ phân liên kết β-glycoside trong cellulose.")
+  ],
+  quiz:[
+    {q:"Tinh bột và cellulose đều được cấu tạo từ:", options:["Fructose","Glucose","Saccharose","Maltose"], correct:1, explain:"Cả hai là polysaccharide của các gốc glucose."},
+    {q:"Thuốc thử đặc trưng để nhận biết hồ tinh bột là:", options:["Dung dịch AgNO₃/NH₃","Dung dịch iodine","Cu(OH)₂","Quỳ tím"], correct:1, explain:"Tinh bột tạo màu xanh tím với dung dịch iodine."},
+    {q:"Sản phẩm thuỷ phân hoàn toàn tinh bột hoặc cellulose là:", options:["Saccharose","Glucose","Fructose","Maltose"], correct:1, explain:"Cả hai polysaccharide này thuỷ phân hoàn toàn đều tạo glucose."},
+    {q:"Điểm khác nhau cơ bản giữa tinh bột và cellulose về cấu tạo là:", options:["Số nguyên tử carbon","Loại liên kết glycoside (α hay β) giữa các gốc glucose","Khối lượng phân tử","Trạng thái tồn tại"], correct:1, explain:"Tinh bột tạo bởi liên kết α-glycoside, cellulose bởi liên kết β-glycoside."}
+  ]
+};
+
+/* ============================================================
+   LỚP 12 — Chương 3: Hợp chất chứa nitrogen
+   ============================================================ */
+const L12_B6 = {
+  title:"Bài 6: Amine", ready:true,
+  sections:[
+    sec("1. Khái niệm, phân loại, danh pháp", `
+      <p><b>Amine</b> là hợp chất hữu cơ được tạo thành khi thay thế một hay nhiều nguyên tử H trong phân tử NH₃ bằng gốc hydrocarbon. Phân loại theo bậc: <b>amine bậc I</b> (R–NH₂), <b>bậc II</b> (R–NH–R'), <b>bậc III</b> (R–N(R')–R'').</p>
+      <p>Tên gọi thường: tên gốc hydrocarbon + <b>amine</b>. Ví dụ: CH₃NH₂ methylamine, C₆H₅NH₂ aniline (phenylamine).</p>`),
+    sec("2. Tính chất vật lí", `<p>Methylamine, dimethylamine, trimethylamine là chất khí, mùi khai giống ammonia; các amine cao hơn là chất lỏng hoặc rắn. Amine mạch ngắn tan tốt trong nước; aniline ít tan trong nước, là chất lỏng độc.</p>`),
+    sec("3. Tính chất hoá học", `
+      <ul>
+        <li><b>Tính base</b> (giống NH₃, do nguyên tử N còn cặp electron chưa liên kết): amine làm quỳ tím ẩm hoá xanh (trừ aniline, tính base rất yếu do vòng benzene hút electron); phản ứng với acid tạo muối: CH₃NH₂+HCl→CH₃NH₃Cl.</li>
+        <li><b>Phản ứng thế trên vòng thơm của aniline:</b> aniline phản ứng dễ dàng với nước bromine ở điều kiện thường tạo kết tủa trắng: C₆H₅NH₂+3Br₂→C₆H₂Br₃NH₂↓+3HBr — dùng để nhận biết aniline.</li>
+      </ul>`),
+    sec("4. So sánh tính base", `<p>Amine bậc I mạch hở (như CH₃NH₂) có tính base mạnh hơn NH₃ (do nhóm alkyl đẩy electron); aniline (amine thơm) có tính base yếu hơn NH₃ nhiều (do vòng benzene hút bớt electron của N vào vòng).</p>`)
+  ],
+  examples:[
+    {problem:"Viết phương trình phản ứng của methylamine với dung dịch HCl.",
+     solution:"CH₃NH₂+HCl→CH₃NH₃Cl (methylammonium chloride)."},
+    {problem:"Nêu hiện tượng khi nhỏ dung dịch bromine vào aniline.",
+     solution:"Xuất hiện ngay kết tủa trắng: C₆H₅NH₂+3Br₂→C₆H₂Br₃NH₂↓+3HBr, tương tự phenol, do nhóm –NH₂ đẩy electron mạnh vào vòng benzene."}
+  ],
+  exercises:[
+    ex("So sánh tính base của methylamine, ammonia và aniline. Giải thích.", "Tính base: methylamine > ammonia > aniline. Nhóm alkyl (–CH₃) đẩy electron làm tăng mật độ electron trên N, tăng tính base so với NH₃; vòng benzene trong aniline hút electron của N vào vòng làm giảm khả năng nhận proton, giảm tính base so với NH₃."),
+    ex("Đề xuất thuốc thử để phân biệt dung dịch aniline và ethanol.", "Dùng dung dịch nước bromine: aniline tạo ngay kết tủa trắng, ethanol không phản ứng."),
+    ex("Vì sao amine bậc thấp như methylamine có mùi khai giống ammonia?", "Vì cấu tạo phân tử tương tự NH₃ (N còn cặp electron tự do, có H linh động dễ tạo liên kết hydrogen với nước, dễ bay hơi), tính chất hoá học và mùi đặc trưng gần giống ammonia.")
+  ],
+  quiz:[
+    {q:"Amine là sản phẩm thay thế nguyên tử H trong phân tử nào bằng gốc hydrocarbon?", options:["H₂O","NH₃","CH₄","HCl"], correct:1, explain:"Amine được coi là dẫn xuất thế của ammonia (NH₃)."},
+    {q:"So với ammonia, tính base của aniline:", options:["Mạnh hơn nhiều","Yếu hơn","Bằng nhau","Không có tính base"], correct:1, explain:"Vòng benzene hút electron của N làm giảm tính base của aniline so với NH₃."},
+    {q:"Thuốc thử để nhận biết aniline là:", options:["Quỳ tím","Dung dịch nước bromine","Na kim loại","Cu(OH)₂"], correct:1, explain:"Aniline phản ứng ngay với nước bromine tạo kết tủa trắng."},
+    {q:"Amine bậc II có cấu tạo dạng:", options:["R–NH₂","R–NH–R'","R–N(R')–R''","R–NH₃⁺"], correct:1, explain:"Bậc của amine tính theo số gốc hydrocarbon thay thế H trong NH₃; bậc II có 2 gốc R, R'."}
+  ]
+};
+
+const L12_B7 = {
+  title:"Bài 7: Amino acid", ready:true,
+  sections:[
+    sec("1. Khái niệm, cấu tạo", `<p><b>Amino acid</b> là hợp chất hữu cơ tạp chức, trong phân tử chứa đồng thời nhóm amino (–NH₂) và nhóm carboxyl (–COOH). Công thức chung dạng đơn giản: H₂N–R–COOH. Ví dụ: glycine H₂N–CH₂–COOH, alanine CH₃–CH(NH₂)–COOH.</p>`),
+    sec("2. Tính chất vật lí — ion lưỡng cực", `<p>Trong phân tử, nhóm –COOH có thể nhường proton cho nhóm –NH₂ tạo <b>ion lưỡng cực</b> (dạng zwitterion): H₃N⁺–R–COO⁻. Vì vậy amino acid là chất rắn kết tinh, có nhiệt độ nóng chảy cao, tan tốt trong nước.</p>`),
+    sec("3. Tính chất hoá học", `
+      <ul>
+        <li><b>Tính lưỡng tính:</b> amino acid phản ứng được cả với acid (do nhóm –NH₂): H₂NCH₂COOH+HCl→ClH₃NCH₂COOH; và với base (do nhóm –COOH): H₂NCH₂COOH+NaOH→H₂NCH₂COONa+H₂O.</li>
+        <li><b>Phản ứng ester hoá</b> nhóm –COOH với alcohol (xúc tác acid, tương tự carboxylic acid).</li>
+        <li><b>Phản ứng trùng ngưng</b> tạo liên kết peptide giữa nhóm –COOH của phân tử này với nhóm –NH₂ của phân tử khác, giải phóng nước — cơ sở hình thành peptide, protein.</li>
+      </ul>`),
+    sec("4. Vai trò", `<p>Amino acid là đơn vị cấu tạo nên protein, có vai trò thiết yếu trong dinh dưỡng và trao đổi chất; một số amino acid dùng làm gia vị (monosodium glutamate — bột ngọt), dược phẩm, sản xuất tơ nylon (từ amino acid mạch dài, ví dụ ε-aminocaproic acid).</p>`)
+  ],
+  examples:[
+    {problem:"Viết phương trình phản ứng glycine với NaOH và với HCl.",
+     solution:"Với NaOH: H₂NCH₂COOH+NaOH→H₂NCH₂COONa+H₂O. Với HCl: H₂NCH₂COOH+HCl→ClH₃NCH₂COOH."},
+    {problem:"Vì sao amino acid tồn tại chủ yếu ở dạng ion lưỡng cực chứ không phải dạng phân tử trung hoà thông thường?",
+     solution:"Vì trong phân tử có đồng thời nhóm –COOH có tính acid và nhóm –NH₂ có tính base; nhóm COOH nhường proton (H⁺) ngay cho nhóm NH₂ trong cùng phân tử, tạo cấu trúc lưỡng cực H₃N⁺–R–COO⁻ bền hơn."}
+  ],
+  exercises:[
+    ex("Vì sao amino acid được gọi là hợp chất tạp chức lưỡng tính?", "Vì trong phân tử có đồng thời hai nhóm chức khác loại: nhóm –NH₂ (tính base) và nhóm –COOH (tính acid), nên amino acid vừa phản ứng được với acid vừa phản ứng được với base — gọi là tính lưỡng tính."),
+    ex("Viết sơ đồ phản ứng trùng ngưng giữa 2 phân tử glycine tạo đipeptide.", "H₂NCH₂COOH + H₂NCH₂COOH → H₂NCH₂CONHCH₂COOH + H₂O (hình thành liên kết peptide –CO–NH–)."),
+    ex("Vì sao amino acid có nhiệt độ nóng chảy khá cao so với các hợp chất hữu cơ có khối lượng phân tử tương đương?", "Vì amino acid tồn tại ở dạng ion lưỡng cực (zwitterion), giữa các phân tử có lực hút tĩnh điện mạnh (giống hợp chất ion), cần nhiều năng lượng hơn để phá vỡ mạng tinh thể khi nóng chảy.")
+  ],
+  quiz:[
+    {q:"Amino acid là hợp chất chứa đồng thời hai nhóm chức nào?", options:["–OH và –CHO","–NH₂ và –COOH","–COOH và –COOH","–OH và –NH₂"], correct:1, explain:"Amino acid có nhóm amino (–NH₂) và nhóm carboxyl (–COOH)."},
+    {q:"Amino acid có tính chất đặc trưng là:", options:["Chỉ có tính acid","Chỉ có tính base","Tính lưỡng tính","Không phản ứng với acid, base"], correct:2, explain:"Có cả 2 nhóm chức acid và base nên amino acid có tính lưỡng tính."},
+    {q:"Liên kết hình thành giữa các amino acid trong phân tử peptide gọi là:", options:["Liên kết ester","Liên kết peptide (–CO–NH–)","Liên kết glycoside","Liên kết hydrogen"], correct:1, explain:"Liên kết –CO–NH– giữa nhóm COOH và NH₂ của 2 amino acid gọi là liên kết peptide."},
+    {q:"Amino acid trong dung dịch nước thường tồn tại chủ yếu ở dạng:", options:["Phân tử trung hoà thông thường","Ion lưỡng cực (zwitterion)","Ion dương hoàn toàn","Ion âm hoàn toàn"], correct:1, explain:"Amino acid tồn tại chủ yếu ở dạng ion lưỡng cực H₃N⁺–R–COO⁻."}
+  ]
+};
+
+const L12_B8 = {
+  title:"Bài 8: Peptide – Protein", ready:true,
+  sections:[
+    sec("1. Peptide", `<p><b>Peptide</b> là hợp chất chứa từ 2 đến 50 gốc α-amino acid liên kết với nhau bằng <b>liên kết peptide</b> (–CO–NH–). Tuỳ số gốc amino acid mà gọi là đipeptide, tripeptide... polypeptide.</p>`),
+    sec("2. Protein — cấu trúc", `
+      <p><b>Protein</b> là polypeptide cao phân tử (có phân tử khối từ vài chục nghìn trở lên), được cấu tạo từ nhiều gốc α-amino acid nối với nhau bằng liên kết peptide, có cấu trúc không gian phức tạp (bậc 1: trình tự amino acid; bậc 2: xoắn α, gấp nếp β; bậc 3, bậc 4: cấu trúc không gian ba chiều).</p>
+      <p>Protein chia thành protein đơn giản (chỉ gồm amino acid) và protein phức tạp (kèm thành phần phi protein như lipid, đường...).</p>`),
+    sec("3. Tính chất của protein", `
+      <ul>
+        <li><b>Phản ứng thuỷ phân:</b> protein bị thuỷ phân (xúc tác acid, base hoặc enzyme) tạo các peptide ngắn hơn, cuối cùng thành hỗn hợp các α-amino acid.</li>
+        <li><b>Phản ứng màu biure:</b> protein (có từ 2 liên kết peptide trở lên) tác dụng với Cu(OH)₂ trong môi trường kiềm tạo phức chất màu tím đặc trưng — dùng để nhận biết protein.</li>
+        <li><b>Sự đông tụ:</b> khi đun nóng, hoặc tác dụng với acid, base, muối kim loại nặng, protein bị đông tụ (biến tính), mất khả năng hoà tan và hoạt tính sinh học ban đầu.</li>
+      </ul>`),
+    sec("4. Vai trò", `<p>Protein là thành phần cấu trúc và chức năng cơ bản của mọi tế bào sống (cơ, da, tóc, enzyme, kháng thể, hormone...), là chất dinh dưỡng thiết yếu trong khẩu phần ăn.</p>`)
+  ],
+  examples:[
+    {problem:"Nêu hiện tượng khi nhỏ dung dịch CuSO₄ và NaOH vào dung dịch protein (phản ứng biure).",
+     solution:"Xuất hiện màu tím đặc trưng, do các liên kết peptide (–CO–NH–) trong protein tạo phức chất màu tím với Cu(OH)₂ trong môi trường kiềm."},
+    {problem:"Giải thích hiện tượng lòng trắng trứng đông lại khi luộc trứng.",
+     solution:"Khi đun nóng, protein trong lòng trắng trứng (albumin) bị biến tính, cấu trúc không gian bị phá vỡ, các phân tử protein kết tụ lại với nhau (đông tụ), không tan trở lại được."}
+  ],
+  exercises:[
+    ex("Phân biệt peptide và protein.", "Peptide là hợp chất gồm từ 2 đến 50 gốc α-amino acid liên kết bằng liên kết peptide; protein là polypeptide có khối lượng phân tử rất lớn (hàng chục nghìn trở lên), có cấu trúc không gian phức tạp và chức năng sinh học đặc trưng."),
+    ex("Thuốc thử để nhận biết protein là gì? Nêu hiện tượng.", "Dùng Cu(OH)₂ trong môi trường kiềm (phản ứng biure): xuất hiện màu tím đặc trưng nếu có protein (peptide có ≥2 liên kết peptide)."),
+    ex("Vì sao khi bị ngộ độc kim loại nặng (như chì, thuỷ ngân), người ta thường cho uống sữa hoặc lòng trắng trứng để sơ cứu?", "Vì protein trong sữa, lòng trắng trứng có khả năng kết hợp với ion kim loại nặng làm đông tụ protein, giúp hạn chế kim loại nặng được hấp thu tiếp vào cơ thể trong khi chờ cấp cứu.")
+  ],
+  quiz:[
+    {q:"Liên kết chủ yếu tạo nên mạch peptide/protein là:", options:["Liên kết glycoside","Liên kết peptide (–CO–NH–)","Liên kết ester","Liên kết hydrogen"], correct:1, explain:"Các gốc amino acid nối với nhau qua liên kết peptide."},
+    {q:"Phản ứng biure dùng để nhận biết:", options:["Glucose","Protein","Chất béo","Tinh bột"], correct:1, explain:"Protein tạo phức màu tím với Cu(OH)₂/kiềm (phản ứng biure)."},
+    {q:"Hiện tượng protein bị đông tụ khi đun nóng gọi là:", options:["Thuỷ phân","Biến tính","Trùng hợp","Ester hoá"], correct:1, explain:"Đun nóng làm biến tính (phá vỡ cấu trúc không gian) khiến protein đông tụ."},
+    {q:"Sản phẩm cuối cùng khi thuỷ phân hoàn toàn protein là:", options:["Glucose","Các α-amino acid","Glycerol và acid béo","Ester"], correct:1, explain:"Thuỷ phân hoàn toàn protein tạo hỗn hợp các amino acid cấu thành."}
+  ]
+};
+
+/* ============================================================
+   LỚP 12 — Chương 4: Polymer
+   ============================================================ */
+const L12_B9 = {
+  title:"Bài 9: Đại cương về polymer", ready:true,
+  sections:[
+    sec("1. Khái niệm", `<p><b>Polymer</b> là hợp chất có khối lượng phân tử rất lớn, do nhiều đơn vị nhỏ (gọi là <b>mắt xích</b>, monomer) liên kết lặp đi lặp lại tạo nên. Ví dụ: polyethylene (–CH₂–CH₂–)ₙ được tạo từ monomer ethylene (CH₂=CH₂).</p>`),
+    sec("2. Phân loại", `
+      <p>Theo nguồn gốc: polymer thiên nhiên (tinh bột, cellulose, cao su thiên nhiên, protein), polymer tổng hợp (PE, PVC, nylon), polymer bán tổng hợp (tơ visco, tơ acetate).</p>
+      <p>Theo cấu trúc mạch: mạch không phân nhánh, mạch phân nhánh, mạch mạng lưới (không gian).</p>`),
+    sec("3. Phản ứng điều chế polymer", `
+      <ul>
+        <li><b>Phản ứng trùng hợp:</b> nhiều phân tử monomer có liên kết bội (C=C) kết hợp với nhau, không giải phóng phân tử nhỏ nào: nCH₂=CH₂→(xúc tác,to,p)(–CH₂–CH₂–)ₙ.</li>
+        <li><b>Phản ứng trùng ngưng:</b> nhiều phân tử monomer (có ít nhất 2 nhóm chức) kết hợp với nhau, đồng thời giải phóng phân tử nhỏ (thường là H₂O). Ví dụ: tạo nylon-6,6 từ hexamethylenediamine và adipic acid, giải phóng H₂O.</li>
+      </ul>`),
+    sec("4. Tính chất chung", `<p>Đa số polymer là chất rắn, không bay hơi, không có nhiệt độ nóng chảy xác định (nóng chảy trong một khoảng nhiệt độ), nhiều polymer không tan hoặc tan rất chậm trong dung môi thông thường.</p>`)
+  ],
+  examples:[
+    {problem:"Phân biệt monomer và mắt xích của polymer, lấy ví dụ polyethylene.",
+     solution:"Monomer là phân tử ban đầu tham gia phản ứng trùng hợp (CH₂=CH₂ ethylene); mắt xích là đơn vị cấu trúc lặp lại trong mạch polymer sau phản ứng (–CH₂–CH₂–)."},
+    {problem:"Phân biệt phản ứng trùng hợp và trùng ngưng.",
+     solution:"Trùng hợp: monomer có liên kết bội kết hợp trực tiếp, không tạo ra sản phẩm phụ. Trùng ngưng: monomer có nhóm chức phản ứng với nhau, đồng thời giải phóng phân tử nhỏ (thường H₂O)."}
+  ],
+  exercises:[
+    ex("Nêu điều kiện của monomer để tham gia được phản ứng trùng hợp.", "Monomer cần có liên kết bội (đôi hoặc ba, ví dụ C=C) hoặc là vòng kém bền có thể mở vòng để tham gia phản ứng trùng hợp."),
+    ex("Nêu điều kiện của monomer để tham gia được phản ứng trùng ngưng.", "Monomer cần có ít nhất 2 nhóm chức có khả năng phản ứng với nhau (ví dụ –NH₂ và –COOH, hoặc –OH và –COOH)."),
+    ex("Vì sao polymer không có nhiệt độ nóng chảy xác định như hợp chất phân tử nhỏ?", "Vì polymer là hỗn hợp các phân tử có mạch dài ngắn khác nhau (khối lượng phân tử không đồng nhất), nên khi đun nóng chúng mềm ra và nóng chảy dần trong một khoảng nhiệt độ chứ không chuyển pha đột ngột ở một nhiệt độ cố định.")
+  ],
+  quiz:[
+    {q:"Polymer được tạo thành từ các đơn vị nhỏ lặp lại gọi là:", options:["Monomer/mắt xích","Nguyên tử","Ion","Phân tử nước"], correct:0, explain:"Mắt xích (từ monomer) là đơn vị cấu trúc lặp lại trong polymer."},
+    {q:"Phản ứng trùng hợp yêu cầu monomer phải có:", options:["Liên kết bội hoặc vòng kém bền","Ít nhất 2 nhóm chức khác loại","Nhóm –COOH","Tính acid"], correct:0, explain:"Trùng hợp cần liên kết bội (C=C, C≡C) hoặc vòng kém bền để mở ra liên kết với nhau."},
+    {q:"Phản ứng trùng ngưng khác trùng hợp ở điểm nào?", options:["Không tạo polymer","Có giải phóng phân tử nhỏ (như H₂O)","Chỉ dùng cho polymer thiên nhiên","Không cần monomer"], correct:1, explain:"Trùng ngưng giải phóng thêm phân tử nhỏ (thường là nước), khác trùng hợp."},
+    {q:"Polyethylene (PE) được điều chế bằng phản ứng:", options:["Trùng ngưng","Trùng hợp","Ester hoá","Xà phòng hoá"], correct:1, explain:"nCH₂=CH₂ trùng hợp tạo PE."}
+  ]
+};
+
+const L12_B10 = {
+  title:"Bài 10: Vật liệu polymer", ready:true,
+  sections:[
+    sec("1. Chất dẻo", `<p><b>Chất dẻo</b> là vật liệu polymer có tính dẻo, có thể tạo hình dưới tác dụng nhiệt độ, áp suất. Ví dụ: PE (túi nilon, màng bọc), PVC (ống nước, vỏ dây điện), PS (vỏ hộp xốp), PET (chai nhựa).</p>`),
+    sec("2. Tơ", `
+      <p><b>Tơ</b> là vật liệu polymer hình sợi dài, mảnh, có độ bền nhất định. Phân loại: <b>tơ thiên nhiên</b> (bông, tơ tằm, len), <b>tơ hoá học</b> gồm tơ tổng hợp (nylon-6,6, tơ capron — từ trùng ngưng/trùng hợp) và tơ bán tổng hợp (tơ visco, tơ acetate — chế biến từ cellulose thiên nhiên).</p>`),
+    sec("3. Cao su", `
+      <p><b>Cao su thiên nhiên</b> lấy từ mủ cây cao su, thành phần chính là polyisoprene. <b>Cao su tổng hợp</b> điều chế bằng trùng hợp (cao su buna từ buta-1,3-diene). Cao su có tính đàn hồi cao; qua quá trình <b>lưu hoá</b> (kết hợp với sulfur) tạo cầu nối –S–S– giữa các mạch, cao su bền hơn, đàn hồi tốt hơn, ít bị biến dạng khi kéo dãn.</p>`),
+    sec("4. Ứng dụng chung", `<p>Vật liệu polymer được sử dụng rộng rãi trong đời sống, công nghiệp (bao bì, đồ gia dụng, dệt may, lốp xe, vật liệu xây dựng) nhờ nhẹ, bền, dễ tạo hình, giá thành hợp lí; tuy nhiên rác thải nhựa khó phân huỷ đang là vấn đề môi trường lớn.</p>`)
+  ],
+  examples:[
+    {problem:"Kể tên 2 loại chất dẻo phổ biến và ứng dụng của chúng.",
+     solution:"PE (polyethylene) dùng làm túi nilon, màng bọc thực phẩm; PVC (polyvinyl chloride) dùng làm ống nước, vỏ dây điện."},
+    {problem:"Vì sao cao su sau khi lưu hoá lại bền và đàn hồi tốt hơn cao su chưa lưu hoá?",
+     solution:"Vì lưu hoá tạo các cầu nối –S–S– giữa các mạch polyisoprene, liên kết các mạch với nhau thành mạng lưới không gian, giúp cao su giữ được hình dạng và độ đàn hồi tốt hơn, ít bị chảy dính hay biến dạng vĩnh viễn khi kéo dãn."}
+  ],
+  exercises:[
+    ex("Phân biệt tơ tổng hợp và tơ bán tổng hợp, mỗi loại cho một ví dụ.", "Tơ tổng hợp được tổng hợp hoàn toàn từ các monomer hoá học (ví dụ nylon-6,6, tơ capron); tơ bán tổng hợp được chế biến từ polymer thiên nhiên có sẵn (như cellulose) qua xử lí hoá học (ví dụ tơ visco, tơ acetate)."),
+    ex("Nêu thành phần chính của cao su thiên nhiên.", "Thành phần chính của cao su thiên nhiên là polyisoprene — polymer của isoprene (2-methylbuta-1,3-diene)."),
+    ex("Vì sao rác thải nhựa (chất dẻo) gây ô nhiễm môi trường nghiêm trọng và khó xử lí?", "Vì đa số chất dẻo có cấu trúc mạch bền, khó bị vi sinh vật phân huỷ trong tự nhiên, tồn tại rất lâu (hàng trăm năm), tích tụ ngày càng nhiều trong môi trường đất, nước, đại dương.")
+  ],
+  quiz:[
+    {q:"Chất dẻo là vật liệu polymer có đặc điểm:", options:["Có tính đàn hồi cao","Có thể tạo hình dưới nhiệt độ, áp suất","Chỉ tồn tại dạng sợi","Không thể tái chế"], correct:1, explain:"Chất dẻo có tính dẻo, dễ tạo hình khi gia nhiệt và ép."},
+    {q:"Thành phần chính của cao su thiên nhiên là:", options:["Cellulose","Polyisoprene","Tinh bột","Protein"], correct:1, explain:"Cao su thiên nhiên có thành phần chính là polyisoprene."},
+    {q:"Quá trình lưu hoá cao su là quá trình:", options:["Đun nóng cao su với sulfur tạo cầu nối –S–S–","Hoà tan cao su trong xăng","Trùng hợp isoprene","Thuỷ phân cao su"], correct:0, explain:"Lưu hoá tạo cầu nối disulfide giữa các mạch polyisoprene, tăng độ bền."},
+    {q:"Tơ visco, tơ acetate thuộc loại:", options:["Tơ thiên nhiên","Tơ tổng hợp","Tơ bán tổng hợp","Tơ vô cơ"], correct:2, explain:"Chúng được chế biến từ cellulose thiên nhiên qua xử lí hoá học, gọi là tơ bán tổng hợp."}
+  ]
+};
+
+/* ============================================================
+   LỚP 12 — Chương 5: Đại cương về kim loại
+   ============================================================ */
+const L12_B11 = {
+  title:"Bài 11: Cấu tạo và tính chất vật lí của kim loại", ready:true,
+  sections:[
+    sec("1. Vị trí và cấu tạo nguyên tử kim loại", `<p>Đa số nguyên tố kim loại có số electron lớp ngoài cùng ít (1, 2, 3 electron), bán kính nguyên tử tương đối lớn, dễ nhường electron để tạo cation. Trong tinh thể kim loại, các nguyên tử/ion kim loại được sắp xếp theo mạng tinh thể chặt khít, các electron hoá trị tách khỏi nguyên tử di chuyển tự do trong toàn mạng gọi là <b>electron tự do (electron dẫn)</b>, tạo nên <b>liên kết kim loại</b>.</p>`),
+    sec("2. Tính chất vật lí chung", `
+      <ul>
+        <li><b>Tính dẻo:</b> có thể dát mỏng, kéo sợi (Au, Ag, Al dẻo nhất) do các lớp ion kim loại có thể trượt lên nhau mà liên kết kim loại không bị phá vỡ.</li>
+        <li><b>Tính dẫn điện, dẫn nhiệt:</b> tốt nhờ các electron tự do chuyển động dễ dàng (Ag dẫn điện tốt nhất, sau đó Cu, Au, Al...).</li>
+        <li><b>Ánh kim:</b> bề mặt kim loại sáng bóng do electron tự do phản xạ tốt ánh sáng.</li>
+      </ul>
+      <p>Ngoài ra, các kim loại khác nhau về khối lượng riêng, nhiệt độ nóng chảy, độ cứng tuỳ theo độ bền liên kết kim loại và cấu trúc mạng tinh thể.</p>`),
+    sec("3. Mạng tinh thể kim loại", `<p>Có 3 kiểu mạng tinh thể phổ biến: lập phương tâm khối (Fe, Na, K), lập phương tâm diện (Cu, Al, Ag, Au), lục phương (Mg, Zn) — quyết định độ đặc khít và một số tính chất vật lí của từng kim loại.</p>`)
+  ],
+  examples:[
+    {problem:"Vì sao kim loại có tính dẫn điện tốt?",
+     solution:"Vì trong mạng tinh thể kim loại có các electron tự do (electron hoá trị tách khỏi nguyên tử), khi có điện trường ngoài các electron này chuyển động thành dòng có hướng, tạo nên dòng điện."},
+    {problem:"Kim loại nào dẫn điện tốt nhất trong các kim loại thông dụng?",
+     solution:"Bạc (Ag) dẫn điện tốt nhất, sau đó đến đồng (Cu), vàng (Au), nhôm (Al)."}
+  ],
+  exercises:[
+    ex("Giải thích vì sao kim loại có tính dẻo.", "Vì trong tinh thể kim loại, các lớp ion dương kim loại có thể trượt lên nhau khi có lực tác dụng mà liên kết kim loại (nhờ electron tự do bao quanh) không bị đứt gãy, nên kim loại dễ dát mỏng, kéo sợi mà không giòn gãy."),
+    ex("Kể tên 3 kiểu mạng tinh thể kim loại phổ biến và ví dụ mỗi loại.", "Lập phương tâm khối (Na, K, Fe ở nhiệt độ thường); lập phương tâm diện (Cu, Al, Ag, Au); lục phương (Mg, Zn)."),
+    ex("Vì sao vàng (Au) được dùng làm đồ trang sức thay vì chỉ dùng kim loại dẫn điện tốt nhất là bạc?", "Vì ngoài dẫn điện, đồ trang sức cần có tính chất khác như độ bền hoá học cao (Au rất khó bị oxi hoá, không gỉ, giữ ánh kim lâu dài), trong khi Ag dễ bị xỉn màu do phản ứng với hợp chất sulfur trong không khí.")
+  ],
+  quiz:[
+    {q:"Liên kết trong tinh thể kim loại được hình thành nhờ:", options:["Các electron tự do liên kết các ion dương kim loại","Lực hút tĩnh điện giữa 2 ion trái dấu","Cặp electron dùng chung giữa 2 nguyên tử","Lực Van der Waals"], correct:0, explain:"Liên kết kim loại hình thành nhờ các electron tự do di chuyển trong mạng ion dương kim loại."},
+    {q:"Kim loại nào dẫn điện tốt nhất?", options:["Cu","Au","Ag","Al"], correct:2, explain:"Bạc (Ag) có độ dẫn điện tốt nhất trong các kim loại."},
+    {q:"Tính dẻo của kim loại được giải thích bởi:", options:["Các lớp ion trượt lên nhau mà không đứt liên kết kim loại","Kim loại có khối lượng riêng lớn","Kim loại có nhiệt độ nóng chảy cao","Kim loại có màu sáng"], correct:0, explain:"Nhờ electron tự do 'giữ' các lớp ion, liên kết không đứt khi các lớp trượt lên nhau."},
+    {q:"Nguyên tử kim loại thường có đặc điểm nào về electron lớp ngoài cùng?", options:["Nhiều electron (5–7)","Ít electron (1–3)","Bão hoà (8 electron)","Không có electron lớp ngoài"], correct:1, explain:"Đa số kim loại có 1–3 electron lớp ngoài cùng, dễ nhường electron."}
+  ]
+};
+
+const L12_B12 = {
+  title:"Bài 12: Tính chất hoá học của kim loại – Dãy điện hoá", ready:true,
+  sections:[
+    sec("1. Tính chất hoá học chung của kim loại — tính khử", `
+      <p>Kim loại dễ nhường electron lớp ngoài cùng để trở thành cation, thể hiện <b>tính khử</b>: M → Mⁿ⁺ + ne.</p>
+      <ul>
+        <li>Tác dụng với phi kim: 2Fe+3Cl₂→(to)2FeCl₃; tác dụng với oxygen tạo oxide.</li>
+        <li>Tác dụng với dung dịch acid (HCl, H₂SO₄ loãng): kim loại đứng trước H trong dãy điện hoá phản ứng giải phóng H₂: Fe+2HCl→FeCl₂+H₂↑.</li>
+        <li>Tác dụng với dung dịch muối: kim loại mạnh hơn đẩy kim loại yếu hơn ra khỏi dung dịch muối: Fe+CuSO₄→FeSO₄+Cu.</li>
+      </ul>`),
+    sec("2. Dãy điện hoá của kim loại", `
+      <p><b>Dãy điện hoá</b> sắp xếp các cặp oxi hoá – khử của kim loại theo chiều tăng dần tính oxi hoá của cation kim loại (và giảm dần tính khử của kim loại): K, Ca, Na, Mg, Al, Zn, Fe, Ni, Sn, Pb, (H), Cu, Ag, Au.</p>
+      <p>Quy tắc α (anpha): phản ứng giữa 2 cặp oxi hoá – khử chỉ xảy ra theo chiều chất khử mạnh hơn phản ứng với chất oxi hoá mạnh hơn, tạo ra chất khử yếu hơn và chất oxi hoá yếu hơn.</p>`),
+    sec("3. Ứng dụng của dãy điện hoá", `<p>Dựa vào dãy điện hoá, có thể dự đoán chiều phản ứng oxi hoá – khử giữa kim loại với ion kim loại khác, giữa kim loại với dung dịch acid, và giải thích hiện tượng ăn mòn điện hoá.</p>`)
+  ],
+  examples:[
+    {problem:"Cho đinh sắt vào dung dịch CuSO₄, nêu hiện tượng và viết phương trình.",
+     solution:"Có lớp kim loại màu đỏ (Cu) bám vào đinh sắt, dung dịch nhạt màu xanh dần: Fe+CuSO₄→FeSO₄+Cu (Fe mạnh hơn Cu nên đẩy Cu ra khỏi muối)."},
+    {problem:"Vì sao không dùng dây đồng (Cu) để làm vật đựng dung dịch AgNO₃ nhưng có thể dùng để điều chế Ag từ dung dịch này?",
+     solution:"Vì Cu đứng trước Ag trong dãy điện hoá, có tính khử mạnh hơn Ag, nên Cu sẽ khử Ag⁺ thành Ag kim loại: Cu+2AgNO₃→Cu(NO₃)₂+2Ag — đây chính là phản ứng dùng để điều chế Ag, không phải nhược điểm khi 'đựng' dung dịch."}
+  ],
+  exercises:[
+    ex("Sắp xếp theo chiều tăng dần tính khử: Cu, Fe, Ag, Al (dựa vào dãy điện hoá).", "Chiều tăng dần tính khử: Ag < Cu < Fe < Al."),
+    ex("Kim loại nào sau đây không tác dụng với dung dịch HCl loãng: Fe, Cu, Zn, Mg? Giải thích.", "Cu không tác dụng vì Cu đứng sau H trong dãy điện hoá, không đủ khả năng khử H⁺ trong HCl loãng thành H₂."),
+    ex("Viết phương trình phản ứng (nếu có) khi cho Zn vào dung dịch MgSO₄ và khi cho Zn vào dung dịch CuSO₄.", "Zn+MgSO₄: không phản ứng, vì Zn đứng sau Mg trong dãy điện hoá (Mg có tính khử mạnh hơn Zn). Zn+CuSO₄→ZnSO₄+Cu, vì Zn đứng trước Cu, có tính khử mạnh hơn.")
+  ],
+  quiz:[
+    {q:"Tính chất hoá học chung của kim loại là:", options:["Tính oxi hoá","Tính khử","Tính acid","Tính base"], correct:1, explain:"Kim loại dễ nhường electron nên thể hiện tính khử."},
+    {q:"Trong dãy điện hoá, kim loại đứng trước H có thể:", options:["Không phản ứng với acid loãng","Phản ứng với dung dịch acid loãng giải phóng H₂","Chỉ phản ứng với base","Chỉ tồn tại dạng ion"], correct:1, explain:"Kim loại đứng trước H trong dãy điện hoá đẩy được H₂ ra khỏi acid loãng."},
+    {q:"Theo quy tắc α, phản ứng oxi hoá – khử xảy ra theo chiều:", options:["Chất khử yếu phản ứng chất oxi hoá yếu","Chất khử mạnh hơn phản ứng với chất oxi hoá mạnh hơn, tạo chất khử và oxi hoá yếu hơn","Không xác định được chiều","Luôn xảy ra theo cả 2 chiều"], correct:1, explain:"Quy tắc α xác định chiều ưu tiên của phản ứng oxi hoá khử giữa 2 cặp."},
+    {q:"Kim loại Fe có thể đẩy được kim loại nào ra khỏi dung dịch muối của nó?", options:["Mg","Al","Cu","Zn"], correct:2, explain:"Fe đứng trước Cu trong dãy điện hoá nên đẩy được Cu ra khỏi dung dịch muối CuSO₄, còn Mg, Al, Zn đều đứng trước Fe."}
+  ]
+};
+
+const L12_B13 = {
+  title:"Bài 13: Hợp kim và sự ăn mòn kim loại", ready:true,
+  sections:[
+    sec("1. Hợp kim", `<p><b>Hợp kim</b> là vật liệu chứa một kim loại cơ bản và một số kim loại hoặc phi kim khác. So với kim loại nguyên chất, hợp kim thường có độ cứng cao hơn, chịu nhiệt, chịu ăn mòn tốt hơn, nhưng thường dẫn điện, dẫn nhiệt kém hơn. Ví dụ: thép (Fe+C), gang (Fe+C hàm lượng cao hơn), đồng thau (Cu+Zn), duralumin (Al+Cu+Mg+Mn).</p>`),
+    sec("2. Ăn mòn hoá học", `<p><b>Ăn mòn hoá học</b> là quá trình kim loại bị oxi hoá trực tiếp bởi các chất trong môi trường (khí O₂, khí Cl₂, hơi nước ở nhiệt độ cao...), không phát sinh dòng điện. Ví dụ: 3Fe+2O₂→(to)Fe₃O₄ khi vật bằng sắt bị đốt nóng.</p>`),
+    sec("3. Ăn mòn điện hoá", `
+      <p><b>Ăn mòn điện hoá</b> xảy ra khi kim loại tiếp xúc với dung dịch chất điện li và một kim loại (hoặc phi kim) khác có tính khử yếu hơn, tạo thành cặp điện cực, sinh ra dòng điện nhỏ trong dung dịch. Đây là dạng ăn mòn phổ biến và nghiêm trọng nhất (ví dụ gỉ sắt trong không khí ẩm có tiếp xúc với các tạp chất kim loại khác).</p>
+      <p>Điều kiện xảy ra ăn mòn điện hoá: có 2 điện cực khác bản chất, các điện cực tiếp xúc trực tiếp (hoặc qua dây dẫn), cùng tiếp xúc với dung dịch chất điện li.</p>`),
+    sec("4. Chống ăn mòn kim loại", `<p>Các biện pháp chống ăn mòn: phủ lớp bảo vệ (sơn, mạ kẽm, mạ crôm), dùng hợp kim chống gỉ (thép không gỉ), phương pháp điện hoá (gắn kim loại hoạt động mạnh hơn — như gắn khối kẽm vào vỏ tàu biển bằng thép — để kẽm bị ăn mòn thay cho sắt, gọi là <b>phương pháp bảo vệ catode/điện cực hi sinh</b>).</p>`)
+  ],
+  examples:[
+    {problem:"Vì sao vỏ tàu biển bằng thép thường được gắn thêm các khối kẽm (Zn)?",
+     solution:"Vì Zn có tính khử mạnh hơn Fe; khi tiếp xúc với nước biển (dung dịch điện li), xảy ra ăn mòn điện hoá, Zn đóng vai trò cực âm bị ăn mòn (hi sinh) thay cho Fe, bảo vệ vỏ tàu khỏi bị gỉ."},
+    {problem:"Phân biệt ăn mòn hoá học và ăn mòn điện hoá.",
+     solution:"Ăn mòn hoá học: kim loại phản ứng trực tiếp với chất oxi hoá trong môi trường, không sinh dòng điện. Ăn mòn điện hoá: cần có 2 điện cực khác bản chất tiếp xúc với dung dịch điện li, sinh ra dòng điện nhỏ, ăn mòn xảy ra nhanh và phổ biến hơn."}
+  ],
+  exercises:[
+    ex("Vì sao đinh sắt bị gỉ nhanh hơn khi có mặt vảy đồng (Cu) bám trên bề mặt trong môi trường ẩm?", "Vì khi có Cu tiếp xúc với Fe trong môi trường ẩm (có hơi nước, khí CO₂... là chất điện li), hình thành cặp điện cực Fe–Cu, xảy ra ăn mòn điện hoá; Fe có tính khử mạnh hơn Cu nên đóng vai trò cực âm, bị ăn mòn (gỉ) nhanh hơn so với khi không có Cu."),
+    ex("Kể 3 biện pháp phổ biến để chống ăn mòn kim loại trong đời sống.", "Sơn phủ bề mặt, mạ kẽm/mạ crôm, dùng hợp kim không gỉ (thép không gỉ)."),
+    ex("Thành phần chính của thép và gang khác nhau như thế nào?", "Cả hai đều là hợp kim của Fe và C, nhưng gang có hàm lượng carbon cao hơn (khoảng 2–5%) nên giòn hơn, còn thép có hàm lượng carbon thấp hơn (dưới 2%) nên dẻo dai, bền hơn, được dùng rộng rãi hơn trong xây dựng, chế tạo.")
+  ],
+  quiz:[
+    {q:"Ăn mòn điện hoá cần có điều kiện nào sau đây?", options:["Chỉ cần 1 kim loại tiếp xúc không khí khô","Hai điện cực khác bản chất tiếp xúc với dung dịch điện li","Nhiệt độ rất cao","Không cần dung dịch điện li"], correct:1, explain:"Ăn mòn điện hoá cần 2 điện cực khác bản chất cùng tiếp xúc dung dịch điện li."},
+    {q:"Phương pháp bảo vệ vỏ tàu biển bằng cách gắn khối kẽm gọi là:", options:["Mạ điện","Phương pháp điện cực hi sinh (bảo vệ catode)","Sơn phủ","Nhúng dầu"], correct:1, explain:"Zn bị ăn mòn thay cho Fe, gọi là phương pháp điện cực hi sinh."},
+    {q:"Ăn mòn hoá học khác ăn mòn điện hoá ở điểm nào?", options:["Không sinh ra dòng điện","Chỉ xảy ra trong nước","Chỉ xảy ra với vàng","Luôn xảy ra nhanh hơn"], correct:0, explain:"Ăn mòn hoá học là phản ứng oxi hoá trực tiếp, không phát sinh dòng điện."},
+    {q:"Hợp kim so với kim loại nguyên chất tạo nên nó thường có:", options:["Độ cứng thấp hơn","Độ cứng cao hơn, chịu ăn mòn tốt hơn","Dẫn điện tốt hơn","Khối lượng riêng nhỏ hơn nhiều"], correct:1, explain:"Hợp kim thường cứng hơn, bền và chịu ăn mòn tốt hơn kim loại nguyên chất."}
+  ]
+};
+
+/* ============================================================
+   LỚP 12 — Chương 6: Kim loại nhóm IA, IIA
+   ============================================================ */
+const L12_B14 = {
+  title:"Bài 14: Kim loại nhóm IA", ready:true,
+  sections:[
+    sec("1. Vị trí, cấu tạo, tính chất vật lí", `<p>Kim loại nhóm IA (kim loại kiềm) gồm Li, Na, K, Rb, Cs, có 1 electron lớp ngoài cùng (ns¹), dễ nhường electron tạo ion M⁺. Là kim loại nhẹ, mềm (cắt được bằng dao), nhiệt độ nóng chảy thấp, giảm dần từ Li đến Cs.</p>`),
+    sec("2. Tính chất hoá học — tính khử rất mạnh", `
+      <ul>
+        <li>Tác dụng với phi kim: 4Na+O₂→2Na₂O; 2Na+Cl₂→(to)2NaCl.</li>
+        <li>Tác dụng mãnh liệt với nước ngay ở nhiệt độ thường: 2Na+2H₂O→2NaOH+H₂↑ (Na nổi và chạy trên mặt nước do phản ứng toả nhiệt lớn, có thể gây cháy nổ với K).</li>
+        <li>Vì hoạt động hoá học rất mạnh, kim loại kiềm được bảo quản bằng cách ngâm trong dầu hoả (dầu hoả không có nước, không phản ứng với kim loại kiềm).</li>
+      </ul>`),
+    sec("3. Một số hợp chất quan trọng", `<p>NaOH (xút ăn da) là base mạnh, dùng trong công nghiệp xà phòng, giấy, dệt. NaCl dùng làm muối ăn, nguyên liệu sản xuất Cl₂, NaOH (điện phân dung dịch NaCl có màng ngăn). Na₂CO₃ (soda) dùng trong công nghiệp thuỷ tinh, xà phòng.</p>`)
+  ],
+  examples:[
+    {problem:"Nêu hiện tượng khi cho một mẩu nhỏ Na vào cốc nước có vài giọt phenolphthalein.",
+     solution:"Na nóng chảy thành hạt tròn chạy nhanh trên mặt nước, có khí thoát ra (H₂), dung dịch chuyển màu hồng do tạo NaOH (base): 2Na+2H₂O→2NaOH+H₂↑."},
+    {problem:"Vì sao kim loại kiềm phải được bảo quản bằng cách ngâm trong dầu hoả?",
+     solution:"Vì kim loại kiềm có tính khử rất mạnh, phản ứng dễ dàng với hơi nước và oxygen trong không khí; dầu hoả không chứa nước và không phản ứng với kim loại kiềm nên cách li chúng an toàn khỏi môi trường."}
+  ],
+  exercises:[
+    ex("Vì sao kim loại kiềm có tính khử mạnh nhất trong các kim loại?", "Vì kim loại kiềm có bán kính nguyên tử lớn, chỉ có 1 electron lớp ngoài cùng, năng lượng ion hoá thứ nhất thấp nên rất dễ nhường electron tạo ion M⁺, thể hiện tính khử rất mạnh."),
+    ex("Viết phương trình phản ứng của K với nước, so sánh mức độ phản ứng với Na.", "2K+2H₂O→2KOH+H₂↑. K phản ứng mãnh liệt hơn Na (có thể gây cháy, nổ) do bán kính nguyên tử K lớn hơn, năng lượng ion hoá nhỏ hơn, tính khử mạnh hơn Na."),
+    ex("Nêu một ứng dụng quan trọng của NaOH trong công nghiệp.", "NaOH được dùng để sản xuất xà phòng (phản ứng xà phòng hoá chất béo), sản xuất giấy, tơ nhân tạo, và trong công nghiệp dệt nhuộm.")
+  ],
+  quiz:[
+    {q:"Kim loại nhóm IA có bao nhiêu electron lớp ngoài cùng?", options:["1","2","3","7"], correct:0, explain:"Kim loại kiềm có cấu hình electron ngoài cùng ns¹."},
+    {q:"Kim loại kiềm được bảo quản bằng cách:", options:["Để trong không khí","Ngâm trong nước","Ngâm trong dầu hoả","Ngâm trong acid loãng"], correct:2, explain:"Ngâm trong dầu hoả để cách li khỏi hơi nước, oxygen trong không khí."},
+    {q:"Phản ứng của Na với nước tạo ra:", options:["NaOH và H₂","Na₂O và H₂O","NaCl và H₂","Na₂CO₃ và O₂"], correct:0, explain:"2Na+2H₂O→2NaOH+H₂↑."},
+    {q:"Trong nhóm IA, tính khử biến đổi theo chiều nào từ Li đến Cs?", options:["Giảm dần","Tăng dần","Không đổi","Biến đổi không theo quy luật"], correct:1, explain:"Từ Li đến Cs, bán kính nguyên tử tăng, năng lượng ion hoá giảm nên tính khử tăng dần."}
+  ]
+};
+
+const L12_B15 = {
+  title:"Bài 15: Kim loại nhóm IIA", ready:true,
+  sections:[
+    sec("1. Vị trí, cấu tạo, tính chất vật lí", `<p>Kim loại nhóm IIA (kim loại kiềm thổ) gồm Be, Mg, Ca, Sr, Ba, có 2 electron lớp ngoài cùng (ns²). Là kim loại nhẹ, tương đối cứng hơn kim loại kiềm, nhiệt độ nóng chảy cao hơn kim loại kiềm cùng chu kì.</p>`),
+    sec("2. Tính chất hoá học — tính khử mạnh (yếu hơn kim loại kiềm cùng chu kì)", `
+      <ul>
+        <li>Tác dụng với phi kim: 2Mg+O₂→(to)2MgO; Ca+Cl₂→(to)CaCl₂.</li>
+        <li>Tác dụng với nước: Ca, Sr, Ba phản ứng với nước ở nhiệt độ thường tạo base và H₂: Ca+2H₂O→Ca(OH)₂+H₂↑; Mg phản ứng rất chậm với nước lạnh nhưng phản ứng được với hơi nước nóng; Be không phản ứng với nước.</li>
+        <li>Tác dụng với dung dịch acid giải phóng H₂ (trừ Be phản ứng chậm).</li>
+      </ul>`),
+    sec("3. Một số hợp chất quan trọng", `<p>CaO (vôi sống) tác dụng với nước tạo Ca(OH)₂ (vôi tôi, nước vôi trong), dùng trong xây dựng, khử chua đất, xử lí nước thải. CaCO₃ (đá vôi) là nguyên liệu sản xuất xi măng, vôi. MgO chịu nhiệt cao, dùng làm vật liệu chịu lửa.</p>`)
+  ],
+  examples:[
+    {problem:"Viết phương trình phản ứng của CaO với nước và ứng dụng của phản ứng này.",
+     solution:"CaO+H₂O→Ca(OH)₂ (phản ứng toả nhiệt mạnh — gọi là 'tôi vôi'), sản phẩm Ca(OH)₂ dùng trong xây dựng, khử chua đất nông nghiệp."},
+    {problem:"Vì sao Mg phản ứng với nước lạnh rất chậm nhưng phản ứng nhanh với hơi nước ở nhiệt độ cao?",
+     solution:"Vì ở nhiệt độ thường, lớp oxide MgO mỏng hình thành trên bề mặt Mg bảo vệ kim loại không phản ứng tiếp với nước; ở nhiệt độ cao, phản ứng được cung cấp đủ năng lượng hoạt hoá, đồng thời oxide bị phá vỡ, nên Mg phản ứng nhanh với hơi nước nóng: Mg+H₂O(hơi)→(to)MgO+H₂↑."}
+  ],
+  exercises:[
+    ex("So sánh khả năng phản ứng với nước của Be, Mg, Ca ở nhiệt độ thường.", "Be không phản ứng với nước; Mg phản ứng rất chậm ở nhiệt độ thường (do lớp oxide bảo vệ); Ca phản ứng mạnh với nước ngay ở nhiệt độ thường, giải phóng khí H₂."),
+    ex("Viết phương trình phản ứng nhiệt phân CaCO₃, nêu ứng dụng.", "CaCO₃→(to)CaO+CO₂↑, phản ứng này dùng để sản xuất vôi sống (CaO) trong công nghiệp xây dựng."),
+    ex("Vì sao thạch cao (CaSO₄) được dùng để bó bột khi gãy xương?", "Vì thạch cao nung (CaSO₄.½H₂O) khi trộn với nước sẽ đông cứng nhanh, tạo hình cố định vững chắc quanh vùng xương gãy, đồng thời an toàn, không độc hại với cơ thể.")
+  ],
+  quiz:[
+    {q:"Kim loại nhóm IIA có bao nhiêu electron lớp ngoài cùng?", options:["1","2","3","4"], correct:1, explain:"Kim loại kiềm thổ có cấu hình electron ngoài cùng ns²."},
+    {q:"Kim loại nào trong nhóm IIA không phản ứng với nước ở mọi nhiệt độ thông thường?", options:["Ca","Ba","Be","Sr"], correct:2, explain:"Be hầu như không phản ứng với nước do có lớp oxide bảo vệ bền."},
+    {q:"CaO tác dụng với nước tạo ra:", options:["CaCO₃","Ca(OH)₂","CaCl₂","CaSO₄"], correct:1, explain:"CaO+H₂O→Ca(OH)₂, phản ứng toả nhiệt mạnh (tôi vôi)."},
+    {q:"So với kim loại kiềm cùng chu kì, kim loại kiềm thổ có tính khử:", options:["Mạnh hơn","Yếu hơn","Bằng nhau","Không so sánh được"], correct:1, explain:"Kim loại kiềm thổ có 2 electron ngoài cùng, năng lượng ion hoá cao hơn kim loại kiềm cùng chu kì nên tính khử yếu hơn."}
+  ]
+};
+
+const L12_B16 = {
+  title:"Bài 16: Nước cứng", ready:true,
+  sections:[
+    sec("1. Khái niệm và phân loại", `
+      <p><b>Nước cứng</b> là nước chứa nhiều ion Ca²⁺, Mg²⁺. Nước không chứa hoặc chứa rất ít các ion này gọi là <b>nước mềm</b>.</p>
+      <ul>
+        <li><b>Tính cứng tạm thời</b>: do muối Ca(HCO₃)₂, Mg(HCO₃)₂ gây ra — có thể loại bỏ bằng cách đun sôi.</li>
+        <li><b>Tính cứng vĩnh cửu</b>: do muối CaCl₂, MgCl₂, CaSO₄, MgSO₄ gây ra — không mất đi khi đun sôi.</li>
+        <li><b>Tính cứng toàn phần</b> = tính cứng tạm thời + tính cứng vĩnh cửu.</li>
+      </ul>`),
+    sec("2. Tác hại của nước cứng", `<p>Nước cứng làm giảm khả năng tạo bọt của xà phòng (tạo kết tủa với xà phòng, gây lãng phí), làm hỏng hương vị thực phẩm khi nấu, gây đóng cặn (cáu cặn CaCO₃, MgCO₃) trong ấm đun nước, nồi hơi, đường ống, làm giảm hiệu suất truyền nhiệt và có thể gây nổ nồi hơi công nghiệp do tắc nghẽn.</p>`),
+    sec("3. Phương pháp làm mềm nước cứng", `
+      <ul>
+        <li><b>Phương pháp đun sôi</b> (chỉ khử được tính cứng tạm thời): Ca(HCO₃)₂→(to)CaCO₃↓+CO₂↑+H₂O.</li>
+        <li><b>Phương pháp hoá học</b> (khử cả tính cứng vĩnh cửu): dùng dung dịch Na₂CO₃, Na₃PO₄ để kết tủa Ca²⁺, Mg²⁺: Ca²⁺+CO₃²⁻→CaCO₃↓.</li>
+        <li><b>Phương pháp trao đổi ion</b>: cho nước cứng đi qua vật liệu trao đổi ion (nhựa cationit), thay Ca²⁺, Mg²⁺ bằng Na⁺ hoặc H⁺.</li>
+      </ul>`)
+  ],
+  examples:[
+    {problem:"Viết phương trình đun sôi nước cứng tạm thời chứa Ca(HCO₃)₂.",
+     solution:"Ca(HCO₃)₂→(to)CaCO₃↓+CO₂↑+H₂O — kết tủa CaCO₃ tách ra khỏi nước, làm giảm độ cứng."},
+    {problem:"Vì sao đun sôi không loại bỏ được tính cứng vĩnh cửu do CaSO₄, MgSO₄ gây ra?",
+     solution:"Vì CaSO₄, MgSO₄ là muối bền nhiệt, không bị phân huỷ khi đun sôi (khác với muối hydrocarbonate dễ bị phân huỷ), nên đun sôi không loại được các ion Ca²⁺, Mg²⁺ do các muối này gây ra."}
+  ],
+  exercises:[
+    ex("Phân biệt tính cứng tạm thời và tính cứng vĩnh cửu.", "Tính cứng tạm thời do muối hydrocarbonate (Ca(HCO₃)₂, Mg(HCO₃)₂) gây ra, có thể khử bằng cách đun sôi; tính cứng vĩnh cửu do muối chloride, sulfate của Ca, Mg gây ra, không mất khi đun sôi mà phải dùng phương pháp hoá học hoặc trao đổi ion."),
+    ex("Đề xuất phương pháp làm mềm nước cứng chứa đồng thời Ca(HCO₃)₂ và CaSO₄.", "Dùng dung dịch Na₂CO₃ (hoặc Na₃PO₄) để kết tủa hoàn toàn cả 2 loại, vì phương pháp hoá học khử được cả tính cứng tạm thời và vĩnh cửu: Ca²⁺+CO₃²⁻→CaCO₃↓ (áp dụng cho cả Ca²⁺ từ Ca(HCO₃)₂ và từ CaSO₄)."),
+    ex("Vì sao nước cứng làm giảm tác dụng tẩy rửa của xà phòng?", "Vì ion Ca²⁺, Mg²⁺ trong nước cứng phản ứng với xà phòng (muối natri của acid béo) tạo kết tủa muối canxi/magie của acid béo không tan, làm mất tác dụng tạo bọt và giặt sạch của xà phòng, đồng thời bám dính gây cứng vải.")
+  ],
+  quiz:[
+    {q:"Nước cứng là nước chứa nhiều ion:", options:["Na⁺, K⁺","Ca²⁺, Mg²⁺","Cl⁻, SO₄²⁻","H⁺, OH⁻"], correct:1, explain:"Nước cứng đặc trưng bởi hàm lượng cao ion Ca²⁺ và Mg²⁺."},
+    {q:"Tính cứng tạm thời có thể loại bỏ bằng cách:", options:["Đun sôi","Thêm muối ăn","Lọc qua giấy lọc","Chiết"], correct:0, explain:"Đun sôi phân huỷ muối hydrocarbonate gây tính cứng tạm thời."},
+    {q:"Phương pháp nào khử được cả tính cứng tạm thời và vĩnh cửu?", options:["Đun sôi","Dùng dung dịch Na₂CO₃","Lọc thô","Để lắng tự nhiên"], correct:1, explain:"Na₂CO₃ kết tủa Ca²⁺, Mg²⁺ dưới mọi dạng muối, khử được cả 2 loại tính cứng."},
+    {q:"Tác hại nào sau đây KHÔNG phải do nước cứng gây ra?", options:["Đóng cặn trong nồi hơi","Giảm tác dụng tẩy rửa của xà phòng","Làm tăng độ pH của nước quá cao gây nguy hiểm","Ảnh hưởng hương vị khi nấu ăn"], correct:2, explain:"Nước cứng không nhất thiết làm tăng pH bất thường; đây không phải tác hại đặc trưng của nước cứng."}
+  ]
+};
+
+/* ============================================================
+   LỚP 12 — Chương 7: Sơ lược dãy kim loại chuyển tiếp và phức chất
+   ============================================================ */
+const L12_B17 = {
+  title:"Bài 17: Nguyên tố nhóm B", ready:true,
+  sections:[
+    sec("1. Đặc điểm chung của nguyên tố nhóm B (kim loại chuyển tiếp)", `
+      <p>Nguyên tố nhóm B (kim loại chuyển tiếp, ví dụ Fe, Cu, Cr, Mn, Zn...) có electron hoá trị điền vào cả phân lớp (n-1)d và ns. Đặc điểm chung:</p>
+      <ul>
+        <li>Có nhiều số oxi hoá khác nhau trong hợp chất (ví dụ Fe có +2, +3; Cr có +2, +3, +6).</li>
+        <li>Hợp chất thường có màu sắc đặc trưng (do có electron d chưa lấp đầy, dễ chuyển mức năng lượng).</li>
+        <li>Có khả năng tạo phức chất tốt (do còn orbital trống, tương tác với các phối tử).</li>
+      </ul>`),
+    sec("2. Sắt (Fe) — nguyên tố điển hình", `<p>Fe có 2 số oxi hoá phổ biến là +2 và +3. Hợp chất Fe(II) (như FeSO₄, dung dịch màu lục nhạt) có tính khử, dễ bị oxi hoá thành Fe(III); hợp chất Fe(III) (như FeCl₃, dung dịch màu vàng nâu) có tính oxi hoá. Fe là kim loại phổ biến nhất trong công nghiệp, thành phần chính của gang, thép.</p>`),
+    sec("3. Đồng (Cu) và một số kim loại chuyển tiếp khác", `<p>Cu có số oxi hoá phổ biến +1, +2; hợp chất Cu(II) thường có màu xanh lam đặc trưng (CuSO₄.5H₂O, Cu(OH)₂). Cr có các số oxi hoá +2, +3, +6, hợp chất có nhiều màu sắc (Cr₂O₃ màu lục, CrO₃ màu đỏ thẫm) — do đó tên "chromium" bắt nguồn từ tiếng Hy Lạp nghĩa là "màu sắc".</p>`)
+  ],
+  examples:[
+    {problem:"Vì sao hợp chất của kim loại chuyển tiếp thường có màu sắc đặc trưng trong khi hợp chất kim loại nhóm IA, IIA hầu như không màu?",
+     solution:"Vì các ion kim loại chuyển tiếp có phân lớp d chưa lấp đầy electron, các electron d có thể hấp thụ ánh sáng nhìn thấy để chuyển lên mức năng lượng d cao hơn, gây ra màu sắc; trong khi ion kim loại nhóm IA, IIA có cấu hình electron bền (như khí hiếm), không có sự chuyển mức năng lượng tương tự nên hợp chất của chúng thường không màu."},
+    {problem:"Nêu 2 số oxi hoá phổ biến của Fe và ví dụ hợp chất tương ứng.",
+     solution:"Fe(+2): FeSO₄, FeCl₂ (dung dịch màu lục nhạt); Fe(+3): FeCl₃, Fe₂(SO₄)₃ (dung dịch màu vàng nâu)."}
+  ],
+  exercises:[
+    ex("Nêu đặc điểm cấu hình electron chung của nguyên tố nhóm B.", "Electron hoá trị của nguyên tố nhóm B điền vào cả phân lớp (n-1)d và ns, khác với nguyên tố nhóm A chỉ điền vào phân lớp ns, np."),
+    ex("Vì sao kim loại chuyển tiếp có nhiều số oxi hoá khác nhau trong hợp chất?", "Vì các electron ở cả phân lớp ns và (n-1)d đều có năng lượng gần nhau, có thể tham gia tạo liên kết, nên kim loại chuyển tiếp có thể nhường số electron khác nhau tuỳ điều kiện phản ứng, tạo nhiều số oxi hoá."),
+    ex("Kể tên một hợp chất của đồng (Cu) có màu xanh lam đặc trưng.", "CuSO₄.5H₂O (đồng(II) sulfate ngậm nước) có màu xanh lam đặc trưng; hoặc Cu(OH)₂ kết tủa xanh lam.")
+  ],
+  quiz:[
+    {q:"Electron hoá trị của nguyên tố nhóm B điền vào phân lớp nào?", options:["ns và np","(n-1)d và ns","(n-2)f","Chỉ np"], correct:1, explain:"Nguyên tố nhóm B (kim loại chuyển tiếp) có electron hoá trị ở (n-1)d và ns."},
+    {q:"Đặc điểm nổi bật của hợp chất kim loại chuyển tiếp là:", options:["Không màu","Thường có màu sắc đặc trưng","Không tan trong nước","Chỉ có 1 số oxi hoá"], correct:1, explain:"Do có phân lớp d chưa lấp đầy, hợp chất kim loại chuyển tiếp thường có màu."},
+    {q:"Fe có các số oxi hoá phổ biến là:", options:["+1, +2","+2, +3","+3, +4","0, +1"], correct:1, explain:"Fe(II) và Fe(III) là 2 số oxi hoá phổ biến nhất của sắt."},
+    {q:"Kim loại chuyển tiếp có khả năng tạo phức chất tốt là do:", options:["Bán kính nguyên tử nhỏ","Còn orbital trống có thể nhận cặp electron từ phối tử","Không có electron hoá trị","Có tính khử yếu"], correct:1, explain:"Orbital trống của kim loại chuyển tiếp cho phép nhận cặp electron từ phối tử, tạo liên kết phối trí trong phức chất."}
+  ]
+};
+
+const L12_B18 = {
+  title:"Bài 18: Sơ lược về phức chất", ready:true,
+  sections:[
+    sec("1. Khái niệm phức chất", `<p><b>Phức chất</b> là hợp chất trong đó có nguyên tử/ion kim loại trung tâm liên kết với một hay nhiều phân tử/ion khác (gọi là <b>phối tử</b>, ligand) bằng <b>liên kết cho – nhận (liên kết phối trí)</b>, trong đó phối tử cho cặp electron chưa liên kết, ion/nguyên tử kim loại trung tâm nhận cặp electron đó.</p>`),
+    sec("2. Ví dụ về phức chất", `
+      <p>Ví dụ: [Cu(NH₃)₄]²⁺ (phức chất tetraammine copper(II), màu xanh lam đậm, hình thành khi cho dư dung dịch NH₃ vào dung dịch muối Cu²⁺); [Ag(NH₃)₂]⁺ (phức bạc-ammine, có trong thuốc thử Tollens dùng cho phản ứng tráng bạc).</p>
+      <p>Phối tử thường gặp: H₂O, NH₃, Cl⁻, OH⁻, CN⁻... — đều là phân tử/ion có cặp electron chưa liên kết có thể cho vào ion kim loại trung tâm.</p>`),
+    sec("3. Ứng dụng của phức chất", `<p>Phức chất có vai trò quan trọng trong hoá học phân tích (nhận biết ion kim loại qua màu sắc phức đặc trưng), trong sinh học (hemoglobin chứa phức chất của Fe, chlorophyll chứa phức chất của Mg), trong công nghiệp (mạ điện, xúc tác) và y học (một số thuốc chứa phức chất kim loại).</p>`)
+  ],
+  examples:[
+    {problem:"Nêu hiện tượng khi nhỏ từ từ dư dung dịch NH₃ vào dung dịch CuSO₄.",
+     solution:"Ban đầu xuất hiện kết tủa xanh lam Cu(OH)₂; khi tiếp tục cho dư NH₃, kết tủa tan dần tạo dung dịch màu xanh lam đậm (xanh thẫm) do tạo phức chất tan [Cu(NH₃)₄]²⁺."},
+    {problem:"Vì sao NH₃ có thể đóng vai trò phối tử trong phức chất?",
+     solution:"Vì phân tử NH₃ có 1 cặp electron chưa liên kết trên nguyên tử N, có thể cho vào orbital trống của ion kim loại trung tâm, tạo liên kết cho – nhận (liên kết phối trí)."}
+  ],
+  exercises:[
+    ex("Phân biệt liên kết cho–nhận trong phức chất với liên kết cộng hoá trị thông thường.", "Trong liên kết cộng hoá trị thông thường, mỗi nguyên tử góp 1 electron tạo cặp electron chung; trong liên kết cho–nhận (phối trí), chỉ một nguyên tử (phối tử) cung cấp cả cặp electron, nguyên tử/ion còn lại (kim loại trung tâm) chỉ góp orbital trống để nhận cặp electron đó."),
+    ex("Kể tên một phức chất quan trọng trong cơ thể sinh vật và vai trò của nó.", "Hemoglobin trong máu người chứa phức chất của ion Fe²⁺ với vòng porphyrin, có vai trò vận chuyển oxygen từ phổi đến các tế bào."),
+    ex("Vì sao dung dịch [Cu(NH₃)₄]²⁺ có màu xanh đậm hơn hẳn dung dịch CuSO₄ ban đầu?", "Vì khi tạo phức với NH₃, sự sắp xếp electron d của Cu²⁺ và tương tác với phối tử NH₃ thay đổi mức năng lượng hấp thụ ánh sáng so với khi Cu²⁺ chỉ liên kết với các phân tử nước, làm thay đổi (đậm hơn) màu sắc của dung dịch.")
+  ],
+  quiz:[
+    {q:"Trong phức chất, phối tử là chất:", options:["Nhận cặp electron từ kim loại trung tâm","Cho cặp electron chưa liên kết vào kim loại trung tâm","Không tham gia liên kết","Luôn là ion dương"], correct:1, explain:"Phối tử cung cấp cặp electron chưa liên kết cho ion kim loại trung tâm (liên kết cho–nhận)."},
+    {q:"Phức chất [Cu(NH₃)₄]²⁺ được tạo thành khi:", options:["Cho dư NH₃ vào dung dịch muối Cu²⁺","Cho dư HCl vào dung dịch muối Cu²⁺","Đun nóng CuO","Cho Cu tác dụng với O₂"], correct:0, explain:"Dư NH₃ hoà tan kết tủa Cu(OH)₂ ban đầu, tạo phức chất tan màu xanh đậm."},
+    {q:"Phức chất của Fe có vai trò gì trong hemoglobin?", options:["Vận chuyển oxygen trong máu","Tổng hợp protein","Dẫn truyền thần kinh","Tạo năng lượng ATP"], correct:0, explain:"Phức chất Fe–porphyrin trong hemoglobin có chức năng vận chuyển O₂."},
+    {q:"Liên kết trong phức chất giữa phối tử và ion kim loại trung tâm gọi là:", options:["Liên kết ion","Liên kết cộng hoá trị thông thường","Liên kết cho – nhận (phối trí)","Liên kết kim loại"], correct:2, explain:"Đây là liên kết phối trí (cho–nhận), đặc trưng của phức chất."}
+  ]
+};
+
 const DATA = {
 10:{ label:"Lớp 10", chapters:[
   {title:"Chương 1: Cấu tạo nguyên tử", lessons:[L10_B1, L10_B2, L10_B3]},
@@ -840,58 +2088,21 @@ const DATA = {
   {title:"Chương 7: Nguyên tố nhóm VIIA (Halogen)", lessons:[L10_B16, L10_B17]},
 ]},
 11:{ label:"Lớp 11", chapters:[
-  {title:"Chương 1: Cân bằng hoá học", lessons:[
-     {title:"Bài 1: Khái niệm về cân bằng hoá học"},
-     {title:"Bài 2: Cân bằng trong dung dịch nước (chất điện li, pH)"}]},
-  {title:"Chương 2: Nitrogen – Sulfur", lessons:[
-     {title:"Bài 3: Đơn chất nitrogen"},
-     {title:"Bài 4: Ammonia và muối ammonium"},
-     {title:"Bài 5: Nitric acid và muối nitrate"},
-     {title:"Bài 6: Sulfur và sulfur dioxide"},
-     {title:"Bài 7: Sulfuric acid và muối sulfate"}]},
-  {title:"Chương 3: Đại cương về hoá học hữu cơ", lessons:[
-     {title:"Bài 8: Hợp chất hữu cơ và hoá học hữu cơ"},
-     {title:"Bài 9: Phương pháp tách biệt và tinh chế hợp chất hữu cơ"},
-     {title:"Bài 10: Công thức phân tử hợp chất hữu cơ"},
-     {title:"Bài 11: Cấu tạo hoá học hợp chất hữu cơ"}]},
-  {title:"Chương 4: Hydrocarbon", lessons:[
-     {title:"Bài 12: Alkane"},
-     {title:"Bài 13: Alkene và Alkyne"},
-     {title:"Bài 14: Arene (hydrocarbon thơm)"}]},
-  {title:"Chương 5: Dẫn xuất halogen – Alcohol – Phenol", lessons:[
-     {title:"Bài 15: Dẫn xuất halogen"},
-     {title:"Bài 16: Alcohol"},
-     {title:"Bài 17: Phenol"}]},
-  {title:"Chương 6: Hợp chất carbonyl – Carboxylic acid", lessons:[
-     {title:"Bài 18: Hợp chất carbonyl (aldehyde – ketone)"},
-     {title:"Bài 19: Carboxylic acid"}]},
+  {title:"Chương 1: Cân bằng hoá học", lessons:[L11_B1, L11_B2]},
+  {title:"Chương 2: Nitrogen – Sulfur", lessons:[L11_B3, L11_B4, L11_B5, L11_B6, L11_B7]},
+  {title:"Chương 3: Đại cương về hoá học hữu cơ", lessons:[L11_B8, L11_B9, L11_B10, L11_B11]},
+  {title:"Chương 4: Hydrocarbon", lessons:[L11_B12, L11_B13, L11_B14]},
+  {title:"Chương 5: Dẫn xuất halogen – Alcohol – Phenol", lessons:[L11_B15, L11_B16, L11_B17]},
+  {title:"Chương 6: Hợp chất carbonyl – Carboxylic acid", lessons:[L11_B18, L11_B19]},
 ]},
 12:{ label:"Lớp 12", chapters:[
-  {title:"Chương 1: Ester – Lipid", lessons:[
-     {title:"Bài 1: Ester"},
-     {title:"Bài 2: Lipid – Chất béo"}]},
-  {title:"Chương 2: Carbohydrate", lessons:[
-     {title:"Bài 3: Glucose và fructose"},
-     {title:"Bài 4: Saccharose và maltose"},
-     {title:"Bài 5: Tinh bột và cellulose"}]},
-  {title:"Chương 3: Hợp chất chứa nitrogen", lessons:[
-     {title:"Bài 6: Amine"},
-     {title:"Bài 7: Amino acid"},
-     {title:"Bài 8: Peptide – Protein"}]},
-  {title:"Chương 4: Polymer", lessons:[
-     {title:"Bài 9: Đại cương về polymer"},
-     {title:"Bài 10: Vật liệu polymer"}]},
-  {title:"Chương 5: Đại cương về kim loại", lessons:[
-     {title:"Bài 11: Cấu tạo và tính chất vật lí của kim loại"},
-     {title:"Bài 12: Tính chất hoá học của kim loại – Dãy điện hoá"},
-     {title:"Bài 13: Hợp kim và sự ăn mòn kim loại"}]},
-  {title:"Chương 6: Kim loại nhóm IA, IIA", lessons:[
-     {title:"Bài 14: Kim loại nhóm IA"},
-     {title:"Bài 15: Kim loại nhóm IIA"},
-     {title:"Bài 16: Nước cứng"}]},
-  {title:"Chương 7: Sơ lược dãy kim loại chuyển tiếp và phức chất", lessons:[
-     {title:"Bài 17: Nguyên tố nhóm B"},
-     {title:"Bài 18: Sơ lược về phức chất"}]},
+  {title:"Chương 1: Ester – Lipid", lessons:[L12_B1, L12_B2]},
+  {title:"Chương 2: Carbohydrate", lessons:[L12_B3, L12_B4, L12_B5]},
+  {title:"Chương 3: Hợp chất chứa nitrogen", lessons:[L12_B6, L12_B7, L12_B8]},
+  {title:"Chương 4: Polymer", lessons:[L12_B9, L12_B10]},
+  {title:"Chương 5: Đại cương về kim loại", lessons:[L12_B11, L12_B12, L12_B13]},
+  {title:"Chương 6: Kim loại nhóm IA, IIA", lessons:[L12_B14, L12_B15, L12_B16]},
+  {title:"Chương 7: Sơ lược dãy kim loại chuyển tiếp và phức chất", lessons:[L12_B17, L12_B18]},
 ]}
 };
 
