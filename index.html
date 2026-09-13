@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hóa học 10–12</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Literata:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap');
+
+:root{
+  --navy:#101b2d;
+  --navy-2:#17253c;
+  --paper:#faf8f3;
+  --card:#ffffff;
+  --ink:#1c2733;
+  --ink-soft:#5a6b7d;
+  --border:#e6ded0;
+  --teal:#2f8f74;
+  --teal-dk:#1f6b56;
+  --flame:#c2502e;
+  --gold:#b8862f;
+  --teal-bg:#eef6f2;
+  --flame-bg:#fbeee8;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;height:100%;}
+body{
+  font-family:'Inter',sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:'Literata',serif;font-weight:600;margin:0;}
+.app{display:flex;height:100vh;overflow:hidden;}
+
+/* ---------- SIDEBAR ---------- */
+.sidebar{
+  width:300px;min-width:300px;background:var(--navy);color:#dfe6ee;
+  display:flex;flex-direction:column;overflow:hidden;
+  transition:margin-left .25s ease;
+}
+.sidebar-head{padding:20px 18px 12px;border-bottom:1px solid #263a56;}
+.sidebar-head .brand{font-family:'Literata',serif;font-size:20px;color:#fff;font-weight:700;letter-spacing:.2px;}
+.sidebar-head .brand span{color:#7fd6b8;}
+.sidebar-head .sub{font-size:12.5px;color:#8fa0b5;margin-top:4px;}
+.grade-tabs{display:flex;gap:6px;padding:14px 18px 8px;}
+.grade-tab{
+  flex:1;text-align:center;padding:8px 0;border-radius:8px;font-size:13.5px;font-weight:600;
+  background:#1c2c46;color:#a7b6c9;cursor:pointer;border:1px solid transparent;
+}
+.grade-tab.active{background:var(--teal);color:#fff;}
+.chapters{flex:1;overflow-y:auto;padding:6px 10px 20px;}
+.chapter{margin:10px 8px 0;}
+.chapter-head{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:9px 10px;cursor:pointer;border-radius:8px;color:#cdd8e5;font-size:13.5px;font-weight:600;
+}
+.chapter-head:hover{background:#1c2c46;}
+.chapter-head .arrow{transition:transform .18s ease;font-size:11px;color:#7d8fa5;}
+.chapter.open .chapter-head .arrow{transform:rotate(90deg);}
+.lesson-list{list-style:none;margin:0;padding:2px 0 8px 14px;display:none;border-left:1px solid #263a56;}
+.chapter.open .lesson-list{display:block;}
+.lesson-item{
+  padding:8px 10px 8px 14px;font-size:13px;color:#a7b6c9;cursor:pointer;border-radius:0 8px 8px 0;
+  display:flex;align-items:center;gap:8px;line-height:1.35;justify-content:space-between;
+}
+.lesson-item:hover{background:#1c2c46;color:#dfe6ee;}
+.lesson-item.active{background:var(--teal-dk);color:#fff;}
+.badge-soon{font-size:9.5px;color:#7d8fa5;border:1px solid #33465f;border-radius:20px;padding:1px 6px;white-space:nowrap;}
+.lesson-item.active .badge-soon{border-color:#3d8f78;color:#bfe9dc;}
+
+/* ---------- MAIN ---------- */
+.main{flex:1;overflow-y:auto;background:var(--paper);}
+.topbar{
+  display:none;align-items:center;gap:12px;padding:12px 16px;background:var(--navy);color:#fff;position:sticky;top:0;z-index:5;
+}
+.menu-btn{background:#1c2c46;border:none;color:#fff;width:34px;height:34px;border-radius:8px;font-size:16px;cursor:pointer;}
+.content{max-width:760px;margin:0 auto;padding:38px 28px 90px;}
+.crumb{font-size:12.5px;color:var(--ink-soft);margin-bottom:10px;letter-spacing:.2px;}
+.lesson-title{font-size:27px;line-height:1.25;margin-bottom:22px;color:#12202f;}
+
+.section{margin:26px 0;}
+.section h3{font-size:18px;color:#14352b;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid var(--teal);display:inline-block;}
+.section .body{font-size:15.3px;line-height:1.74;color:#293848;}
+.section .body p{margin:0 0 12px;}
+.section .body ul,.section .body ol{margin:0 0 12px;padding-left:22px;}
+.section .body li{margin-bottom:6px;}
+table.chem{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;}
+table.chem th,table.chem td{border:1px solid var(--border);padding:7px 10px;text-align:left;}
+table.chem th{background:#f1ede2;font-weight:600;}
+
+.example{
+  background:var(--teal-bg);border-left:3px solid var(--teal);border-radius:0 10px 10px 0;
+  padding:14px 16px;margin:14px 0;font-size:14.6px;line-height:1.68;
+}
+.example .tag{font-weight:700;color:var(--teal-dk);font-size:12.5px;letter-spacing:.3px;margin-bottom:6px;}
+.note{
+  background:var(--flame-bg);border-left:3px solid var(--flame);border-radius:0 10px 10px 0;
+  padding:13px 16px;margin:14px 0;font-size:14.4px;line-height:1.62;color:#4a2c20;
+}
+.note .tag{font-weight:700;color:var(--flame);font-size:12.5px;margin-bottom:5px;}
+
+.exercise{
+  background:var(--card);border:1px solid var(--border);border-radius:10px;
+  padding:15px 16px;margin:12px 0;font-size:14.7px;line-height:1.65;
+}
+.exercise .qnum{color:var(--teal-dk);font-weight:700;margin-right:4px;}
+.exercise details{margin-top:9px;}
+.exercise summary{
+  cursor:pointer;color:var(--teal-dk);font-weight:600;font-size:13.5px;list-style:none;
+  display:inline-flex;align-items:center;gap:5px;
+}
+.exercise summary::-webkit-details-marker{display:none;}
+.exercise summary:before{content:"▸";font-size:11px;}
+.exercise details[open] summary:before{content:"▾";}
+.exercise .ans{
+  margin-top:9px;padding:11px 13px;background:#f4f1e8;border-radius:8px;color:#3a3225;font-size:14.2px;
+}
+
+sub,sup{font-size:.72em;}
+
+.placeholder{
+  border:1.5px dashed var(--border);border-radius:14px;padding:34px 26px;text-align:center;margin-top:20px;
+}
+.placeholder h3{border:none;padding:0;font-size:17px;color:#3a4658;margin-bottom:8px;display:block;}
+.placeholder p{color:var(--ink-soft);font-size:14px;line-height:1.6;max-width:440px;margin:0 auto;}
+
+.overlay{display:none;position:fixed;inset:0;background:rgba(10,15,25,.45);z-index:9;}
+
+/* ---------- AUTH SCREEN ---------- */
+.auth-wrap{
+  position:fixed;inset:0;background:var(--navy);z-index:50;
+  display:flex;align-items:center;justify-content:center;padding:20px;
+}
+.auth-card{
+  width:100%;max-width:400px;background:var(--card);border-radius:16px;padding:30px 26px;
+  box-shadow:0 20px 60px rgba(0,0,0,.35);
+}
+.auth-brand{font-family:'Literata',serif;font-weight:700;font-size:22px;color:#14203a;margin-bottom:4px;}
+.auth-brand span{color:var(--teal);}
+.auth-sub{font-size:12.8px;color:var(--ink-soft);margin-bottom:20px;line-height:1.5;}
+.auth-roles{display:flex;gap:8px;margin-bottom:18px;}
+.auth-role-btn{
+  flex:1;padding:9px 0;border-radius:9px;border:1.5px solid var(--border);background:#fff;
+  font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;
+}
+.auth-role-btn.active{background:var(--navy);border-color:var(--navy);color:#fff;}
+.field{margin-bottom:12px;}
+.field label{display:block;font-size:12.5px;font-weight:600;color:#4a5668;margin-bottom:5px;}
+.field input{
+  width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:9px;font-size:14.5px;
+  font-family:'Inter',sans-serif;background:#fdfcf9;
+}
+.field input:focus{outline:none;border-color:var(--teal);}
+.auth-btn{
+  width:100%;padding:11px 0;border:none;border-radius:9px;background:var(--teal);color:#fff;
+  font-weight:700;font-size:14.5px;cursor:pointer;margin-top:4px;
+}
+.auth-btn.secondary{background:#eef1e9;color:var(--ink);margin-top:8px;}
+.auth-error{background:var(--flame-bg);color:var(--flame);font-size:13px;padding:9px 11px;border-radius:8px;margin-bottom:12px;}
+.auth-note{font-size:11.5px;color:#9aa6b5;margin-top:16px;line-height:1.55;}
+
+/* ---------- USERBAR ---------- */
+.userbar{
+  display:none;align-items:center;justify-content:space-between;gap:10px;
+  padding:11px 22px;background:#fff;border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:6;flex-wrap:wrap;
+}
+.ub-left{font-size:13.5px;color:var(--ink);}
+.ub-role{
+  display:inline-block;background:var(--navy);color:#fff;font-size:10.5px;font-weight:700;
+  padding:2px 8px;border-radius:20px;margin-right:7px;vertical-align:middle;letter-spacing:.3px;
+}
+.ub-right{display:flex;gap:8px;}
+.ub-btn{
+  border:1.5px solid var(--border);background:#fff;border-radius:8px;padding:6px 12px;font-size:12.8px;
+  font-weight:600;color:var(--ink);cursor:pointer;
+}
+.ub-btn.active{background:var(--teal);border-color:var(--teal);color:#fff;}
+.ub-btn.ub-logout{color:var(--flame);border-color:#e9c7ba;}
+
+/* ---------- QUIZ ---------- */
+.qz-intro{font-size:13px;color:var(--ink-soft);margin-bottom:14px;}
+.qz-q{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:12px;}
+.qz-qtext{font-size:14.7px;margin-bottom:9px;line-height:1.55;}
+.qz-opt{display:flex;align-items:flex-start;gap:9px;font-size:14px;padding:6px 8px;border-radius:7px;cursor:pointer;line-height:1.5;}
+.qz-opt:hover{background:#f4f1e8;}
+.qz-opt input{margin-top:3px;}
+.btn-submit{
+  background:var(--navy);color:#fff;border:none;padding:11px 22px;border-radius:9px;font-weight:700;
+  font-size:14px;cursor:pointer;margin-top:6px;
+}
+.btn-retake{
+  background:#fff;color:var(--teal-dk);border:1.5px solid var(--teal);padding:9px 18px;border-radius:9px;
+  font-weight:700;font-size:13.5px;cursor:pointer;margin-top:12px;
+}
+.qz-result{
+  display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:12px;margin-bottom:6px;
+}
+.qz-result.pass{background:var(--teal-bg);border:1.5px solid #bfe3d5;}
+.qz-result.fail{background:var(--flame-bg);border:1.5px solid #efc9b8;}
+.qz-score{font-family:'Literata',serif;font-size:30px;font-weight:700;color:var(--ink);min-width:70px;text-align:center;}
+
+/* ---------- DASHBOARD ---------- */
+.dash-section{margin-bottom:30px;}
+.dash-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;}
+.dash-card h4{font-size:14.5px;margin-bottom:12px;color:#14352b;}
+.dash-form{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;}
+.dash-form .field{margin-bottom:0;min-width:150px;flex:1;}
+.dash-msg{font-size:12.8px;margin-top:10px;padding:8px 11px;border-radius:8px;}
+.dash-msg.ok{background:var(--teal-bg);color:var(--teal-dk);}
+.dash-msg.err{background:var(--flame-bg);color:var(--flame);}
+.stu-card{border:1px solid var(--border);border-radius:10px;margin-top:10px;overflow:hidden;}
+.stu-card summary{
+  cursor:pointer;padding:13px 16px;font-size:14px;font-weight:600;list-style:none;
+  display:flex;justify-content:space-between;align-items:center;background:#fdfcf9;
+}
+.stu-card summary::-webkit-details-marker{display:none;}
+.stu-meta{font-size:12px;font-weight:500;color:var(--ink-soft);}
+table.dtab{width:100%;border-collapse:collapse;font-size:13px;}
+table.dtab th,table.dtab td{padding:9px 12px;border-top:1px solid var(--border);text-align:left;vertical-align:middle;}
+table.dtab th{background:#f6f3ea;font-size:11.5px;text-transform:uppercase;letter-spacing:.3px;color:var(--ink-soft);}
+.pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11.5px;font-weight:700;}
+.pill.pass{background:var(--teal-bg);color:var(--teal-dk);}
+.pill.fail{background:var(--flame-bg);color:var(--flame);}
+.pill.none{background:#eee;color:#888;}
+.mini-btn{
+  border:1.5px solid var(--border);background:#fff;border-radius:7px;padding:4px 9px;font-size:11.5px;
+  font-weight:600;cursor:pointer;margin-right:5px;white-space:nowrap;
+}
+.mini-btn.on{background:var(--teal);border-color:var(--teal);color:#fff;}
+.mini-btn.warn{color:var(--flame);border-color:#e9c7ba;}
+
+@media (max-width:860px){
+  .sidebar{position:fixed;left:0;top:0;bottom:0;z-index:10;margin-left:-300px;box-shadow:0 0 30px rgba(0,0,0,.3);}
+  .sidebar.show{margin-left:0;}
+  .topbar{display:flex;}
+  .overlay.show{display:block;}
+  .content{padding:22px 16px 70px;}
+  .lesson-title{font-size:22px;}
+  .userbar{padding:10px 14px;}
+  table.dtab{font-size:12px;}
+}
+</style>
+</head>
+<body>
+
+<div class="auth-wrap" id="authWrap">
+  <div class="auth-card">
+    <div class="auth-brand">Hóa<span>Học</span> 10–12</div>
+    <div class="auth-sub">Đăng nhập để học bài, làm bài kiểm tra có chấm điểm và theo dõi kết quả.</div>
+    <div id="authError"></div>
+    <form id="authForm">
+      <div class="field"><label>Tên đăng nhập</label><input type="text" id="authUsername" autocomplete="username" required></div>
+      <div class="field"><label>Mật khẩu</label><input type="password" id="authPassword" autocomplete="current-password" required></div>
+      <button type="submit" class="auth-btn" id="authSubmitBtn">Đăng nhập</button>
+    </form>
+    <div class="auth-note" id="authNote">Không có đăng ký tự do: Admin tạo tài khoản cho giáo viên, giáo viên tạo tài khoản cho học sinh (trong mục "Bảng điều khiển" sau khi đăng nhập). Hệ thống tự nhận diện vai trò (admin/giáo viên/học sinh) theo tài khoản, không cần chọn tab.</div>
+    <details style="margin-top:14px;">
+      <summary style="cursor:pointer;font-size:12.5px;color:var(--teal-dk);font-weight:700;">Đã nhận "mã đồng bộ" từ admin/giáo viên? Bấm để nhập</summary>
+      <div style="margin-top:10px;">
+        <textarea id="importBox" rows="4" style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:8px;font-size:11px;font-family:'IBM Plex Mono',monospace;" placeholder="Dán mã đồng bộ vào đây..."></textarea>
+        <button type="button" class="auth-btn secondary" id="importBtn" style="margin-top:8px;">Nhập dữ liệu</button>
+        <div id="importMsg"></div>
+      </div>
+    </details>
+  </div>
+</div>
+
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+      <div class="brand">Hóa<span>Học</span> 10–12</div>
+      <div class="sub">Bám sát chương trình GDPT 2018 · lý thuyết + ví dụ + bài tập</div>
+    </div>
+    <div class="grade-tabs" id="gradeTabs"></div>
+    <div class="chapters" id="chapters"></div>
+  </aside>
+  <div class="overlay" id="overlay"></div>
+  <main class="main">
+    <div class="userbar" id="userbar"></div>
+    <div class="topbar">
+      <button class="menu-btn" id="menuBtn">☰</button>
+      <div style="font-family:'Literata',serif;font-weight:700;">HóaHọc 10–12</div>
+    </div>
+    <div class="content" id="content"></div>
+  </main>
+</div>
+
+<script>
+/* ============================================================
+   HELPERS
+   ============================================================ */
+const sec = (heading, body) => ({heading, body});
+const ex  = (q, ans) => ({q, ans});
+const PASS_THRESHOLD = 0.7;
+
+/* ============================================================
+   LỚP 10 — NỘI DUNG ĐẦY ĐỦ (17 bài)
+   ============================================================ */
+
+const L10_B1 = {
+  title:"Bài 1: Thành phần nguyên tử", ready:true,
+  sections:[
+    sec("1. Nguyên tử là gì?", `
+      <p>Nguyên tử là hạt vô cùng nhỏ, trung hòa về điện, cấu tạo nên chất. Nguyên tử gồm hai phần: <b>hạt nhân</b> ở tâm (mang điện dương) và <b>lớp vỏ electron</b> chuyển động xung quanh (mang điện âm).</p>
+      <p>Hạt nhân được tạo bởi hai loại hạt là <b>proton</b> (p) và <b>neutron</b> (n); lớp vỏ được tạo bởi các hạt <b>electron</b> (e).</p>`),
+    sec("2. Đặc điểm ba loại hạt cơ bản", `
+      <table class="chem">
+        <tr><th>Hạt</th><th>Kí hiệu</th><th>Điện tích</th><th>Khối lượng (amu)</th><th>Vị trí</th></tr>
+        <tr><td>Proton</td><td>p</td><td>+1</td><td>≈ 1</td><td>Hạt nhân</td></tr>
+        <tr><td>Neutron</td><td>n</td><td>0</td><td>≈ 1</td><td>Hạt nhân</td></tr>
+        <tr><td>Electron</td><td>e</td><td>−1</td><td>≈ 0,00055</td><td>Lớp vỏ</td></tr>
+      </table>
+      <p>Vì khối lượng electron quá nhỏ so với proton và neutron, <b>khối lượng nguyên tử gần như tập trung hoàn toàn ở hạt nhân</b>. Đơn vị khối lượng nguyên tử là <b>amu</b> (1 amu = 1/12 khối lượng nguyên tử carbon-12).</p>`),
+    sec("3. Nguyên tử trung hòa về điện", `
+      <p style="text-align:center;font-weight:600;">Số proton (p) = Số electron (e)</p>
+      <p>Hệ thức này dùng để xác định nhanh số hạt electron nếu biết số proton và ngược lại.</p>`),
+    sec("4. Kích thước và khối lượng nguyên tử", `
+      <p>Nguyên tử có kích thước rất nhỏ, đường kính cỡ 10⁻¹⁰ m. Hạt nhân nhỏ hơn nguyên tử khoảng 10 000 – 100 000 lần, nên nguyên tử gần như là khoảng không gian trống, phần lớn thể tích thuộc lớp vỏ electron.</p>`)
+  ],
+  examples:[
+    {problem:"Nguyên tử nhôm (aluminium) có 13 proton. Hỏi nguyên tử này có bao nhiêu electron? Vì sao?",
+     solution:"Vì nguyên tử luôn trung hòa về điện nên số electron = số proton = 13."},
+    {problem:"Một nguyên tử có 17 proton, 18 neutron và 17 electron. Tính khối lượng gần đúng theo amu.",
+     solution:"Khối lượng ≈ số p × 1 + số n × 1 = 17 + 18 = 35 amu (bỏ qua khối lượng electron)."}
+  ],
+  exercises:[
+    ex("Vì sao nói khối lượng nguyên tử tập trung hầu như toàn bộ ở hạt nhân?",
+       "Vì proton, neutron có khối lượng ≈1 amu, còn electron chỉ ≈0,00055 amu — nhỏ đến mức bỏ qua được."),
+    ex("Nguyên tử X có tổng số hạt p, n, e là 34, số hạt mang điện nhiều hơn số hạt không mang điện là 10. Tính số p, n, e.",
+       "2Z+N=34 và 2Z−N=10 → 4Z=44 → Z=11; N=12. Vậy X có 11p, 11e, 12n (sodium, Na)."),
+    ex("Hạt nhân nguyên tử có mang điện không?",
+       "Có, mang điện dương vì gồm proton (+1) và neutron (không mang điện)."),
+    ex("So sánh kích thước nguyên tử và hạt nhân.",
+       "Hạt nhân nhỏ hơn nguyên tử 10 000–100 000 lần; phần lớn nguyên tử là không gian trống nơi electron chuyển động.")
+  ],
+  quiz:[
+    {q:"Hạt mang điện dương trong nguyên tử là?", options:["Electron","Proton","Neutron","Photon"], correct:1, explain:"Proton mang điện tích +1, nằm trong hạt nhân."},
+    {q:"Trong nguyên tử trung hòa điện, ta luôn có:", options:["số p = số n","số p = số e","số e = số n","số p+số n = số e"], correct:1, explain:"Nguyên tử trung hòa điện nên số proton bằng số electron."},
+    {q:"Khối lượng nguyên tử tập trung chủ yếu ở:", options:["Lớp vỏ electron","Hạt nhân","Cả hai như nhau","Không xác định"], correct:1, explain:"Proton, neutron nặng hơn electron rất nhiều nên khối lượng tập trung ở hạt nhân."},
+    {q:"Đơn vị amu được định nghĩa bằng:", options:["Khối lượng 1 electron","Khối lượng 1 proton","1/12 khối lượng nguyên tử carbon-12","Khối lượng 1 nguyên tử hydrogen"], correct:2, explain:"1 amu = 1/12 khối lượng một nguyên tử carbon-12."}
+  ]
+};
+
+const L10_B2 = {
+  title:"Bài 2: Nguyên tố hóa học", ready:true,
+  sections:[
+    sec("1. Số hiệu nguyên tử (Z)", `<p>Số đơn vị điện tích hạt nhân (bằng số proton) gọi là <b>số hiệu nguyên tử</b>, kí hiệu <b>Z</b>. Z = số proton = số electron.</p>`),
+    sec("2. Số khối (A)", `<p><b>Số khối</b> A = tổng số proton và neutron: A = Z + N. Số khối cho biết gần đúng khối lượng nguyên tử theo amu.</p>`),
+    sec("3. Kí hiệu nguyên tử", `<p>Kí hiệu đầy đủ: số khối ghi ở góc trên bên trái, số hiệu nguyên tử ở góc dưới bên trái, ví dụ <sup>23</sup><sub>11</sub>Na nghĩa là A=23, Z=11 (N=12).</p>`),
+    sec("4. Nguyên tố hóa học và đồng vị", `
+      <p><b>Nguyên tố hóa học</b> là tập hợp các nguyên tử có cùng số proton (cùng Z).</p>
+      <p><b>Đồng vị</b> là các nguyên tử cùng một nguyên tố (cùng Z) nhưng khác số neutron (khác A). Ví dụ: hydrogen có 3 đồng vị <sup>1</sup><sub>1</sub>H, <sup>2</sup><sub>1</sub>H (deuterium), <sup>3</sup><sub>1</sub>H (tritium).</p>`),
+    sec("5. Nguyên tử khối trung bình", `
+      <p>Vì một nguyên tố là hỗn hợp nhiều đồng vị, người ta dùng <b>nguyên tử khối trung bình</b>:</p>
+      <p style="text-align:center;font-weight:600;">A̅ = (A₁·x₁ + A₂·x₂ + ...) / 100</p>`)
+  ],
+  examples:[
+    {problem:"Xác định số p, n, e của nguyên tử ³⁵₁₇Cl.", solution:"Z=17 → p=e=17. A=35 → N=35−17=18."},
+    {problem:"Chlorine có 2 đồng vị ³⁵Cl (75,77%) và ³⁷Cl (24,23%). Tính nguyên tử khối trung bình.",
+     solution:"A̅=(35×75,77+37×24,23)/100 ≈ 35,45."}
+  ],
+  exercises:[
+    ex("Nguyên tử potassium ³⁹₁₉K có bao nhiêu p, n, e?", "Z=19→p=e=19; N=39−19=20."),
+    ex("Vì sao các đồng vị của một nguyên tố có tính chất hóa học gần giống nhau?",
+       "Vì tính chất hóa học do số electron (nhất là electron ngoài cùng) quyết định, mà các đồng vị có cùng Z nên cùng số electron."),
+    ex("Copper có 2 đồng vị ⁶³Cu và ⁶⁵Cu, A̅=63,54. Tính % mỗi đồng vị.",
+       "63x+65(100−x)=6354 → −2x=−146 → x=73. Vậy ⁶³Cu 73%, ⁶⁵Cu 27%."),
+    ex("Hai nguyên tử cùng số neutron nhưng khác số proton có phải đồng vị không?",
+       "Không — đồng vị phải cùng Z, khác N. Khác Z là hai nguyên tố khác nhau.")
+  ],
+  quiz:[
+    {q:"Số khối A được tính bằng:", options:["Z + N","Z − N","chỉ số proton","chỉ số electron"], correct:0, explain:"A = Z + N (proton + neutron)."},
+    {q:"Hai nguyên tử là đồng vị của nhau khi:", options:["cùng Z khác N","cùng N khác Z","cùng A khác Z","khác cả Z và N"], correct:0, explain:"Đồng vị: cùng số proton (Z), khác số neutron (N)."},
+    {q:"Kí hiệu ²³₁₁Na có bao nhiêu neutron?", options:["11","12","23","34"], correct:1, explain:"N = A − Z = 23 − 11 = 12."},
+    {q:"Nguyên tử khối trung bình được tính dựa trên:", options:["số khối lớn nhất","tỉ lệ % số nguyên tử mỗi đồng vị","số proton trung bình","khối lượng electron"], correct:1, explain:"Là trung bình cộng có trọng số theo % mỗi đồng vị."}
+  ]
+};
+
+const L10_B3 = {
+  title:"Bài 3: Cấu trúc lớp vỏ electron nguyên tử", ready:true,
+  sections:[
+    sec("1. Sự chuyển động của electron", `<p>Electron chuyển động rất nhanh, không theo quỹ đạo xác định, tạo thành đám mây electron. Khu vực có xác suất tìm thấy electron lớn nhất gọi là <b>orbital nguyên tử (AO)</b>.</p>`),
+    sec("2. Lớp và phân lớp electron", `
+      <p>Electron sắp xếp thành từng <b>lớp</b> n=1,2,3... (K,L,M...). Mỗi lớp chia thành các <b>phân lớp</b> s,p,d,f.</p>
+      <table class="chem"><tr><th>Phân lớp</th><th>s</th><th>p</th><th>d</th><th>f</th></tr><tr><td>e tối đa</td><td>2</td><td>6</td><td>10</td><td>14</td></tr></table>
+      <p>Số electron tối đa của lớp thứ n là 2n².</p>`),
+    sec("3. Nguyên lí và quy tắc sắp xếp electron", `
+      <ul>
+        <li><b>Aufbau:</b> electron chiếm mức năng lượng từ thấp đến cao: 1s 2s 2p 3s 3p 4s 3d 4p...</li>
+        <li><b>Pauli:</b> mỗi orbital tối đa 2 electron, chiều tự quay ngược nhau.</li>
+        <li><b>Hund:</b> electron phân bố đều vào các orbital cùng phân lớp trước khi ghép đôi.</li>
+      </ul>`),
+    sec("4. Cấu hình electron", `<p>Là cách biểu diễn phân bố electron trên các phân lớp, viết theo thứ tự lớp tăng dần. <b>Electron lớp ngoài cùng</b> quyết định phần lớn tính chất hóa học.</p>`)
+  ],
+  examples:[
+    {problem:"Viết cấu hình electron của Na (Z=11).",
+     solution:"1s² 2s² 2p⁶ 3s¹ (2+2+6+1=11). Có 1 electron lớp ngoài cùng → kim loại, dễ nhường 1e."},
+    {problem:"Viết cấu hình electron của Cl (Z=17).",
+     solution:"1s² 2s² 2p⁶ 3s² 3p⁵ (17 electron). Lớp ngoài cùng có 7e → phi kim, dễ nhận 1e."}
+  ],
+  exercises:[
+    ex("Viết cấu hình electron của O (Z=8) và Mg (Z=12). Số electron lớp ngoài cùng mỗi nguyên tố?",
+       "O: 1s²2s²2p⁴ → 6e ngoài cùng. Mg: 1s²2s²2p⁶3s² → 2e ngoài cùng."),
+    ex("Cấu hình 1s²2s²2p⁶3s²3p⁶ ứng với Z bao nhiêu, là loại nguyên tố gì?",
+       "Z=18, lớp ngoài cùng 8e (bão hòa) → khí hiếm (argon)."),
+    ex("Vì sao electron lớp ngoài cùng quyết định tính chất hóa học?",
+       "Vì ở xa hạt nhân nhất, chịu lực hút yếu nhất nên dễ tham gia liên kết hóa học."),
+    ex("Nguyên tử X có 20 electron. Viết cấu hình, dự đoán kim loại hay phi kim.",
+       "1s²2s²2p⁶3s²3p⁶4s² — 2e ngoài cùng → kim loại (calcium).")
+  ],
+  quiz:[
+    {q:"Theo nguyên lí Pauli, mỗi orbital chứa tối đa:", options:["1e","2e","6e","8e"], correct:1, explain:"Mỗi orbital tối đa 2 electron, chiều tự quay ngược nhau."},
+    {q:"Lớp electron thứ n chứa tối đa bao nhiêu electron?", options:["n","2n","n²","2n²"], correct:3, explain:"Công thức 2n² electron tối đa mỗi lớp."},
+    {q:"Cấu hình electron của Na (Z=11) là:", options:["1s²2s²2p⁶3s¹","1s²2s²2p⁵3s²","1s²2s²2p⁶3s²","1s²2s²2p⁶3p¹"], correct:0, explain:"11 electron điền theo Aufbau: 1s²2s²2p⁶3s¹."},
+    {q:"Electron quyết định chủ yếu tính chất hóa học của nguyên tố là:", options:["electron lớp trong cùng","electron lớp ngoài cùng","tất cả electron","chỉ electron phân lớp s"], correct:1, explain:"Electron ngoài cùng dễ tham gia liên kết nhất."}
+  ]
+};
+
+const L10_B4 = {
+  title:"Bài 4: Cấu tạo bảng tuần hoàn các nguyên tố hóa học", ready:true,
+  sections:[
+    sec("1. Nguyên tắc sắp xếp", `<ul>
+      <li>Các nguyên tố xếp theo chiều <b>tăng dần điện tích hạt nhân (Z)</b>.</li>
+      <li>Nguyên tố có cùng <b>số lớp electron</b> xếp cùng một hàng (chu kì).</li>
+      <li>Nguyên tố có tính chất hóa học tương tự nhau xếp cùng một cột (nhóm).</li></ul>`),
+    sec("2. Ô nguyên tố", `<p>Mỗi nguyên tố chiếm một ô, số thứ tự ô = Z. Ô thường ghi kí hiệu, tên, Z, nguyên tử khối trung bình, độ âm điện, cấu hình electron.</p>`),
+    sec("3. Chu kì", `<p>Chu kì là dãy nguyên tố có cùng số lớp electron. Có 7 chu kì: 1,2,3 là chu kì nhỏ (2,8,8 nguyên tố); 4,5,6,7 là chu kì lớn. Số thứ tự chu kì = số lớp electron.</p>`),
+    sec("4. Nhóm nguyên tố", `<p><b>Nhóm A</b> (IA→VIIIA): nguyên tố s,p — số thứ tự nhóm A = số electron lớp ngoài cùng. <b>Nhóm B</b>: nguyên tố d, kim loại chuyển tiếp, từ chu kì 4.</p>`),
+    sec("5. Khối nguyên tố", `<p>Dựa vào phân lớp electron cuối cùng: khối s (IA,IIA), khối p (IIIA→VIIIA), khối d (nhóm B), khối f (lanthanide, actinide).</p>`)
+  ],
+  examples:[
+    {problem:"X có cấu hình 1s²2s²2p⁶3s²3p⁴. Xác định ô, chu kì, nhóm.",
+     solution:"Z=16 → ô 16. 3 lớp electron → chu kì 3. Lớp ngoài 3s²3p⁴=6e, khối p → nhóm VIA (sulfur)."},
+    {problem:"Y ở ô 20. Xác định chu kì, nhóm.",
+     solution:"1s²2s²2p⁶3s²3p⁶4s² → 4 lớp → chu kì 4; 4s² khối s → nhóm IIA (calcium)."}
+  ],
+  exercises:[
+    ex("R có Z=13. Xác định ô, chu kì, nhóm.", "1s²2s²2p⁶3s²3p¹ → ô 13, chu kì 3, nhóm IIIA (aluminium)."),
+    ex("Vì sao các nguyên tố cùng nhóm A có tính chất hóa học tương tự?",
+       "Vì có cùng số electron lớp ngoài cùng, mà electron này quyết định chủ yếu tính chất hóa học."),
+    ex("Nguyên tố ở chu kì 3, nhóm VIIA. Viết cấu hình, xác định Z.",
+       "3s²3p⁵ → cấu hình đầy đủ 1s²2s²2p⁶3s²3p⁵ → Z=17 (chlorine)."),
+    ex("Phân biệt nguyên tố nhóm A và nhóm B.",
+       "Nhóm A: electron cuối điền vào s hoặc p. Nhóm B: electron cuối điền vào d, là kim loại chuyển tiếp.")
+  ],
+  quiz:[
+    {q:"Số thứ tự ô nguyên tố bằng:", options:["số khối A","số hiệu nguyên tử Z","số neutron","số lớp electron"], correct:1, explain:"Ô nguyên tố đánh số theo Z."},
+    {q:"Số thứ tự chu kì bằng:", options:["số electron hóa trị","số lớp electron","số proton","số nhóm"], correct:1, explain:"Chu kì = số lớp electron của nguyên tử."},
+    {q:"Nguyên tố có cấu hình lớp ngoài 3s²3p⁴ thuộc nhóm:", options:["IVA","VIA","IIA","VIIIA"], correct:1, explain:"Tổng 6 electron lớp ngoài, khối p → nhóm VIA."},
+    {q:"Nguyên tố nhóm B có electron cuối cùng điền vào phân lớp:", options:["s","p","d","f"], correct:2, explain:"Nhóm B là các nguyên tố khối d."}
+  ]
+};
+
+const L10_B5 = {
+  title:"Bài 5: Xu hướng biến đổi tính chất trong bảng tuần hoàn", ready:true,
+  sections:[
+    sec("1. Bán kính nguyên tử", `<ul>
+      <li>Trong một <b>chu kì</b> (trái→phải): bán kính <b>giảm dần</b> (Z tăng, lực hút electron ngoài mạnh dần).</li>
+      <li>Trong một <b>nhóm A</b> (trên→dưới): bán kính <b>tăng dần</b> (thêm lớp electron).</li></ul>`),
+    sec("2. Độ âm điện", `<ul>
+      <li>Trong chu kì (trái→phải): độ âm điện <b>tăng dần</b>.</li>
+      <li>Trong nhóm A (trên→dưới): độ âm điện <b>giảm dần</b>.</li></ul>
+      <p>Fluorine (F) có độ âm điện lớn nhất bảng tuần hoàn.</p>`),
+    sec("3. Tính kim loại – phi kim", `<ul>
+      <li>Trong chu kì (trái→phải): tính kim loại <b>giảm</b>, tính phi kim <b>tăng</b>.</li>
+      <li>Trong nhóm A (trên→dưới): tính kim loại <b>tăng</b>, tính phi kim <b>giảm</b>.</li></ul>`),
+    sec("4. Tính acid – base của oxide, hydroxide", `<ul>
+      <li>Trong chu kì (trái→phải): tính base <b>giảm</b>, tính acid <b>tăng</b>.</li>
+      <li>Trong nhóm A (trên→dưới): tính base <b>tăng</b>, tính acid <b>giảm</b>.</li></ul>
+      <p>Ví dụ chu kì 3: Na₂O, MgO (base) → Al₂O₃ (lưỡng tính) → SiO₂, P₂O₅, SO₃, Cl₂O₇ (acid tăng dần).</p>`),
+    sec("5. Định luật tuần hoàn", `<p>Tính chất các nguyên tố và hợp chất của chúng biến đổi <b>tuần hoàn</b> theo chiều tăng điện tích hạt nhân.</p>`)
+  ],
+  examples:[
+    {problem:"So sánh bán kính nguyên tử Na, Mg, Al (chu kì 3).",
+     solution:"Cùng chu kì, Z tăng Na(11)<Mg(12)<Al(13) → bán kính giảm dần: r(Na)>r(Mg)>r(Al)."},
+    {problem:"So sánh tính kim loại Li, Na, K (nhóm IA).",
+     solution:"Cùng nhóm IA, số lớp electron tăng dần → bán kính tăng → tính kim loại tăng: Li<Na<K."}
+  ],
+  exercises:[
+    ex("Sắp xếp P, S, Cl, Si theo chiều tăng độ âm điện (chu kì 3).", "Si<P<S<Cl (tăng dần trái→phải cùng chu kì)."),
+    ex("X chu kì 3 nhóm IIA; Y chu kì 4 nhóm IIA. So sánh tính kim loại.",
+       "Cùng nhóm nên cùng 2e ngoài cùng; Y nhiều lớp electron hơn → bán kính lớn hơn → dễ nhường electron hơn → tính kim loại Y > X."),
+    ex("Sắp xếp tính base của NaOH, Al(OH)₃, HClO₄ (chu kì 3) giảm dần.",
+       "NaOH > Al(OH)₃ > HClO₄ (tính base giảm dần trái→phải cùng chu kì)."),
+    ex("Vì sao bán kính nguyên tử giảm dần trong một chu kì?",
+       "Vì số lớp electron không đổi nhưng điện tích hạt nhân tăng, lực hút electron ngoài mạnh hơn, kéo electron gần hạt nhân hơn.")
+  ],
+  quiz:[
+    {q:"Trong một chu kì theo chiều tăng Z, bán kính nguyên tử:", options:["tăng dần","giảm dần","không đổi","tăng rồi giảm"], correct:1, explain:"Lực hút hạt nhân tăng làm bán kính giảm."},
+    {q:"Trong nhóm A từ trên xuống dưới, tính kim loại:", options:["tăng dần","giảm dần","không đổi","không xác định"], correct:0, explain:"Bán kính tăng, electron ngoài dễ mất hơn."},
+    {q:"Nguyên tố có độ âm điện lớn nhất là:", options:["Cs","F","O","Cl"], correct:1, explain:"Fluorine có độ âm điện lớn nhất bảng tuần hoàn."},
+    {q:"Trong chu kì 3, oxide có tính acid mạnh nhất (trong các lựa chọn) là:", options:["Na₂O","MgO","Al₂O₃","SO₃"], correct:3, explain:"Tính acid tăng dần từ trái sang phải trong chu kì."}
+  ]
+};
+
+const L10_B6 = {
+  title:"Bài 6: Quy tắc octet", ready:true,
+  sections:[
+    sec("1. Xu hướng đạt cấu hình bền của khí hiếm", `<p>Khí hiếm (trừ He) có 8 electron lớp ngoài cùng, rất bền, hầu như không phản ứng. Nguyên tử các nguyên tố khác có xu hướng nhường, nhận hoặc góp chung electron để đạt cấu hình electron bền giống khí hiếm gần nhất.</p>`),
+    sec("2. Nội dung quy tắc octet", `<p>Khi hình thành liên kết hóa học, nguyên tử có xu hướng nhường, nhận hoặc góp chung electron để lớp ngoài cùng đạt <b>8 electron</b> (riêng nguyên tố gần He hướng tới 2e).</p>`),
+    sec("3. Áp dụng dự đoán", `<p>Kim loại điển hình (IA, IIA, IIIA) có xu hướng <b>nhường</b> electron lớp ngoài để tạo ion dương. Phi kim điển hình (VA→VIIA) có xu hướng <b>nhận</b> electron để tạo ion âm.</p>`)
+  ],
+  examples:[
+    {problem:"Na (2,8,1) có xu hướng nhường hay nhận electron? Vì sao?",
+     solution:"Nhường 1 electron để còn lại (2,8) giống cấu hình Ne, tạo ion Na⁺ bền."},
+    {problem:"Cl (2,8,7) có xu hướng nhường hay nhận electron?",
+     solution:"Nhận 1 electron để đạt (2,8,8) giống cấu hình Ar, tạo ion Cl⁻ bền."}
+  ],
+  exercises:[
+    ex("Vì sao khí hiếm hầu như không tạo liên kết hóa học?", "Vì lớp ngoài cùng đã đủ 8 electron (bền vững), không có xu hướng nhường/nhận/góp chung electron."),
+    ex("Mg có cấu hình (2,8,2). Áp dụng octet dự đoán ion tạo thành.", "Mg nhường 2 electron để đạt (2,8) giống Ne, tạo ion Mg²⁺."),
+    ex("O có cấu hình (2,6). Dự đoán ion bền của oxygen.", "O nhận 2 electron để đạt (2,8) giống Ne, tạo ion O²⁻.")
+  ],
+  quiz:[
+    {q:"Quy tắc octet nói về xu hướng đạt:", options:["2 hoặc 8 electron lớp ngoài cùng","18 electron","số p = số n","số khối chẵn"], correct:0, explain:"Nguyên tử hướng tới 8e (hoặc 2e với nguyên tố gần He) ở lớp ngoài."},
+    {q:"Nguyên tử Na (2,8,1) có xu hướng:", options:["nhận 1e","nhường 1e","nhường 7e","nhận 7e"], correct:1, explain:"Nhường 1e để đạt cấu hình bền giống Ne."},
+    {q:"Nguyên tử Cl (2,8,7) có xu hướng:", options:["nhường 7e","nhận 1e","nhường 1e","nhận 7e"], correct:1, explain:"Nhận 1e để đạt cấu hình bền giống Ar."},
+    {q:"Ion nào có cấu hình electron giống khí hiếm Ne?", options:["Na⁺","K⁺","Cl⁻","Ca²⁺"], correct:0, explain:"Na⁺ có cấu hình (2,8) giống Ne; các ion còn lại giống Ar."}
+  ]
+};
+
+const L10_B7 = {
+  title:"Bài 7: Liên kết ion", ready:true,
+  sections:[
+    sec("1. Sự hình thành ion", `<p><b>Cation</b> (ion dương) tạo khi nguyên tử nhường electron: Na → Na⁺ + 1e. <b>Anion</b> (ion âm) tạo khi nguyên tử nhận electron: Cl + 1e → Cl⁻.</p>`),
+    sec("2. Sự hình thành liên kết ion", `<p><b>Liên kết ion</b> là lực hút tĩnh điện giữa ion dương và ion âm, thường hình thành giữa kim loại điển hình và phi kim điển hình (hiệu độ âm điện lớn, thường ≥1,7). Ví dụ NaCl: Na nhường 1e cho Cl tạo Na⁺ và Cl⁻ hút nhau.</p>`),
+    sec("3. Tinh thể ion và tính chất chung", `<p>Ion dương, âm sắp xếp luân phiên tạo mạng tinh thể ion vững chắc. Tính chất chung: chất rắn ở nhiệt độ thường, nhiệt độ nóng chảy/sôi cao, dẫn điện khi nóng chảy hoặc hòa tan trong nước, thường tan tốt trong nước, giòn dễ vỡ.</p>`)
+  ],
+  examples:[
+    {problem:"Viết sơ đồ hình thành liên kết ion trong MgO.",
+     solution:"Mg → Mg²⁺ + 2e; O + 2e → O²⁻; Mg²⁺ và O²⁻ hút nhau tạo MgO."},
+    {problem:"Vì sao NaCl có nhiệt độ nóng chảy cao (801°C)?",
+     solution:"Vì lực hút tĩnh điện giữa các ion Na⁺, Cl⁻ trong mạng tinh thể rất mạnh, cần nhiều năng lượng để phá vỡ."}
+  ],
+  exercises:[
+    ex("Viết sơ đồ hình thành liên kết ion trong CaCl₂.", "Ca → Ca²⁺ + 2e; mỗi Cl + 1e → Cl⁻ (2 lần); Ca²⁺ và 2Cl⁻ hút nhau tạo CaCl₂."),
+    ex("Vì sao hợp chất ion dẫn điện khi nóng chảy nhưng không dẫn điện ở trạng thái rắn?",
+       "Ở trạng thái rắn, các ion cố định trong mạng tinh thể, không di chuyển tự do. Khi nóng chảy, ion được giải phóng, di chuyển tự do và dẫn điện."),
+    ex("Dự đoán loại liên kết trong KBr.", "K là kim loại điển hình (độ âm điện thấp), Br là phi kim điển hình (độ âm điện cao) → hiệu độ âm điện lớn → liên kết ion.")
+  ],
+  quiz:[
+    {q:"Liên kết ion được hình thành bởi:", options:["sự góp chung electron","lực hút tĩnh điện giữa các ion trái dấu","sự dùng chung electron","lực van der Waals"], correct:1, explain:"Liên kết ion là lực hút tĩnh điện giữa cation và anion."},
+    {q:"Liên kết ion thường hình thành giữa:", options:["hai phi kim","hai kim loại","kim loại điển hình và phi kim điển hình","hai khí hiếm"], correct:2, explain:"Hiệu độ âm điện lớn giữa kim loại và phi kim điển hình."},
+    {q:"Trong NaCl, ion Na⁺ được tạo thành do Na:", options:["nhận 1 electron","nhường 1 electron","nhường 2 electron","nhận 2 electron"], correct:1, explain:"Na nhường 1 electron để tạo Na⁺."},
+    {q:"Tính chất KHÔNG phải của hợp chất ion là:", options:["nhiệt độ nóng chảy cao","dẫn điện tốt ở trạng thái rắn","tan tốt trong nước","giòn, dễ vỡ"], correct:1, explain:"Ở trạng thái rắn ion không di chuyển tự do nên không dẫn điện."}
+  ]
+};
+
+const L10_B8 = {
+  title:"Bài 8: Liên kết cộng hóa trị", ready:true,
+  sections:[
+    sec("1. Sự hình thành liên kết cộng hóa trị", `<p>Hai nguyên tử phi kim (độ âm điện gần nhau) liên kết bằng cách <b>góp chung</b> một hay nhiều cặp electron để cùng đạt cấu hình bền. Ví dụ H₂: mỗi H góp 1e tạo 1 cặp electron chung.</p>`),
+    sec("2. Liên kết đơn, đôi, ba", `<p>Liên kết đơn (1 cặp electron chung, Cl–Cl), liên kết đôi (2 cặp, O=O), liên kết ba (3 cặp, N≡N).</p>`),
+    sec("3. Liên kết cho – nhận", `<p>Trường hợp đặc biệt, cặp electron chung do một nguyên tử đóng góp cả 2 electron (ví dụ trong ion NH₄⁺).</p>`),
+    sec("4. Công thức Lewis", `<p>Biểu diễn electron hóa trị bằng dấu chấm quanh kí hiệu nguyên tố, cặp electron chung biểu diễn bằng gạch nối.</p>`),
+    sec("5. Liên kết phân cực và không phân cực", `<p>Dựa vào hiệu độ âm điện Δχ: Δχ &lt; 0,4 → không phân cực; 0,4 ≤ Δχ &lt; 1,7 → có cực; Δχ ≥ 1,7 → liên kết ion (quy ước).</p>`)
+  ],
+  examples:[
+    {problem:"Xác định loại liên kết trong phân tử Cl₂.", solution:"Δχ=0 (hai nguyên tử giống nhau) → liên kết cộng hóa trị không cực, mỗi Cl góp 1 electron."},
+    {problem:"Xác định loại liên kết trong HCl (χH=2,20, χCl=3,16).", solution:"Δχ=0,96 → liên kết cộng hóa trị có cực."}
+  ],
+  exercises:[
+    ex("Viết công thức Lewis của N₂, cho biết loại liên kết.", "N≡N (mỗi N góp 3 electron), liên kết ba."),
+    ex("Vì sao phân tử O₂ có liên kết đôi?", "Mỗi nguyên tử O còn thiếu 2 electron để đạt octet nên góp chung 2 cặp electron, tạo O=O."),
+    ex("Xác định loại liên kết trong H₂O (χO=3,44, χH=2,20).", "Δχ=1,24 → liên kết cộng hóa trị có cực.")
+  ],
+  quiz:[
+    {q:"Liên kết cộng hóa trị được hình thành bởi:", options:["lực hút tĩnh điện giữa ion","cặp electron dùng chung","sự nhường hẳn electron","lực van der Waals"], correct:1, explain:"Hai nguyên tử góp chung cặp electron."},
+    {q:"Phân tử N₂ có liên kết:", options:["đơn","đôi","ba","cho nhận"], correct:2, explain:"N≡N là liên kết ba (3 cặp electron chung)."},
+    {q:"Liên kết cộng hóa trị không phân cực thường gặp trong:", options:["phân tử gồm 2 nguyên tử cùng nguyên tố","hợp chất ion","kim loại","khí hiếm"], correct:0, explain:"Hai nguyên tử giống nhau có Δχ=0."},
+    {q:"Hiệu độ âm điện càng lớn thì liên kết càng có xu hướng:", options:["cộng hóa trị không cực","ion","kim loại","van der Waals"], correct:1, explain:"Δχ lớn (≥1,7) thường là liên kết ion."}
+  ]
+};
+
+const L10_B9 = {
+  title:"Bài 9: Liên kết hydrogen và tương tác van der Waals", ready:true,
+  sections:[
+    sec("1. Liên kết hydrogen", `<p>Hình thành giữa nguyên tử H liên kết với nguyên tử có độ âm điện lớn (F, O, N) trong một phân tử, với nguyên tử có độ âm điện lớn (còn cặp electron riêng) ở phân tử khác. Yếu hơn liên kết cộng hóa trị/ion nhưng ảnh hưởng lớn đến tính chất vật lí. Ví dụ: liên kết hydrogen giữa các phân tử nước làm nước có nhiệt độ sôi cao bất thường.</p>`),
+    sec("2. Tương tác van der Waals", `<p>Lực hút yếu giữa các phân tử do sự phân cực tạm thời của electron, tồn tại giữa mọi phân tử. Cường độ tăng theo khối lượng phân tử.</p>`),
+    sec("3. Ảnh hưởng đến tính chất vật lí", `<p>Liên kết hydrogen và tương tác van der Waals càng mạnh thì nhiệt độ nóng chảy, nhiệt độ sôi của chất càng cao.</p>`)
+  ],
+  examples:[
+    {problem:"Vì sao H₂O sôi ở 100°C, cao hơn nhiều H₂S (-60°C) dù S nặng hơn O?",
+     solution:"Giữa các phân tử H₂O có liên kết hydrogen bền; H₂S không tạo liên kết hydrogen đáng kể (S có độ âm điện nhỏ hơn) → lực liên kết giữa các phân tử H₂O mạnh hơn nhiều."},
+    {problem:"So sánh nhiệt độ sôi F₂ và Cl₂.",
+     solution:"Cl₂ có khối lượng phân tử lớn hơn F₂ → tương tác van der Waals mạnh hơn → nhiệt độ sôi Cl₂ (-34°C) cao hơn F₂ (-188°C)."}
+  ],
+  exercises:[
+    ex("Vì sao alcohol có nhiệt độ sôi cao hơn hydrocarbon có khối lượng phân tử tương đương?",
+       "Vì phân tử alcohol có nhóm –OH tạo được liên kết hydrogen giữa các phân tử, còn hydrocarbon thì không."),
+    ex("Sắp xếp He, Ne, Ar theo chiều tăng nhiệt độ sôi, giải thích.",
+       "He<Ne<Ar — khối lượng phân tử tăng dần làm tương tác van der Waals tăng dần."),
+    ex("So sánh độ bền liên kết hydrogen với liên kết cộng hóa trị.",
+       "Liên kết hydrogen yếu hơn nhiều so với liên kết cộng hóa trị, nhưng vẫn đủ mạnh để ảnh hưởng đáng kể đến nhiệt độ nóng chảy, sôi.")
+  ],
+  quiz:[
+    {q:"Liên kết hydrogen dễ hình thành nhất khi H liên kết trực tiếp với:", options:["C","F, O, N","S","P"], correct:1, explain:"F, O, N có độ âm điện lớn và còn cặp electron riêng."},
+    {q:"Vì sao nước có nhiệt độ sôi cao bất thường so với H₂S?", options:["do khối lượng phân tử lớn hơn","do có liên kết hydrogen giữa các phân tử","do liên kết ion","do áp suất khí quyển"], correct:1, explain:"Liên kết hydrogen giữa các phân tử H₂O rất bền."},
+    {q:"Tương tác van der Waals có xu hướng:", options:["giảm khi khối lượng phân tử tăng","tăng khi khối lượng phân tử tăng","không phụ thuộc khối lượng phân tử","chỉ có ở chất rắn"], correct:1, explain:"Khối lượng phân tử càng lớn, tương tác van der Waals càng mạnh."},
+    {q:"Chiều tăng dần nhiệt độ sôi của các đơn chất halogen là:", options:["I₂<Br₂<Cl₂<F₂","F₂<Cl₂<Br₂<I₂","Cl₂<F₂<I₂<Br₂","không theo quy luật"], correct:1, explain:"Khối lượng phân tử tăng dần từ F₂ đến I₂ làm van der Waals tăng."}
+  ]
+};
+
+const L10_B10 = {
+  title:"Bài 10: Phản ứng oxi hóa – khử", ready:true,
+  sections:[
+    sec("1. Số oxi hóa", `<p>Là điện tích quy ước của một nguyên tử trong phân tử/ion, giả định electron liên kết chuyển hẳn về nguyên tử có độ âm điện lớn hơn. Quy tắc: đơn chất = 0; ion đơn nguyên tử = điện tích ion; tổng số oxi hóa trong phân tử trung hòa = 0 (hoặc = điện tích với ion đa nguyên tử); H thường +1; O thường −2; kim loại IA luôn +1, IIA luôn +2.</p>`),
+    sec("2. Chất khử, chất oxi hóa", `<p><b>Chất khử</b> (bị oxi hóa) là chất nhường electron, số oxi hóa tăng. <b>Chất oxi hóa</b> (bị khử) là chất nhận electron, số oxi hóa giảm.</p>`),
+    sec("3. Phản ứng oxi hóa – khử", `<p>Là phản ứng có sự chuyển electron giữa các chất phản ứng (có sự thay đổi số oxi hóa của ít nhất một nguyên tố).</p>`)
+  ],
+  examples:[
+    {problem:"Xác định số oxi hóa của Mn trong KMnO₄.", solution:"K:+1; O:−2×4=−8; tổng=0 → +1+Mn−8=0 → Mn=+7."},
+    {problem:"Trong Zn + CuSO₄ → ZnSO₄ + Cu, xác định chất khử, chất oxi hóa.",
+     solution:"Zn: 0→+2 (tăng, nhường 2e) → chất khử. Cu: +2→0 (giảm, nhận 2e) → chất oxi hóa."}
+  ],
+  exercises:[
+    ex("Xác định số oxi hóa của S trong H₂SO₄, SO₂, H₂S.", "H₂SO₄: S=+6. SO₂: S=+4. H₂S: S=−2."),
+    ex("Trong Fe + 2HCl → FeCl₂ + H₂, xác định chất khử, chất oxi hóa.",
+       "Fe: 0→+2 (chất khử). H trong HCl: +1→0 (chất oxi hóa)."),
+    ex("Vì sao NaOH + HCl → NaCl + H₂O không phải phản ứng oxi hóa – khử?",
+       "Vì không có nguyên tố nào thay đổi số oxi hóa (Na vẫn +1, Cl vẫn −1, H vẫn +1, O vẫn −2).")
+  ],
+  quiz:[
+    {q:"Số oxi hóa của oxygen trong hầu hết hợp chất là:", options:["+2","−2","−1","0"], correct:1, explain:"O thường có số oxi hóa −2 (trừ peroxide, OF₂)."},
+    {q:"Chất khử là chất:", options:["nhận electron","nhường electron","không đổi số oxi hóa","luôn là phi kim"], correct:1, explain:"Chất khử nhường electron, số oxi hóa tăng."},
+    {q:"Trong Zn + CuSO₄ → ZnSO₄ + Cu, Zn đóng vai trò:", options:["chất oxi hóa","chất khử","môi trường","không đổi số oxi hóa"], correct:1, explain:"Zn nhường electron (0→+2) nên là chất khử."},
+    {q:"Số oxi hóa của Mn trong KMnO₄ là:", options:["+2","+4","+6","+7"], correct:3, explain:"Tính theo tổng bằng 0: Mn=+7."}
+  ]
+};
+
+const L10_B11 = {
+  title:"Bài 11: Cân bằng phương trình oxi hóa – khử", ready:true,
+  sections:[
+    sec("1. Các bước cân bằng (phương pháp thăng bằng electron)", `<ol>
+      <li>Xác định số oxi hóa các nguyên tố thay đổi.</li>
+      <li>Viết quá trình oxi hóa và quá trình khử, cân bằng electron nhường = nhận.</li>
+      <li>Nhân hệ số thích hợp cho mỗi quá trình.</li>
+      <li>Đặt hệ số vào phương trình, cân bằng các nguyên tố còn lại (kim loại → phi kim → H → O).</li></ol>`)
+  ],
+  examples:[
+    {problem:"Cân bằng Fe + Cl₂ → FeCl₃ bằng thăng bằng electron.",
+     solution:"Fe⁰→Fe⁺³+3e (×2); Cl₂+2e→2Cl⁻ (×3) → 2Fe + 3Cl₂ → 2FeCl₃."},
+    {problem:"Cân bằng Cu + HNO₃(loãng) → Cu(NO₃)₂ + NO + H₂O.",
+     solution:"Cu⁰→Cu⁺²+2e (×3); N⁺⁵+3e→N⁺²(NO) (×2) → 3Cu + 8HNO₃ → 3Cu(NO₃)₂ + 2NO + 4H₂O."}
+  ],
+  exercises:[
+    ex("Cân bằng Al + O₂ → Al₂O₃.", "Al⁰→Al⁺³+3e (×4); O₂+4e→2O⁻² (×3) → 4Al + 3O₂ → 2Al₂O₃."),
+    ex("Cân bằng Fe₂O₃ + CO → Fe + CO₂.", "Fe⁺³+3e→Fe⁰ (cần 6e cho 2Fe); C⁺²→C⁺⁴+2e (×3) → Fe₂O₃ + 3CO → 2Fe + 3CO₂."),
+    ex("Cân bằng KMnO₄ + HCl → KCl + MnCl₂ + Cl₂ + H₂O.",
+       "Mn⁺⁷+5e→Mn⁺² (×2); 2Cl⁻→Cl₂+2e (×5) → 2KMnO₄ + 16HCl → 2KCl + 2MnCl₂ + 5Cl₂ + 8H₂O.")
+  ],
+  quiz:[
+    {q:"Bước đầu tiên khi cân bằng bằng thăng bằng electron là:", options:["cân bằng oxygen","xác định số oxi hóa các nguyên tố","cân bằng hydro","tính số mol"], correct:1, explain:"Phải xác định nguyên tố nào thay đổi số oxi hóa trước."},
+    {q:"Hệ số của quá trình oxi hóa và khử được chọn sao cho:", options:["số nguyên tử bằng nhau","tổng electron nhường bằng tổng electron nhận","khối lượng bằng nhau","thể tích bằng nhau"], correct:1, explain:"Nguyên tắc bảo toàn electron."},
+    {q:"Trong 2Fe + 3Cl₂ → 2FeCl₃, tỉ lệ mol Fe:Cl₂ là:", options:["1:1","2:3","3:2","1:3"], correct:1, explain:"Hệ số cân bằng là 2 và 3."},
+    {q:"Trong 3Cu+8HNO₃→3Cu(NO₃)₂+2NO+4H₂O, mỗi Cu nhường bao nhiêu electron?", options:["1","2","3","6"], correct:1, explain:"Cu⁰→Cu⁺²+2e."}
+  ]
+};
+
+const L10_B12 = {
+  title:"Bài 12: Phản ứng toả nhiệt, thu nhiệt – Enthalpy", ready:true,
+  sections:[
+    sec("1. Phản ứng tỏa nhiệt và thu nhiệt", `<p><b>Phản ứng tỏa nhiệt</b>: giải phóng nhiệt ra môi trường (ví dụ đốt cháy nhiên liệu). <b>Phản ứng thu nhiệt</b>: hấp thụ nhiệt từ môi trường (ví dụ nung đá vôi).</p>`),
+    sec("2. Biến thiên enthalpy (ΔrH)", `<p>Enthalpy (H) đặc trưng cho năng lượng của hệ ở áp suất không đổi. <b>Biến thiên enthalpy chuẩn</b> (ΔrH°₂₉₈) là nhiệt lượng tỏa/thu ở điều kiện chuẩn (1 bar, 25°C). Phản ứng tỏa nhiệt: ΔrH&lt;0. Phản ứng thu nhiệt: ΔrH&gt;0.</p>`),
+    sec("3. Phương trình nhiệt hóa học", `<p>Là phương trình phản ứng có kèm giá trị ΔrH và trạng thái các chất. Ví dụ: CH₄(g)+2O₂(g)→CO₂(g)+2H₂O(l), ΔrH°₂₉₈=−890,3 kJ.</p>`)
+  ],
+  examples:[
+    {problem:"C(s)+O₂(g)→CO₂(g), ΔrH°₂₉₈=−393,5 kJ. Tỏa hay thu nhiệt?",
+     solution:"Tỏa nhiệt vì ΔrH<0 — năng lượng sản phẩm thấp hơn chất đầu, phần chênh lệch giải phóng ra môi trường."},
+    {problem:"CaCO₃(s)→CaO(s)+CO₂(g), ΔrH°₂₉₈=+178 kJ. Muốn phản ứng xảy ra cần gì?",
+     solution:"Vì ΔrH>0 (thu nhiệt), cần cung cấp nhiệt liên tục (nung ở nhiệt độ cao)."}
+  ],
+  exercises:[
+    ex("Phân biệt phản ứng tỏa nhiệt và thu nhiệt về dấu ΔrH.", "Tỏa nhiệt: ΔrH<0. Thu nhiệt: ΔrH>0."),
+    ex("Vì sao phản ứng đốt cháy nhiên liệu luôn tỏa nhiệt?", "Vì năng lượng liên kết trong sản phẩm cháy (CO₂, H₂O) thấp hơn nhiều so với chất đầu, phần chênh lệch giải phóng dưới dạng nhiệt."),
+    ex("Nêu một phản ứng thu nhiệt trong đời sống, dấu hiệu nhận biết.", "Hòa tan NH₄NO₃ vào nước làm dung dịch lạnh đi — dấu hiệu là nhiệt độ môi trường xung quanh giảm.")
+  ],
+  quiz:[
+    {q:"Phản ứng tỏa nhiệt có:", options:["ΔrH>0","ΔrH<0","ΔrH=0","không xác định được dấu"], correct:1, explain:"Tỏa nhiệt ứng với ΔrH âm."},
+    {q:"Điều kiện chuẩn trong nhiệt hóa học thường lấy ở:", options:["0°C, 1atm","25°C, 1 bar","100°C,1atm","25°C, 2 bar"], correct:1, explain:"Điều kiện chuẩn: 25°C (298K), áp suất 1 bar."},
+    {q:"Phản ứng CaCO₃→CaO+CO₂ là phản ứng:", options:["tỏa nhiệt","thu nhiệt","không đổi năng lượng","oxi hóa khử"], correct:1, explain:"Cần cung cấp nhiệt liên tục để phản ứng xảy ra."},
+    {q:"Kí hiệu ΔrH°₂₉₈ biểu thị:", options:["nhiệt dung riêng","biến thiên enthalpy chuẩn của phản ứng","nhiệt độ phản ứng","tốc độ phản ứng"], correct:1, explain:"Là nhiệt lượng tỏa/thu ở điều kiện chuẩn."}
+  ]
+};
+
+const L10_B13 = {
+  title:"Bài 13: Tính biến thiên enthalpy của phản ứng", ready:true,
+  sections:[
+    sec("1. Tính theo enthalpy tạo thành chuẩn", `<p>Enthalpy tạo thành chuẩn (ΔfH°₂₉₈) là biến thiên enthalpy khi tạo 1 mol chất từ đơn chất bền ở điều kiện chuẩn (đơn chất bền quy ước ΔfH°=0).</p>
+      <p style="text-align:center;font-weight:600;">ΔrH°₂₉₈ = ΣΔfH°(sản phẩm) − ΣΔfH°(chất đầu)</p>`),
+    sec("2. Tính theo năng lượng liên kết", `<p style="text-align:center;font-weight:600;">ΔrH°₂₉₈ = ΣEb(chất đầu) − ΣEb(sản phẩm)</p>
+      <p>Áp dụng cho phản ứng giữa các chất khí có liên kết cộng hóa trị.</p>`)
+  ],
+  examples:[
+    {problem:"Tính ΔrH của CH₄(g)+2O₂(g)→CO₂(g)+2H₂O(g), biết ΔfH°: CH₄=−74,8; CO₂=−393,5; H₂O(g)=−241,8; O₂=0 (kJ/mol).",
+     solution:"ΔrH=[(−393,5)+2×(−241,8)]−[(−74,8)+0]=(−877,1)−(−74,8)=−802,3 kJ."},
+    {problem:"Tính ΔrH của H₂(g)+Cl₂(g)→2HCl(g), biết Eb(H–H)=436; Eb(Cl–Cl)=243; Eb(H–Cl)=432 kJ/mol.",
+     solution:"ΔrH=(436+243)−2×432=679−864=−185 kJ."}
+  ],
+  exercises:[
+    ex("Tính ΔrH của 2H₂(g)+O₂(g)→2H₂O(l), biết ΔfH°(H₂O,l)=−285,8 kJ/mol.", "ΔrH=2×(−285,8)−0=−571,6 kJ."),
+    ex("Tính ΔrH của N₂(g)+3H₂(g)→2NH₃(g) theo năng lượng liên kết: Eb(N≡N)=945; Eb(H–H)=436; Eb(N–H)=391 kJ/mol.",
+       "Chất đầu: 945+3×436=2253. Sản phẩm (6 liên kết N–H): 6×391=2346. ΔrH=2253−2346=−93 kJ."),
+    ex("Vì sao phải quy ước enthalpy tạo thành của đơn chất bền bằng 0?",
+       "Vì enthalpy là đại lượng tương đối, cần một mốc chuẩn chung để so sánh giữa các chất.")
+  ],
+  quiz:[
+    {q:"Công thức tính ΔrH theo enthalpy tạo thành:", options:["Σsản phẩm − Σchất đầu","Σchất đầu − Σsản phẩm","Σsản phẩm + Σchất đầu","Σsản phẩm × Σchất đầu"], correct:0, explain:"ΔrH = ΣΔfH(sản phẩm) − ΣΔfH(chất đầu)."},
+    {q:"Enthalpy tạo thành chuẩn của đơn chất bền được quy ước bằng:", options:["1","−1","0","tùy chất"], correct:2, explain:"Quy ước làm mốc so sánh."},
+    {q:"Công thức tính ΔrH theo năng lượng liên kết:", options:["ΣEb(sp)−ΣEb(chất đầu)","ΣEb(chất đầu)−ΣEb(sp)","ΣEb(chất đầu)+ΣEb(sp)","không tính được"], correct:1, explain:"Năng lượng phá vỡ liên kết trừ năng lượng hình thành liên kết."},
+    {q:"Phản ứng H₂+Cl₂→2HCl có ΔrH=−185kJ nghĩa là:", options:["thu nhiệt 185kJ","tỏa nhiệt 185kJ","không đổi năng lượng","cần cung cấp 185kJ"], correct:1, explain:"ΔrH âm nghĩa là tỏa nhiệt."}
+  ]
+};
+
+const L10_B14 = {
+  title:"Bài 14: Tốc độ phản ứng hóa học", ready:true,
+  sections:[
+    sec("1. Khái niệm tốc độ phản ứng", `<p>Là đại lượng đặc trưng cho sự biến thiên nồng độ của chất phản ứng hoặc sản phẩm trong một đơn vị thời gian.</p>`),
+    sec("2. Tốc độ trung bình", `<p style="text-align:center;font-weight:600;">v̄ = ±ΔC / Δt</p><p>(dấu + nếu tính theo sản phẩm, dấu − nếu tính theo chất phản ứng). Đơn vị thường: mol/(L·s).</p>`),
+    sec("3. Định luật tác dụng khối lượng", `<p>Với phản ứng đơn giản aA + bB → sản phẩm: <b>v = k[A]ᵃ[B]ᵇ</b>, trong đó k là hằng số tốc độ (phụ thuộc nhiệt độ, bản chất phản ứng).</p>`)
+  ],
+  examples:[
+    {problem:"Cho A→B. Sau 20s, nồng độ A giảm từ 0,8M xuống 0,6M. Tính tốc độ trung bình.",
+     solution:"v̄=−ΔC/Δt=−(0,6−0,8)/20=0,2/20=0,01 mol/(L·s)."},
+    {problem:"Phản ứng có v=k[A] (bậc 1). Nếu tăng gấp đôi nồng độ A thì tốc độ thay đổi ra sao?",
+     solution:"Tốc độ tăng gấp đôi vì tỉ lệ thuận với nồng độ (bậc 1)."}
+  ],
+  exercises:[
+    ex("Nêu ý nghĩa của hằng số tốc độ k.", "k đặc trưng cho bản chất phản ứng và điều kiện (nhiệt độ); k lớn thì phản ứng xảy ra nhanh ở cùng nồng độ."),
+    ex("Phản ứng có v=k[A]²[B]. Tăng nồng độ A gấp 3 lần (giữ B không đổi), tốc độ thay đổi thế nào?",
+       "v'=k(3[A])²[B]=9k[A]²[B]=9v — tốc độ tăng 9 lần."),
+    ex("Vì sao tốc độ phản ứng thường tính bằng tốc độ trung bình trong khoảng thời gian ngắn?",
+       "Vì tốc độ thực chất thay đổi liên tục theo thời gian (nồng độ giảm dần), khoảng thời gian càng ngắn thì giá trị càng gần tốc độ tức thời.")
+  ],
+  quiz:[
+    {q:"Tốc độ phản ứng đặc trưng cho:", options:["sự biến thiên khối lượng theo thời gian","sự biến thiên nồng độ theo thời gian","thời gian phản ứng","nhiệt lượng tỏa ra"], correct:1, explain:"Tốc độ phản ứng gắn với biến thiên nồng độ theo thời gian."},
+    {q:"Đơn vị thường dùng của tốc độ phản ứng là:", options:["mol/L","mol/(L·s)","g/mol","L/mol"], correct:1, explain:"Nồng độ biến thiên trên đơn vị thời gian."},
+    {q:"Trong v=k[A]ᵃ[B]ᵇ, k gọi là:", options:["bậc phản ứng","hằng số tốc độ","nồng độ đầu","hiệu suất phản ứng"], correct:1, explain:"k là hằng số tốc độ phản ứng."},
+    {q:"Nếu v=k[A]², khi nồng độ A tăng gấp đôi thì tốc độ:", options:["tăng gấp 2","tăng gấp 4","không đổi","giảm 1 nửa"], correct:1, explain:"(2[A])²=4[A]² — tốc độ tăng 4 lần."}
+  ]
+};
+
+const L10_B15 = {
+  title:"Bài 15: Các yếu tố ảnh hưởng đến tốc độ phản ứng", ready:true,
+  sections:[
+    sec("1. Nồng độ", `<p>Nồng độ chất phản ứng tăng → số va chạm giữa các phân tử tăng → tốc độ phản ứng tăng.</p>`),
+    sec("2. Áp suất (phản ứng có chất khí)", `<p>Áp suất tăng → nồng độ chất khí tăng → tốc độ tăng.</p>`),
+    sec("3. Nhiệt độ", `<p>Nhiệt độ tăng → phân tử chuyển động nhanh hơn, số va chạm hiệu quả (đủ năng lượng hoạt hóa) tăng mạnh → tốc độ phản ứng tăng đáng kể.</p>`),
+    sec("4. Diện tích bề mặt tiếp xúc", `<p>Chất rắn dạng bột mịn có diện tích bề mặt lớn hơn dạng khối → tăng va chạm → tốc độ tăng.</p>`),
+    sec("5. Chất xúc tác", `<p>Làm tăng tốc độ phản ứng bằng cách giảm năng lượng hoạt hóa, không bị biến đổi về khối lượng và bản chất sau phản ứng.</p>`)
+  ],
+  examples:[
+    {problem:"Vì sao đun nóng làm phản ứng HCl với đá vôi (CaCO₃) nhanh hơn?",
+     solution:"Nhiệt độ tăng làm tăng động năng phân tử, tăng tỉ lệ va chạm hiệu quả giữa H⁺ và CaCO₃ → tốc độ tăng."},
+    {problem:"Vì sao bột sắt phản ứng với acid nhanh hơn đinh sắt?",
+     solution:"Bột sắt có diện tích bề mặt tiếp xúc lớn hơn nhiều so với khối sắt đặc → tăng va chạm → phản ứng nhanh hơn."}
+  ],
+  exercises:[
+    ex("Vì sao thực phẩm trong tủ lạnh lâu hỏng hơn ở nhiệt độ phòng?", "Nhiệt độ thấp làm chậm tốc độ các phản ứng phân hủy do vi sinh vật, enzyme gây ra."),
+    ex("Nêu vai trò của enzyme, liên hệ khái niệm chất xúc tác.", "Enzyme là chất xúc tác sinh học, tăng tốc độ phản ứng trong cơ thể mà không bị biến đổi sau phản ứng."),
+    ex("Vì sao sản xuất NH₃ dùng chất xúc tác Fe thay vì chỉ tăng nhiệt độ thật cao?",
+       "Tăng nhiệt độ quá cao làm cân bằng dịch chuyển theo chiều nghịch (phản ứng tỏa nhiệt) giảm hiệu suất; dùng xúc tác giúp tăng tốc độ mà không cần nhiệt độ quá cao.")
+  ],
+  quiz:[
+    {q:"Yếu tố nào KHÔNG ảnh hưởng đến tốc độ phản ứng có chất rắn?", options:["diện tích bề mặt","nhiệt độ","màu sắc chất rắn","chất xúc tác"], correct:2, explain:"Màu sắc không ảnh hưởng đến tốc độ phản ứng."},
+    {q:"Khi tăng nồng độ chất phản ứng, tốc độ phản ứng thường:", options:["giảm","tăng","không đổi","bằng 0"], correct:1, explain:"Nồng độ tăng làm tăng số va chạm."},
+    {q:"Chất xúc tác có đặc điểm:", options:["bị tiêu hao hoàn toàn sau phản ứng","làm giảm năng lượng hoạt hóa, không đổi khối lượng sau phản ứng","làm chậm tốc độ phản ứng","chỉ dùng được 1 lần"], correct:1, explain:"Xúc tác không bị biến đổi về khối lượng, bản chất sau phản ứng."},
+    {q:"Đun nóng hỗn hợp phản ứng làm tốc độ phản ứng:", options:["luôn giảm","luôn tăng","không thay đổi","tùy ý"], correct:1, explain:"Nhiệt độ tăng làm tốc độ phản ứng tăng."}
+  ]
+};
+
+const L10_B16 = {
+  title:"Bài 16: Đơn chất halogen", ready:true,
+  sections:[
+    sec("1. Vị trí, cấu hình electron chung", `<p>Nhóm VIIA gồm F, Cl, Br, I. Cấu hình electron lớp ngoài cùng chung: <b>ns²np⁵</b> (7 electron hóa trị), chỉ thiếu 1 electron để đạt octet → tính oxi hóa mạnh.</p>`),
+    sec("2. Tính chất vật lí", `<p>Tồn tại dạng phân tử X₂. F₂: khí, màu lục nhạt; Cl₂: khí, màu vàng lục; Br₂: lỏng, màu nâu đỏ; I₂: rắn, màu tím đen (thăng hoa). Nhiệt độ nóng chảy, sôi tăng dần từ F₂ đến I₂ do tương tác van der Waals tăng theo khối lượng phân tử.</p>`),
+    sec("3. Tính chất hóa học – tính oxi hóa mạnh", `<p>Tính oxi hóa giảm dần: <b>F₂ > Cl₂ > Br₂ > I₂</b> (độ âm điện giảm dần).</p>
+      <p>Phản ứng với kim loại tạo muối halide: 2Na+Cl₂→2NaCl. Phản ứng với hydrogen: H₂+X₂→2HX (mức độ giảm dần từ F₂ đến I₂). Phản ứng với nước: Cl₂+H₂O⇌HCl+HClO (thuận nghịch).</p>`)
+  ],
+  examples:[
+    {problem:"Sắp xếp F₂, Cl₂, Br₂, I₂ theo chiều giảm dần tính oxi hóa, giải thích.",
+     solution:"F₂>Cl₂>Br₂>I₂, vì từ F đến I bán kính nguyên tử tăng, độ âm điện giảm dần → khả năng hút electron giảm dần."},
+    {problem:"Viết phương trình Cl₂ với Fe (đun nóng).",
+     solution:"2Fe+3Cl₂ →(t°) 2FeCl₃ — Cl₂ oxi hóa Fe lên mức hóa trị cao nhất +3."}
+  ],
+  exercises:[
+    ex("Vì sao F₂ có tính oxi hóa mạnh nhất nhóm halogen?", "Vì F có bán kính nhỏ nhất, độ âm điện lớn nhất → hút electron mạnh nhất."),
+    ex("Viết phương trình Cl₂ với dung dịch NaOH loãng, nguội.", "Cl₂+2NaOH→NaCl+NaClO+H₂O (nước Javel)."),
+    ex("Giải thích xu hướng trạng thái (khí→lỏng→rắn) từ F₂ đến I₂.",
+       "Khối lượng phân tử tăng dần làm tương tác van der Waals tăng, nhiệt độ nóng chảy/sôi tăng dần, nên trạng thái chuyển từ khí sang lỏng rồi rắn.")
+  ],
+  quiz:[
+    {q:"Cấu hình electron lớp ngoài cùng chung của nhóm halogen là:", options:["ns²np³","ns²np⁵","ns²np⁶","ns¹"], correct:1, explain:"7 electron hóa trị: ns²np⁵."},
+    {q:"Tính oxi hóa của các đơn chất halogen biến đổi theo chiều:", options:["F₂<Cl₂<Br₂<I₂","F₂>Cl₂>Br₂>I₂","không theo quy luật","Cl₂ mạnh nhất"], correct:1, explain:"Độ âm điện giảm dần từ F đến I."},
+    {q:"Ở điều kiện thường, Br₂ tồn tại ở trạng thái:", options:["khí","lỏng","rắn","plasma"], correct:1, explain:"Br₂ là chất lỏng màu nâu đỏ ở điều kiện thường."},
+    {q:"Phản ứng 2Fe+3Cl₂→2FeCl₃ cho thấy Cl₂ oxi hóa Fe lên mức hóa trị:", options:["+1","+2","+3","+4"], correct:2, explain:"Sản phẩm là FeCl₃, Fe có số oxi hóa +3."}
+  ]
+};
+
+const L10_B17 = {
+  title:"Bài 17: Hydrogen halide và muối halide", ready:true,
+  sections:[
+    sec("1. Hydrogen halide (HX)", `<p>Là hợp chất cộng hóa trị giữa H và halogen, tan trong nước tạo dung dịch acid tương ứng.</p>`),
+    sec("2. Tính acid của dung dịch HX", `<p>Tính acid tăng dần: <b>HF (acid yếu) &lt;&lt; HCl &lt; HBr &lt; HI</b> (acid mạnh). HF là acid yếu do liên kết H–F rất bền và có liên kết hydrogen giữa các phân tử HF.</p>`),
+    sec("3. Nhận biết ion halide", `<p>Dùng dung dịch AgNO₃: AgCl kết tủa trắng, AgBr kết tủa vàng nhạt, AgI kết tủa vàng đậm, AgF tan (không kết tủa).</p>`),
+    sec("4. Ứng dụng", `<p>HCl: tẩy gỉ kim loại, có trong dịch vị dạ dày. NaCl: muối ăn, nguyên liệu sản xuất Cl₂, NaOH. AgBr: dùng trong nhiếp ảnh.</p>`)
+  ],
+  examples:[
+    {problem:"Vì sao HF là acid yếu trong khi HCl, HBr, HI là acid mạnh?",
+     solution:"Vì liên kết H–F rất bền và giữa các phân tử HF có liên kết hydrogen mạnh, cản trở sự phân li ion H⁺; liên kết H–X (X=Cl,Br,I) kém bền hơn, dễ phân li hoàn toàn."},
+    {problem:"Nhận biết 3 dung dịch NaCl, NaBr, NaI bằng AgNO₃.",
+     solution:"Kết tủa trắng → NaCl (AgCl↓); vàng nhạt → NaBr (AgBr↓); vàng đậm → NaI (AgI↓)."}
+  ],
+  exercises:[
+    ex("Sắp xếp HCl, HBr, HI theo chiều tăng tính acid, giải thích.", "HCl<HBr<HI — bán kính X tăng dần làm liên kết H–X kém bền dần, dễ phân li H⁺ hơn."),
+    ex("Viết phương trình nhận biết ion Cl⁻ bằng AgNO₃.", "NaCl+AgNO₃→AgCl↓(trắng)+NaNO₃."),
+    ex("Nêu 2 ứng dụng của hydrochloric acid.", "Tẩy gỉ sắt thép trước khi mạ/sơn; là thành phần chính của dịch vị dạ dày giúp tiêu hóa thức ăn.")
+  ],
+  quiz:[
+    {q:"Trong các hydrogen halide, acid yếu là:", options:["HCl","HBr","HI","HF"], correct:3, explain:"HF là acid yếu do liên kết H–F bền và có liên kết hydrogen."},
+    {q:"Thuốc thử đặc trưng để nhận biết ion Cl⁻ là:", options:["NaOH","AgNO₃","BaCl₂","quỳ tím"], correct:1, explain:"AgNO₃ tạo kết tủa AgCl trắng đặc trưng."},
+    {q:"Kết tủa khi cho AgNO₃ vào dung dịch NaBr có màu:", options:["trắng","vàng nhạt","vàng đậm","đen"], correct:1, explain:"AgBr kết tủa màu vàng nhạt."},
+    {q:"Nguyên nhân chính khiến HF là acid yếu:", options:["F có độ âm điện nhỏ","liên kết H–F bền và có liên kết hydrogen giữa các phân tử","HF không tan trong nước","F có bán kính lớn"], correct:1, explain:"Liên kết H–F bền + liên kết hydrogen cản trở phân li ion H⁺."}
+  ]
+};
+
+/* ============================================================
+   DATA TREE — điều hướng đầy đủ 10–12
+   ============================================================ */
+const DATA = {
+10:{ label:"Lớp 10", chapters:[
+  {title:"Chương 1: Cấu tạo nguyên tử", lessons:[L10_B1, L10_B2, L10_B3]},
+  {title:"Chương 2: Bảng tuần hoàn các nguyên tố hoá học", lessons:[L10_B4, L10_B5]},
+  {title:"Chương 3: Liên kết hoá học", lessons:[L10_B6, L10_B7, L10_B8, L10_B9]},
+  {title:"Chương 4: Phản ứng oxi hoá – khử", lessons:[L10_B10, L10_B11]},
+  {title:"Chương 5: Năng lượng hoá học", lessons:[L10_B12, L10_B13]},
+  {title:"Chương 6: Tốc độ phản ứng hoá học", lessons:[L10_B14, L10_B15]},
+  {title:"Chương 7: Nguyên tố nhóm VIIA (Halogen)", lessons:[L10_B16, L10_B17]},
+]},
+11:{ label:"Lớp 11", chapters:[
+  {title:"Chương 1: Cân bằng hoá học", lessons:[
+     {title:"Bài 1: Khái niệm về cân bằng hoá học"},
+     {title:"Bài 2: Cân bằng trong dung dịch nước (chất điện li, pH)"}]},
+  {title:"Chương 2: Nitrogen – Sulfur", lessons:[
+     {title:"Bài 3: Đơn chất nitrogen"},
+     {title:"Bài 4: Ammonia và muối ammonium"},
+     {title:"Bài 5: Nitric acid và muối nitrate"},
+     {title:"Bài 6: Sulfur và sulfur dioxide"},
+     {title:"Bài 7: Sulfuric acid và muối sulfate"}]},
+  {title:"Chương 3: Đại cương về hoá học hữu cơ", lessons:[
+     {title:"Bài 8: Hợp chất hữu cơ và hoá học hữu cơ"},
+     {title:"Bài 9: Phương pháp tách biệt và tinh chế hợp chất hữu cơ"},
+     {title:"Bài 10: Công thức phân tử hợp chất hữu cơ"},
+     {title:"Bài 11: Cấu tạo hoá học hợp chất hữu cơ"}]},
+  {title:"Chương 4: Hydrocarbon", lessons:[
+     {title:"Bài 12: Alkane"},
+     {title:"Bài 13: Alkene và Alkyne"},
+     {title:"Bài 14: Arene (hydrocarbon thơm)"}]},
+  {title:"Chương 5: Dẫn xuất halogen – Alcohol – Phenol", lessons:[
+     {title:"Bài 15: Dẫn xuất halogen"},
+     {title:"Bài 16: Alcohol"},
+     {title:"Bài 17: Phenol"}]},
+  {title:"Chương 6: Hợp chất carbonyl – Carboxylic acid", lessons:[
+     {title:"Bài 18: Hợp chất carbonyl (aldehyde – ketone)"},
+     {title:"Bài 19: Carboxylic acid"}]},
+]},
+12:{ label:"Lớp 12", chapters:[
+  {title:"Chương 1: Ester – Lipid", lessons:[
+     {title:"Bài 1: Ester"},
+     {title:"Bài 2: Lipid – Chất béo"}]},
+  {title:"Chương 2: Carbohydrate", lessons:[
+     {title:"Bài 3: Glucose và fructose"},
+     {title:"Bài 4: Saccharose và maltose"},
+     {title:"Bài 5: Tinh bột và cellulose"}]},
+  {title:"Chương 3: Hợp chất chứa nitrogen", lessons:[
+     {title:"Bài 6: Amine"},
+     {title:"Bài 7: Amino acid"},
+     {title:"Bài 8: Peptide – Protein"}]},
+  {title:"Chương 4: Polymer", lessons:[
+     {title:"Bài 9: Đại cương về polymer"},
+     {title:"Bài 10: Vật liệu polymer"}]},
+  {title:"Chương 5: Đại cương về kim loại", lessons:[
+     {title:"Bài 11: Cấu tạo và tính chất vật lí của kim loại"},
+     {title:"Bài 12: Tính chất hoá học của kim loại – Dãy điện hoá"},
+     {title:"Bài 13: Hợp kim và sự ăn mòn kim loại"}]},
+  {title:"Chương 6: Kim loại nhóm IA, IIA", lessons:[
+     {title:"Bài 14: Kim loại nhóm IA"},
+     {title:"Bài 15: Kim loại nhóm IIA"},
+     {title:"Bài 16: Nước cứng"}]},
+  {title:"Chương 7: Sơ lược dãy kim loại chuyển tiếp và phức chất", lessons:[
+     {title:"Bài 17: Nguyên tố nhóm B"},
+     {title:"Bài 18: Sơ lược về phức chất"}]},
+]}
+};
+
+/* gán id duy nhất cho mọi bài học (dùng làm khoá lưu trữ) */
+(function assignIds(){
+  Object.keys(DATA).forEach(g=>{
+    DATA[g].chapters.forEach((c,ci)=>{
+      c.lessons.forEach((l,li)=>{ l.id = g+'_'+ci+'_'+li; });
+    });
+  });
+})();
+function allQuizLessons(){
+  let out=[];
+  Object.values(DATA).forEach(g=>g.chapters.forEach(c=>c.lessons.forEach(l=>{ if(l.quiz) out.push(l); })));
+  return out;
+}
+
+/* ============================================================
+   AUTH & STORAGE
+   ============================================================ */
+let session = null;          // {username, name, role}
+
+/* --- Lớp lưu trữ: ưu tiên localStorage (lưu ngay trên thiết bị/trình duyệt đang dùng — hoạt động
+     tốt khi mở file này trực tiếp bằng trình duyệt/app ngoài, đúng như cách bạn đang dùng).
+     Nếu localStorage bị chặn (một số chế độ ẩn danh), thử window.storage (chỉ có khi xem trong Claude).
+     Nếu cả hai đều không được thì lưu tạm trong phiên hiện tại (mất khi tải lại trang). --- */
+const memStore = {};
+let STORAGE_MODE = 'memory'; // 'local' | 'window' | 'memory' — xác định bởi initStorageMode()
+let STORAGE_WORKING = false; // true nếu 'local' hoặc 'window' (dữ liệu thực sự tồn tại lâu dài)
+
+async function testLocalStorage(){
+  try{
+    const k='__ls_selftest__', v='ok_'+Date.now();
+    localStorage.setItem(k, v);
+    const ok = localStorage.getItem(k) === v;
+    localStorage.removeItem(k);
+    return ok;
+  }catch(e){ return false; }
+}
+async function testWindowStorage(){
+  if(typeof window.storage === 'undefined' || window.storage === null) return false;
+  try{
+    const k='__ws_selftest__', v='ok_'+Date.now();
+    await window.storage.set(k, v, true);
+    const r = await window.storage.get(k, true);
+    return !!(r && r.value === v);
+  }catch(e){ return false; }
+}
+async function initStorageMode(){
+  if(await testLocalStorage()){ STORAGE_MODE = 'local'; STORAGE_WORKING = true; return; }
+  if(await testWindowStorage()){ STORAGE_MODE = 'window'; STORAGE_WORKING = true; return; }
+  STORAGE_MODE = 'memory'; STORAGE_WORKING = false;
+}
+
+async function storeGet(key, shared){
+  if(STORAGE_MODE==='local'){
+    const v = localStorage.getItem(key);
+    return v!==null ? {key, value:v} : null;
+  }
+  if(STORAGE_MODE==='window'){
+    try{ return await window.storage.get(key, shared); }
+    catch(e){ return null; }
+  }
+  return (key in memStore) ? {key, value:memStore[key], shared} : null;
+}
+async function storeSet(key, value, shared){
+  if(STORAGE_MODE==='local'){
+    try{ localStorage.setItem(key, value); return {key, value}; }
+    catch(e){ console.error('localStorage.setItem lỗi:', e); return null; }
+  }
+  if(STORAGE_MODE==='window'){
+    try{ return await window.storage.set(key, value, shared); }
+    catch(e){ console.error('storage.set lỗi:', e); return null; }
+  }
+  memStore[key] = value;
+  return {key, value, shared};
+}
+async function storeList(prefix, shared){
+  if(STORAGE_MODE==='local'){
+    const keys=[];
+    for(let i=0;i<localStorage.length;i++){ const k=localStorage.key(i); if(k && k.startsWith(prefix)) keys.push(k); }
+    return keys;
+  }
+  if(STORAGE_MODE==='window'){
+    try{ const r = await window.storage.list(prefix, shared); return r ? r.keys : []; }
+    catch(e){ return []; }
+  }
+  return Object.keys(memStore).filter(k=>k.startsWith(prefix));
+}
+async function getAllUsersByRole(role){
+  const keys = await storeList('user:', true);
+  const usernames = keys.map(k=>k.replace(/^user:/,''));
+  const users = await Promise.all(usernames.map(async username=>({username, data: await loadUser(username)})));
+  return users.filter(u=>u.data && u.data.role===role);
+}
+
+/* --- Xuất / Nhập dữ liệu thủ công: dùng để "đồng bộ" tài khoản giữa các thiết bị/lần mở file khác nhau,
+     vì đây là 1 file tĩnh không có máy chủ nên không thể tự đồng bộ qua mạng. --- */
+function storageStatusMessage(){
+  if(STORAGE_MODE==='local') return {ok:true, html:'✓ Dữ liệu đang được lưu ngay trên thiết bị/trình duyệt này — sẽ còn nguyên khi tắt mở lại app hoặc tải lại trang. Lưu ý: nó KHÔNG tự xuất hiện trên thiết bị khác (điện thoại/máy tính khác) — muốn dùng ở nơi khác, dùng "mã đồng bộ" bên dưới.'};
+  if(STORAGE_MODE==='window') return {ok:true, html:'✓ Bộ nhớ lưu trữ dùng chung đang hoạt động — tài khoản tự đồng bộ giữa mọi thiết bị, không cần mã đồng bộ.'};
+  return {ok:false, html:'⚠ Không lưu được ở nơi bạn đang mở file này — tài khoản sẽ mất khi tải lại trang. Dùng "mã đồng bộ" bên dưới để chuyển sang máy khác.'};
+}
+
+async function exportAllData(){
+  const keys = [
+    ...(await storeList('user:', true)),
+    ...(await storeList('roster:', true)),
+    ...(await storeList('sub:', true)),
+  ];
+  const data = {};
+  for(const k of keys){
+    const r = await storeGet(k, true);
+    if(r) data[k] = r.value;
+  }
+  return btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+}
+async function importAllData(code){
+  const json = decodeURIComponent(escape(atob(code.trim())));
+  const data = JSON.parse(json);
+  const keys = Object.keys(data);
+  for(const k of keys){ await storeSet(k, data[k], true); }
+  return keys.length;
+}
+
+/* ============================================================
+   TÍCH HỢP SUPABASE — đồng bộ THẬT SỰ nhiều thiết bị (tuỳ chọn)
+   Nếu bạn điền đúng SUPABASE_URL / SUPABASE_ANON_KEY bên dưới (sau khi tạo
+   project Supabase miễn phí và chạy script SQL đi kèm), app sẽ tự chuyển
+   sang chế độ Online: admin/giáo viên/học sinh dùng chung 1 cơ sở dữ liệu
+   thật, đăng nhập ở bất kỳ máy nào cũng thấy cùng dữ liệu.
+   Nếu chưa điền, app tự động dùng chế độ offline (lưu trên thiết bị) như cũ.
+   ============================================================ */
+const SUPABASE_URL = "https://wlpfiaikepattxjacihk.supabase.co";      // <-- điền URL project của bạn
+const SUPABASE_ANON_KEY = "sb_publishable_YvybznQXpHhIyZZS-L1RGQ_XNtXa7Qu";                     // <-- điền anon public key của bạn
+let ONLINE_MODE = false;
+
+async function sbFetch(path, opts={}){
+  const headers = {apikey:SUPABASE_ANON_KEY, Authorization:'Bearer '+SUPABASE_ANON_KEY, 'Content-Type':'application/json', ...(opts.headers||{})};
+  const r = await fetch(SUPABASE_URL+path, {...opts, headers});
+  const t = await r.text();
+  let d = null; try{ d = t ? JSON.parse(t) : null; }catch(_){ d = t; }
+  if(!r.ok) throw new Error((d && (d.message||d.error||d.hint||d.details)) || r.statusText || ('HTTP '+r.status));
+  return d;
+}
+async function sbRpc(name, args={}){ return sbFetch('/rest/v1/rpc/'+encodeURIComponent(name), {method:'POST', body:JSON.stringify(args)}); }
+async function sha256hex(text){
+  if(window.crypto && crypto.subtle){
+    const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(text)));
+    return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');
+  }
+  throw new Error('Thiết bị không hỗ trợ mã hóa mật khẩu (cần HTTPS hoặc localhost).');
+}
+async function initOnlineMode(){
+  const notConfigured = !SUPABASE_URL || SUPABASE_URL.includes('YOUR-PROJECT') || !SUPABASE_ANON_KEY || SUPABASE_ANON_KEY.includes('YOUR-ANON-KEY');
+  if(notConfigured){ ONLINE_MODE = false; return; }
+  try{ await sbRpc('ensure_admin'); ONLINE_MODE = true; }
+  catch(e){ console.error('Không kết nối được Supabase:', e); ONLINE_MODE = false; }
+}
+async function onlineVerifyLogin(username, password){
+  const hash = await sha256hex(password);
+  const rows = await sbRpc('verify_login', {p_username:username, p_password_hash:hash});
+  return (rows && rows.length) ? rows[0] : null;
+}
+async function onlineCreateAccount(username, password, name, role, teacherUsername){
+  const hash = await sha256hex(password);
+  await sbRpc('create_app_account', {p_username:username, p_password_hash:hash, p_name:name, p_role:role, p_teacher_username: teacherUsername||null});
+}
+async function onlineListTeachers(){ return sbRpc('list_teachers'); }
+async function onlineListStudentsOf(teacherUsername){ return sbRpc('list_students_of', {p_teacher:teacherUsername}); }
+async function onlineGetSubmissionsForStudent(username){
+  const rows = await sbFetch('/rest/v1/submissions?student_username=eq.'+encodeURIComponent(username)+'&select=*');
+  const map = {};
+  (rows||[]).forEach(r=>{ map[r.lesson_id] = {
+    student:r.student_username, lessonId:r.lesson_id, lessonTitle:r.lesson_title,
+    score:r.score, passed:r.passed, answers:r.answers, attempts:r.attempts,
+    unlocked:r.unlocked, needsRedo:r.needs_redo
+  }; });
+  return map;
+}
+async function onlineSaveSubmission(student, lessonId, lessonTitle, score, passed, answers){
+  await sbRpc('save_submission', {p_student:student, p_lesson_id:lessonId, p_lesson_title:lessonTitle, p_score:score, p_passed:passed, p_answers:answers});
+}
+async function onlineToggleUnlock(student, lessonId){ await sbRpc('toggle_unlock', {p_student:student, p_lesson_id:lessonId}); }
+async function onlineRequestRedo(student, lessonId){ await sbRpc('request_redo', {p_student:student, p_lesson_id:lessonId}); }
+
+async function loadUser(username){
+  const r = await storeGet('user:'+username, true);
+  return r ? JSON.parse(r.value) : null;
+}
+async function saveUser(username, obj){ await storeSet('user:'+username, JSON.stringify(obj), true); }
+async function getRoster(teacherUsername){
+  const r = await storeGet('roster:'+teacherUsername, true);
+  return r ? JSON.parse(r.value) : [];
+}
+async function saveRoster(teacherUsername, arr){ await storeSet('roster:'+teacherUsername, JSON.stringify(arr), true); }
+async function getSubmission(student, lessonId){
+  const r = await storeGet('sub:'+student+':'+lessonId, true);
+  return r ? JSON.parse(r.value) : null;
+}
+async function saveSubmission(student, lessonId, obj){ await storeSet('sub:'+student+':'+lessonId, JSON.stringify(obj), true); }
+
+
+function showAuthError(msg){ document.getElementById('authError').innerHTML = msg? `<div class="auth-error">${msg}</div>` : ''; }
+
+const ADMIN_DEFAULT_USERNAME = 'admin';
+const ADMIN_DEFAULT_PASSWORD = 'admin123';
+async function ensureAdminSeed(){
+  const existing = await loadUser(ADMIN_DEFAULT_USERNAME);
+  if(!existing){
+    await saveUser(ADMIN_DEFAULT_USERNAME, {password:ADMIN_DEFAULT_PASSWORD, name:'Quản trị viên', role:'admin'});
+  }
+}
+
+document.getElementById('authForm').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  showAuthError('');
+  const submitBtn = document.getElementById('authSubmitBtn');
+  const originalLabel = submitBtn.textContent;
+  submitBtn.disabled = true; submitBtn.textContent = 'Đang xử lý...';
+  try{
+    const username = document.getElementById('authUsername').value.trim();
+    const password = document.getElementById('authPassword').value;
+    if(!username || !password){ showAuthError('Vui lòng nhập đầy đủ thông tin.'); return; }
+
+    if(ONLINE_MODE){
+      const u = await onlineVerifyLogin(username, password);
+      if(!u){ showAuthError('Sai tên đăng nhập hoặc mật khẩu.'); return; }
+      session = {username:u.username, name:u.name, role:u.role};
+      enterApp();
+      return;
+    }
+    const u = await loadUser(username);
+    if(!u){ showAuthError('Tài khoản không tồn tại. Học sinh liên hệ giáo viên, giáo viên liên hệ admin để được tạo tài khoản.'); return; }
+    if(u.password !== password){ showAuthError('Sai mật khẩu.'); return; }
+    session = {username, name:u.name, role:u.role};
+    enterApp();
+  }catch(err){
+    console.error(err);
+    showAuthError('Có lỗi xảy ra: ' + (err && err.message ? err.message : String(err)));
+  }finally{
+    submitBtn.disabled = false; submitBtn.textContent = originalLabel;
+  }
+});
+
+(async function initAuthScreen(){
+  const note = document.getElementById('authNote');
+  note.innerHTML = 'Đang kiểm tra kết nối...';
+  await initOnlineMode();
+  if(!ONLINE_MODE){
+    await initStorageMode();
+    await ensureAdminSeed();
+  }
+  let msg = 'Không có đăng ký tự do: Admin tạo tài khoản cho giáo viên, giáo viên tạo tài khoản cho học sinh (trong mục "Bảng điều khiển" sau khi đăng nhập). Hệ thống tự nhận diện vai trò theo tài khoản.<br>';
+  msg += `Tài khoản admin mặc định: <b>${ADMIN_DEFAULT_USERNAME}</b> / mật khẩu <b>${ADMIN_DEFAULT_PASSWORD}</b>.<br>`;
+  if(ONLINE_MODE){
+    msg += '<b style="color:#1f6b56;">✓ Đã kết nối cơ sở dữ liệu trực tuyến (Supabase) — tài khoản đồng bộ thật sự giữa mọi thiết bị.</b>';
+    const importDetails = document.querySelector('.auth-wrap details');
+    if(importDetails) importDetails.style.display = 'none';
+  } else {
+    const st = storageStatusMessage();
+    msg += `<b style="color:${st.ok?'#1f6b56':'#c2502e'};">${st.html}</b>`;
+  }
+  note.innerHTML = msg;
+})();
+
+document.getElementById('importBtn').addEventListener('click', async ()=>{
+  const box = document.getElementById('importBox');
+  const msg = document.getElementById('importMsg');
+  const code = box.value.trim();
+  if(!code){ msg.innerHTML = `<div class="dash-msg err">Vui lòng dán mã đồng bộ vào ô trên.</div>`; return; }
+  try{
+    const count = await importAllData(code);
+    msg.innerHTML = `<div class="dash-msg ok">Đã nhập ${count} mục dữ liệu. Giờ bạn có thể đăng nhập bằng tài khoản vừa được đồng bộ.</div>`;
+    box.value = '';
+  }catch(err){
+    console.error(err);
+    msg.innerHTML = `<div class="dash-msg err">Mã đồng bộ không hợp lệ hoặc bị lỗi khi dán. Hãy chắc chắn đã sao chép trọn vẹn mã.</div>`;
+  }
+});
+
+function enterApp(){
+  document.getElementById('authWrap').style.display='none';
+  renderUserbar();
+  renderTabs();
+  renderChapters();
+  currentLesson = null; currentChapterTitle = null;
+  renderContent(null);
+}
+function logout(){
+  session = null;
+  document.getElementById('authUsername').value='';
+  document.getElementById('authPassword').value='';
+  document.getElementById('authWrap').style.display='flex';
+}
+
+/* ============================================================
+   RENDER — LỚP / CHƯƠNG / BÀI
+   ============================================================ */
+let state = {grade:10};
+let currentLesson = null, currentChapterTitle = null;
+
+function renderTabs(){
+  const el = document.getElementById('gradeTabs');
+  el.innerHTML = Object.keys(DATA).map(g=>
+    `<div class="grade-tab ${+g===state.grade?'active':''}" data-grade="${g}">${DATA[g].label}</div>`
+  ).join('');
+  el.querySelectorAll('.grade-tab').forEach(t=>t.addEventListener('click', ()=>{
+    state.grade = +t.dataset.grade;
+    renderTabs(); renderChapters();
+    currentLesson=null; currentChapterTitle=null;
+    renderContent(null);
+  }));
+}
+
+function renderChapters(){
+  const el = document.getElementById('chapters');
+  const chapters = DATA[state.grade].chapters;
+  el.innerHTML = chapters.map((c,ci)=>`
+    <div class="chapter ${ci===0?'open':''}" data-ci="${ci}">
+      <div class="chapter-head"><span>${c.title}</span><span class="arrow">›</span></div>
+      <ul class="lesson-list">
+        ${c.lessons.map((l,li)=>`
+          <li class="lesson-item" data-ci="${ci}" data-li="${li}">
+            <span>${l.title}</span>
+            ${!l.ready?'<span class="badge-soon">sắp có</span>':''}
+          </li>`).join('')}
+      </ul>
+    </div>`).join('');
+
+  el.querySelectorAll('.chapter-head').forEach(h=>h.addEventListener('click',()=>{
+    h.parentElement.classList.toggle('open');
+  }));
+  el.querySelectorAll('.lesson-item').forEach(it=>it.addEventListener('click',()=>{
+    const ci = +it.dataset.ci, li = +it.dataset.li;
+    el.querySelectorAll('.lesson-item').forEach(x=>x.classList.remove('active'));
+    it.classList.add('active');
+    currentLesson = chapters[ci].lessons[li];
+    currentChapterTitle = chapters[ci].title;
+    renderContent(currentLesson, currentChapterTitle);
+    closeSidebarMobile();
+    document.querySelector('.main').scrollTo(0,0);
+  }));
+}
+
+async function renderContent(lesson, chapterTitle){
+  const el = document.getElementById('content');
+  if(!lesson){
+    el.innerHTML = `
+      <div class="placeholder" style="margin-top:60px;">
+        <h3>Chọn một bài học ở menu bên trái để bắt đầu</h3>
+        <p>Nội dung bám sát sách giáo khoa Hóa học GDPT 2018, có ví dụ minh hoạ và bài tập kèm đáp án chi tiết. Mỗi bài của lớp 10 còn có bài kiểm tra chấm điểm tự động.</p>
+      </div>`;
+    return;
+  }
+  if(!lesson.ready){
+    el.innerHTML = `
+      <div class="crumb">${chapterTitle || ''}</div>
+      <h2 class="lesson-title">${lesson.title}</h2>
+      <div class="placeholder">
+        <h3>Bài học này đang được biên soạn</h3>
+        <p>Khung chương trình đã lên sẵn đúng thứ tự sách giáo khoa. Nội dung chi tiết cho bài này sẽ được thêm trong bước tiếp theo.</p>
+      </div>`;
+    return;
+  }
+  const sectionsHtml = lesson.sections.map(s=>`
+    <div class="section"><h3>${s.heading}</h3><div class="body">${s.body}</div></div>`).join('');
+  const examplesHtml = lesson.examples && lesson.examples.length ? `
+    <div class="section"><h3>Ví dụ minh hoạ</h3>
+      ${lesson.examples.map((e,i)=>`
+        <div class="example"><div class="tag">VÍ DỤ ${i+1}</div>
+          <div><b>Đề bài:</b> ${e.problem}</div>
+          <div style="margin-top:6px;"><b>Lời giải:</b> ${e.solution}</div></div>`).join('')}
+    </div>` : '';
+  const exercisesHtml = lesson.exercises && lesson.exercises.length ? `
+    <div class="section"><h3>Bài tập tự luyện (xem đáp án bất cứ lúc nào)</h3>
+      ${lesson.exercises.map((e,i)=>`
+        <div class="exercise"><span class="qnum">Câu ${i+1}.</span>${e.q}
+          <details><summary>Xem đáp án & giải thích</summary><div class="ans">${e.ans}</div></details>
+        </div>`).join('')}
+    </div>` : '';
+
+  el.innerHTML = `
+    <div class="crumb">${chapterTitle || ''}</div>
+    <h2 class="lesson-title">${lesson.title}</h2>
+    ${sectionsHtml}${examplesHtml}${exercisesHtml}
+    ${lesson.quiz ? `<div class="section"><h3>Bài kiểm tra (chấm điểm tự động)</h3><div id="quizArea"></div></div>` : ''}
+  `;
+  if(lesson.quiz){
+    const area = document.getElementById('quizArea');
+    if(!session){
+      area.innerHTML = `<p class="qz-intro">Đăng nhập để làm bài kiểm tra và gửi kết quả cho giáo viên.</p>`;
+    } else if(session.role==='teacher' || session.role==='admin'){
+      area.innerHTML = renderTeacherQuizPreview(lesson);
+    } else {
+      await mountStudentQuiz(lesson);
+    }
+  }
+}
+
+/* ============================================================
+   QUIZ — HỌC SINH
+   ============================================================ */
+async function fetchSubmission(student, lessonId){
+  if(ONLINE_MODE){
+    try{
+      const rows = await sbFetch('/rest/v1/submissions?student_username=eq.'+encodeURIComponent(student)+'&lesson_id=eq.'+encodeURIComponent(lessonId)+'&select=*');
+      if(!rows || !rows.length) return null;
+      const r = rows[0];
+      return {student:r.student_username, lessonId:r.lesson_id, lessonTitle:r.lesson_title, score:r.score, passed:r.passed, answers:r.answers, attempts:r.attempts, unlocked:r.unlocked, needsRedo:r.needs_redo};
+    }catch(e){ console.error(e); return null; }
+  }
+  return getSubmission(student, lessonId);
+}
+
+async function mountStudentQuiz(lesson){
+  const area = document.getElementById('quizArea');
+  area.innerHTML = `<p class="qz-intro">Đang tải...</p>`;
+  const sub = await fetchSubmission(session.username, lesson.id);
+  if(sub && sub.needsRedo){
+    area.innerHTML = `<div class="note"><div class="tag">GIÁO VIÊN YÊU CẦU LÀM LẠI</div>Bạn cần làm lại bài kiểm tra này.</div>`;
+    renderQuizForm(lesson, area, sub, true);
+    return;
+  }
+  if(sub && sub.passed){
+    area.innerHTML = renderQuizResultSummary(sub, lesson) +
+      `<button class="btn-retake" id="retakeBtn">Làm lại để ôn tập</button>`;
+    document.getElementById('retakeBtn').onclick = ()=>renderQuizForm(lesson, area, sub, false);
+    return;
+  }
+  renderQuizForm(lesson, area, sub, false);
+}
+
+function renderQuizForm(lesson, area, prevSub, append){
+  const formHtml = `
+    <p class="qz-intro">Cần đạt tối thiểu ${Math.round(PASS_THRESHOLD*100)}% để qua bài. Đáp án chi tiết sẽ hiển thị khi giáo viên mở khoá.</p>
+    <form id="quizForm">
+      ${lesson.quiz.map((q,i)=>`
+        <div class="qz-q">
+          <div class="qz-qtext"><b>Câu ${i+1}.</b> ${q.q}</div>
+          ${q.options.map((op,oi)=>`
+            <label class="qz-opt"><input type="radio" name="q${i}" value="${oi}" required> <span>${op}</span></label>
+          `).join('')}
+        </div>`).join('')}
+      <button type="submit" class="btn-submit">Nộp bài</button>
+    </form>`;
+  area.innerHTML = formHtml;
+  document.getElementById('quizForm').addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    let correctCount = 0; const answers=[];
+    lesson.quiz.forEach((q,i)=>{
+      const val = +fd.get('q'+i);
+      answers.push(val);
+      if(val===q.correct) correctCount++;
+    });
+    const score = Math.round(correctCount/lesson.quiz.length*100);
+    const passed = score >= PASS_THRESHOLD*100;
+    let newSub;
+    if(ONLINE_MODE){
+      await onlineSaveSubmission(session.username, lesson.id, lesson.title, score, passed, answers);
+      newSub = await fetchSubmission(session.username, lesson.id);
+    } else {
+      newSub = {
+        student: session.username, studentName: session.name,
+        lessonId: lesson.id, lessonTitle: lesson.title,
+        score, passed, answers,
+        attempts: (prevSub && prevSub.attempts ? prevSub.attempts : 0) + 1,
+        submittedAt: new Date().toISOString(),
+        unlocked: prevSub ? !!prevSub.unlocked : false,
+        needsRedo: false
+      };
+      await saveSubmission(session.username, lesson.id, newSub);
+    }
+    area.innerHTML = renderQuizResultSummary(newSub, lesson) +
+      (newSub.passed
+        ? `<button class="btn-retake" id="retakeBtn">Làm lại để ôn tập</button>`
+        : `<button class="btn-submit" id="retryBtn">Làm lại ngay</button>`);
+    const rb = document.getElementById('retakeBtn') || document.getElementById('retryBtn');
+    if(rb) rb.onclick = ()=>renderQuizForm(lesson, area, newSub, false);
+  });
+}
+
+function renderQuizResultSummary(sub, lesson){
+  return `
+    <div class="qz-result ${sub.passed?'pass':'fail'}">
+      <div class="qz-score">${sub.score}%</div>
+      <div>
+        <div style="font-weight:700;">${sub.passed? 'Đạt yêu cầu ✓':'Chưa đạt — hãy làm lại'}</div>
+        <div style="font-size:12.5px;color:var(--ink-soft);">Số lần làm: ${sub.attempts} · Đáp án chi tiết: ${sub.unlocked? 'đã mở bởi giáo viên':'đang khoá, chờ giáo viên mở'}</div>
+      </div>
+    </div>
+    ${sub.unlocked? renderAnswerKey(sub, lesson): ''}
+  `;
+}
+function renderAnswerKey(sub, lesson){
+  return `<div style="margin-top:14px;">
+    ${lesson.quiz.map((q,i)=>{
+      const yourAns = sub.answers[i];
+      const ok = yourAns===q.correct;
+      return `<div class="exercise">
+        <div><span class="qnum">Câu ${i+1}.</span>${q.q}</div>
+        <div style="margin-top:6px;color:${ok?'#1f6b56':'#c2502e'};font-weight:600;">Bạn chọn: ${q.options[yourAns]} ${ok?'(Đúng)':'(Sai)'}</div>
+        ${!ok?`<div style="margin-top:3px;">Đáp án đúng: ${q.options[q.correct]}</div>`:''}
+        <div class="ans" style="margin-top:8px;">${q.explain}</div>
+      </div>`;
+    }).join('')}
+  </div>`;
+}
+function renderTeacherQuizPreview(lesson){
+  return `<p class="qz-intro">Bạn đang xem với vai trò giáo viên nên đáp án hiển thị sẵn.</p>` +
+    lesson.quiz.map((q,i)=>`
+      <div class="exercise">
+        <div><span class="qnum">Câu ${i+1}.</span>${q.q}</div>
+        <ul style="margin-top:6px;padding-left:20px;">
+          ${q.options.map((op,oi)=>`<li style="${oi===q.correct?'color:#1f6b56;font-weight:700;':''}">${op}${oi===q.correct?' ✓':''}</li>`).join('')}
+        </ul>
+        <div class="ans" style="margin-top:6px;">${q.explain}</div>
+      </div>`).join('');
+}
+
+/* ============================================================
+   USERBAR + ĐIỀU HƯỚNG BẢNG ĐIỀU KHIỂN
+   ============================================================ */
+function renderUserbar(){
+  const el = document.getElementById('userbar');
+  if(!session){ el.style.display='none'; return; }
+  el.style.display='flex';
+  const roleLabel = session.role==='admin' ? 'ADMIN' : session.role==='teacher' ? 'GIÁO VIÊN' : 'HỌC SINH';
+  const dashLabel = session.role==='student' ? 'Kết quả của tôi' : 'Bảng điều khiển';
+  el.innerHTML = `
+    <div class="ub-left"><span class="ub-role">${roleLabel}</span>${session.name}</div>
+    <div class="ub-right">
+      <button class="ub-btn active" id="navLessons">Bài học</button>
+      <button class="ub-btn" id="navDash">${dashLabel}</button>
+      <button class="ub-btn ub-logout" id="logoutBtn">Đăng xuất</button>
+    </div>`;
+  document.getElementById('navLessons').onclick = ()=>{
+    setActiveNav('navLessons');
+    renderContent(currentLesson, currentChapterTitle);
+  };
+  document.getElementById('navDash').onclick = ()=>{
+    setActiveNav('navDash');
+    if(session.role==='admin') renderAdminDashboard();
+    else if(session.role==='teacher') renderTeacherDashboard();
+    else renderStudentDashboard();
+  };
+  document.getElementById('logoutBtn').onclick = logout;
+}
+function setActiveNav(id){
+  document.querySelectorAll('.userbar .ub-btn').forEach(b=>b.classList.remove('active'));
+  const btn = document.getElementById(id);
+  if(btn) btn.classList.add('active');
+}
+
+/* ---------- Bảng điều khiển ADMIN ---------- */
+function syncCardHtml(idPrefix){
+  return `
+    <div class="dash-section">
+      <div class="dash-card">
+        <h4>Đồng bộ tài khoản sang thiết bị / lần mở khác</h4>
+        <p class="qz-intro">File này không có máy chủ nên không tự đồng bộ qua mạng. Bấm "Lấy mã đồng bộ", sao chép, rồi gửi (Zalo/Messenger...) cho người cần đăng nhập ở máy khác — họ dán mã vào mục "Đã nhận mã đồng bộ" ở màn hình đăng nhập trước khi đăng nhập.</p>
+        <button type="button" class="mini-btn" id="${idPrefix}ExportBtn">Lấy mã đồng bộ</button>
+        <textarea id="${idPrefix}ExportBox" readonly rows="4" style="display:none;width:100%;margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;border:1.5px solid var(--border);border-radius:8px;padding:8px;"></textarea>
+        <button type="button" class="mini-btn" id="${idPrefix}CopyBtn" style="display:none;margin-top:6px;">Sao chép</button>
+        <div id="${idPrefix}ExportMsg"></div>
+      </div>
+    </div>`;
+}
+function bindSyncCard(idPrefix){
+  document.getElementById(idPrefix+'ExportBtn').addEventListener('click', async ()=>{
+    const code = await exportAllData();
+    const box = document.getElementById(idPrefix+'ExportBox');
+    box.style.display='block'; box.value = code;
+    document.getElementById(idPrefix+'CopyBtn').style.display='inline-block';
+  });
+  document.getElementById(idPrefix+'CopyBtn').addEventListener('click', async ()=>{
+    const box = document.getElementById(idPrefix+'ExportBox');
+    box.select();
+    try{ await navigator.clipboard.writeText(box.value); }
+    catch(e){ try{ document.execCommand('copy'); }catch(e2){} }
+    document.getElementById(idPrefix+'ExportMsg').innerHTML = `<div class="dash-msg ok">Đã sao chép — hãy gửi mã này cho người cần dùng.</div>`;
+  });
+}
+
+async function renderAdminDashboard(){
+  const el = document.getElementById('content');
+  const st = storageStatusMessage();
+  el.innerHTML = `
+    <h2 class="lesson-title">Bảng điều khiển admin</h2>
+    <p style="font-size:12.5px;margin-top:-14px;margin-bottom:18px;color:${ONLINE_MODE?'#1f6b56':(st.ok?'#1f6b56':'#c2502e')};font-weight:600;">${ONLINE_MODE? '✓ Chế độ trực tuyến (Supabase) — dữ liệu đồng bộ thật sự nhiều thiết bị.' : st.html}</p>
+    <div class="dash-section">
+      <div class="dash-card">
+        <h4>Thêm tài khoản giáo viên</h4>
+        <form class="dash-form" id="addTeacherForm">
+          <div class="field"><label>Tên đăng nhập</label><input type="text" id="newTeaUsername" required></div>
+          <div class="field"><label>Họ tên giáo viên</label><input type="text" id="newTeaName" required></div>
+          <div class="field"><label>Mật khẩu</label><input type="text" id="newTeaPassword" required></div>
+          <button type="submit" class="auth-btn" style="width:auto;padding:10px 20px;">Tạo tài khoản</button>
+        </form>
+        <div id="addTeaMsg"></div>
+      </div>
+    </div>
+    <div class="dash-section">
+      <div class="dash-card">
+        <h4>Danh sách giáo viên</h4>
+        <div id="teaList"><p class="qz-intro">Đang tải danh sách giáo viên...</p></div>
+      </div>
+    </div>
+    ${!ONLINE_MODE ? syncCardHtml('adm') : ''}`;
+
+  document.getElementById('addTeacherForm').addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const username = document.getElementById('newTeaUsername').value.trim();
+    const name = document.getElementById('newTeaName').value.trim();
+    const password = document.getElementById('newTeaPassword').value.trim();
+    const msg = document.getElementById('addTeaMsg');
+    if(!username || !name || !password){ msg.innerHTML = `<div class="dash-msg err">Vui lòng nhập đầy đủ thông tin.</div>`; return; }
+    try{
+      if(ONLINE_MODE){
+        await onlineCreateAccount(username, password, name, 'teacher', null);
+        msg.innerHTML = `<div class="dash-msg ok">Đã tạo tài khoản giáo viên cho ${name} (tên đăng nhập: ${username}). Giáo viên có thể đăng nhập ngay ở bất kỳ thiết bị nào.</div>`;
+      } else {
+        const existing = await loadUser(username);
+        if(existing){ msg.innerHTML = `<div class="dash-msg err">Tên đăng nhập đã tồn tại.</div>`; return; }
+        await saveUser(username, {password, name, role:'teacher'});
+        await saveRoster(username, []);
+        const verify = await loadUser(username);
+        if(!verify){
+          msg.innerHTML = `<div class="dash-msg err">Lưu tài khoản KHÔNG thành công (bộ nhớ lưu trữ không phản hồi). Vui lòng thử lại.</div>`;
+          return;
+        }
+        msg.innerHTML = `<div class="dash-msg ok">Đã tạo và xác nhận lưu thành công tài khoản giáo viên cho ${name} (tên đăng nhập: ${username}). ${STORAGE_MODE==='local' ? '<b style="color:#b8862f;">Lưu ý: tài khoản này chỉ nằm trên thiết bị hiện tại. Nếu giáo viên đăng nhập ở thiết bị khác, hãy dùng "mã đồng bộ" bên dưới để gửi tài khoản sang đó.</b>' : !STORAGE_WORKING ? '<b style="color:#c2502e;">Lưu ý: đang ở chế độ chỉ-trong-phiên-này — dùng "mã đồng bộ" bên dưới để gửi tài khoản này sang máy của giáo viên.</b>' : ''}</div>`;
+      }
+      document.getElementById('addTeacherForm').reset();
+      loadTeacherList();
+    }catch(err){
+      msg.innerHTML = `<div class="dash-msg err">${err && err.message ? err.message : 'Có lỗi xảy ra.'}</div>`;
+    }
+  });
+
+  if(!ONLINE_MODE) bindSyncCard('adm');
+  loadTeacherList();
+}
+
+async function loadTeacherList(){
+  const listEl = document.getElementById('teaList');
+  if(ONLINE_MODE){
+    let teachers;
+    try{ teachers = await onlineListTeachers(); }
+    catch(e){ listEl.innerHTML = `<p class="qz-intro">Không tải được danh sách: ${e.message}</p>`; return; }
+    if(!teachers || teachers.length===0){ listEl.innerHTML = `<p class="qz-intro">Chưa có giáo viên nào. Hãy tạo tài khoản ở trên.</p>`; return; }
+    const rows = await Promise.all(teachers.map(async t=>{
+      let count = 0;
+      try{ const students = await onlineListStudentsOf(t.username); count = students ? students.length : 0; }catch(e){}
+      return `<tr><td>${t.name}</td><td>${t.username}</td><td>${count} học sinh</td></tr>`;
+    }));
+    listEl.innerHTML = `<table class="dtab"><tr><th>Họ tên</th><th>Tên đăng nhập</th><th>Số học sinh quản lý</th></tr>${rows.join('')}</table>`;
+    return;
+  }
+  const teachers = await getAllUsersByRole('teacher');
+  if(teachers.length===0){ listEl.innerHTML = `<p class="qz-intro">Chưa có giáo viên nào. Hãy tạo tài khoản ở trên.</p>`; return; }
+  const rows = await Promise.all(teachers.map(async t=>{
+    const roster = await getRoster(t.username);
+    return `<tr><td>${t.data.name}</td><td>${t.username}</td><td>${roster.length} học sinh</td></tr>`;
+  }));
+  listEl.innerHTML = `
+    <table class="dtab">
+      <tr><th>Họ tên</th><th>Tên đăng nhập</th><th>Số học sinh quản lý</th></tr>
+      ${rows.join('')}
+    </table>`;
+}
+
+/* ---------- Bảng điều khiển GIÁO VIÊN ---------- */
+async function renderTeacherDashboard(){
+  const el = document.getElementById('content');
+  const st = storageStatusMessage();
+  el.innerHTML = `
+    <h2 class="lesson-title">Bảng điều khiển giáo viên</h2>
+    <p style="font-size:12.5px;margin-top:-14px;margin-bottom:18px;color:${ONLINE_MODE?'#1f6b56':(st.ok?'#1f6b56':'#c2502e')};font-weight:600;">${ONLINE_MODE? '✓ Chế độ trực tuyến (Supabase) — dữ liệu đồng bộ thật sự nhiều thiết bị.' : st.html}</p>
+    <div class="dash-section">
+      <div class="dash-card">
+        <h4>Thêm tài khoản học sinh</h4>
+        <form class="dash-form" id="addStudentForm">
+          <div class="field"><label>Tên đăng nhập</label><input type="text" id="newStuUsername" required></div>
+          <div class="field"><label>Họ tên học sinh</label><input type="text" id="newStuName" required></div>
+          <div class="field"><label>Mật khẩu</label><input type="text" id="newStuPassword" required></div>
+          <button type="submit" class="auth-btn" style="width:auto;padding:10px 20px;">Tạo tài khoản</button>
+        </form>
+        <div id="addStuMsg"></div>
+      </div>
+    </div>
+    <div class="dash-section">
+      <div class="dash-card">
+        <h4>Học sinh & kết quả</h4>
+        <div id="stuList"><p class="qz-intro">Đang tải danh sách học sinh...</p></div>
+      </div>
+    </div>
+    ${!ONLINE_MODE ? syncCardHtml('tea') : ''}`;
+
+  document.getElementById('addStudentForm').addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const username = document.getElementById('newStuUsername').value.trim();
+    const name = document.getElementById('newStuName').value.trim();
+    const password = document.getElementById('newStuPassword').value.trim();
+    const msg = document.getElementById('addStuMsg');
+    if(!username || !name || !password){ msg.innerHTML = `<div class="dash-msg err">Vui lòng nhập đầy đủ thông tin.</div>`; return; }
+    try{
+      if(ONLINE_MODE){
+        await onlineCreateAccount(username, password, name, 'student', session.username);
+        msg.innerHTML = `<div class="dash-msg ok">Đã tạo tài khoản cho ${name} (tên đăng nhập: ${username}). Học sinh có thể đăng nhập ngay ở bất kỳ thiết bị nào.</div>`;
+      } else {
+        const exists = await loadUser(username);
+        if(exists){ msg.innerHTML = `<div class="dash-msg err">Tên đăng nhập đã tồn tại.</div>`; return; }
+        await saveUser(username, {password, name, role:'student', teacher:session.username});
+        const roster = await getRoster(session.username);
+        roster.push(username);
+        await saveRoster(session.username, roster);
+        const verify = await loadUser(username);
+        if(!verify){
+          msg.innerHTML = `<div class="dash-msg err">Lưu tài khoản KHÔNG thành công (bộ nhớ lưu trữ không phản hồi). Vui lòng thử lại.</div>`;
+          return;
+        }
+        msg.innerHTML = `<div class="dash-msg ok">Đã tạo và xác nhận lưu thành công tài khoản cho ${name} (tên đăng nhập: ${username}). ${STORAGE_MODE==='local' ? '<b style="color:#b8862f;">Lưu ý: tài khoản này chỉ nằm trên thiết bị hiện tại. Nếu học sinh dùng thiết bị khác, hãy dùng "mã đồng bộ" bên dưới để gửi tài khoản sang đó.</b>' : !STORAGE_WORKING ? '<b style="color:#c2502e;">Lưu ý: đang ở chế độ chỉ-trong-phiên-này — dùng "mã đồng bộ" bên dưới để gửi tài khoản này sang máy của học sinh.</b>' : ''}</div>`;
+      }
+      document.getElementById('addStudentForm').reset();
+      loadStudentList();
+    }catch(err){
+      msg.innerHTML = `<div class="dash-msg err">${err && err.message ? err.message : 'Có lỗi xảy ra.'}</div>`;
+    }
+  });
+
+  if(!ONLINE_MODE) bindSyncCard('tea');
+  loadStudentList();
+}
+
+async function loadStudentList(){
+  const listEl = document.getElementById('stuList');
+  const quizLessons = allQuizLessons();
+
+  if(ONLINE_MODE){
+    let students;
+    try{ students = await onlineListStudentsOf(session.username); }
+    catch(e){ listEl.innerHTML = `<p class="qz-intro">Không tải được danh sách: ${e.message}</p>`; return; }
+    if(!students || students.length===0){ listEl.innerHTML = `<p class="qz-intro">Chưa có học sinh nào. Hãy tạo tài khoản ở trên.</p>`; return; }
+    const cards = await Promise.all(students.map(async (u)=>{
+      let subMap = {};
+      try{ subMap = await onlineGetSubmissionsForStudent(u.username); }catch(e){}
+      const subs = quizLessons.map(l=>subMap[l.id]||null);
+      const done = subs.filter(s=>s).length;
+      const passCount = subs.filter(s=>s && s.passed && !s.needsRedo).length;
+      const rows = quizLessons.map((l,i)=>{
+        const s = subs[i];
+        const statusPill = !s ? `<span class="pill none">Chưa làm</span>`
+          : s.needsRedo ? `<span class="pill fail">Yêu cầu làm lại</span>`
+          : s.passed ? `<span class="pill pass">Đạt</span>`
+          : `<span class="pill fail">Chưa đạt</span>`;
+        return `<tr>
+          <td>${l.title}</td><td>${s? s.score+'%':'—'}</td><td>${statusPill}</td><td>${s? s.attempts:0}</td>
+          <td>
+            <button class="mini-btn ${s&&s.unlocked?'on':''}" data-action="toggleUnlock" data-student="${u.username}" data-lesson="${l.id}" ${!s?'disabled':''}>${s&&s.unlocked?'Đã mở':'Mở đáp án'}</button>
+            <button class="mini-btn warn" data-action="redo" data-student="${u.username}" data-lesson="${l.id}" ${!s?'disabled':''}>Yêu cầu làm lại</button>
+          </td>
+        </tr>`;
+      }).join('');
+      return `
+        <details class="stu-card">
+          <summary><span>${u.name} <span style="color:var(--ink-soft);font-weight:400;">(${u.username})</span></span>
+            <span class="stu-meta">Đã làm ${done}/${quizLessons.length} · Đạt ${passCount}/${quizLessons.length}</span>
+          </summary>
+          <table class="dtab">
+            <tr><th>Bài học</th><th>Điểm</th><th>Trạng thái</th><th>Lần làm</th><th>Thao tác</th></tr>
+            ${rows}
+          </table>
+        </details>`;
+    }));
+    listEl.innerHTML = cards.join('');
+    listEl.addEventListener('click', handleDashboardClick);
+    return;
+  }
+
+  const roster = await getRoster(session.username);
+  if(roster.length===0){ listEl.innerHTML = `<p class="qz-intro">Chưa có học sinh nào. Hãy tạo tài khoản ở trên.</p>`; return; }
+  const cards = await Promise.all(roster.map(async (username)=>{
+    const u = await loadUser(username);
+    const subs = await Promise.all(quizLessons.map(l=>getSubmission(username, l.id)));
+    const done = subs.filter(s=>s).length;
+    const passCount = subs.filter(s=>s && s.passed && !s.needsRedo).length;
+    const rows = quizLessons.map((l,i)=>{
+      const s = subs[i];
+      const statusPill = !s ? `<span class="pill none">Chưa làm</span>`
+        : s.needsRedo ? `<span class="pill fail">Yêu cầu làm lại</span>`
+        : s.passed ? `<span class="pill pass">Đạt</span>`
+        : `<span class="pill fail">Chưa đạt</span>`;
+      return `<tr>
+        <td>${l.title}</td>
+        <td>${s? s.score+'%':'—'}</td>
+        <td>${statusPill}</td>
+        <td>${s? s.attempts:0}</td>
+        <td>
+          <button class="mini-btn ${s&&s.unlocked?'on':''}" data-action="toggleUnlock" data-student="${username}" data-lesson="${l.id}" ${!s?'disabled':''}>${s&&s.unlocked?'Đã mở':'Mở đáp án'}</button>
+          <button class="mini-btn warn" data-action="redo" data-student="${username}" data-lesson="${l.id}" ${!s?'disabled':''}>Yêu cầu làm lại</button>
+        </td>
+      </tr>`;
+    }).join('');
+    return `
+      <details class="stu-card">
+        <summary><span>${u? u.name : username} <span style="color:var(--ink-soft);font-weight:400;">(${username})</span></span>
+          <span class="stu-meta">Đã làm ${done}/${quizLessons.length} · Đạt ${passCount}/${quizLessons.length}</span>
+        </summary>
+        <table class="dtab">
+          <tr><th>Bài học</th><th>Điểm</th><th>Trạng thái</th><th>Lần làm</th><th>Thao tác</th></tr>
+          ${rows}
+        </table>
+      </details>`;
+  }));
+  listEl.innerHTML = cards.join('');
+  listEl.addEventListener('click', handleDashboardClick);
+}
+
+async function handleDashboardClick(e){
+  const btn = e.target.closest('button[data-action]');
+  if(!btn || btn.disabled) return;
+  const action = btn.dataset.action, student = btn.dataset.student, lessonId = btn.dataset.lesson;
+  if(ONLINE_MODE){
+    try{
+      if(action==='toggleUnlock') await onlineToggleUnlock(student, lessonId);
+      if(action==='redo') await onlineRequestRedo(student, lessonId);
+    }catch(err){ console.error(err); alert('Có lỗi: '+(err.message||err)); }
+    loadStudentList();
+    return;
+  }
+  const sub = await getSubmission(student, lessonId);
+  if(!sub) return;
+  if(action==='toggleUnlock'){ sub.unlocked = !sub.unlocked; }
+  if(action==='redo'){ sub.needsRedo = true; sub.passed = false; }
+  await saveSubmission(student, lessonId, sub);
+  loadStudentList();
+}
+
+/* ---------- Bảng "Kết quả của tôi" — HỌC SINH ---------- */
+async function renderStudentDashboard(){
+  const el = document.getElementById('content');
+  el.innerHTML = `<h2 class="lesson-title">Kết quả của tôi</h2><div class="dash-card" id="myResults"><p class="qz-intro">Đang tải...</p></div>`;
+  const quizLessons = allQuizLessons();
+  let subs;
+  if(ONLINE_MODE){
+    let subMap = {};
+    try{ subMap = await onlineGetSubmissionsForStudent(session.username); }catch(e){}
+    subs = quizLessons.map(l=>subMap[l.id]||null);
+  } else {
+    subs = await Promise.all(quizLessons.map(l=>getSubmission(session.username, l.id)));
+  }
+  const rows = quizLessons.map((l,i)=>{
+    const s = subs[i];
+    const statusPill = !s ? `<span class="pill none">Chưa làm</span>`
+      : s.needsRedo ? `<span class="pill fail">Cần làm lại</span>`
+      : s.passed ? `<span class="pill pass">Đạt</span>`
+      : `<span class="pill fail">Chưa đạt</span>`;
+    return `<tr>
+      <td>${l.title}</td>
+      <td>${s? s.score+'%':'—'}</td>
+      <td>${statusPill}</td>
+      <td>${s? s.attempts:0}</td>
+      <td>${s&&s.unlocked?'Đã mở':'Đang khoá'}</td>
+    </tr>`;
+  }).join('');
+  document.getElementById('myResults').innerHTML = `
+    <table class="dtab">
+      <tr><th>Bài học</th><th>Điểm cao nhất</th><th>Trạng thái</th><th>Lần làm</th><th>Đáp án</th></tr>
+      ${rows}
+    </table>`;
+}
+
+/* ---------- mobile sidebar toggle ---------- */
+function closeSidebarMobile(){
+  document.getElementById('sidebar').classList.remove('show');
+  document.getElementById('overlay').classList.remove('show');
+}
+document.getElementById('menuBtn').addEventListener('click', ()=>{
+  document.getElementById('sidebar').classList.add('show');
+  document.getElementById('overlay').classList.add('show');
+});
+document.getElementById('overlay').addEventListener('click', closeSidebarMobile);
+</script>
+</body>
+</html>
