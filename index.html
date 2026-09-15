@@ -230,6 +230,7 @@ table.dtab th{background:#f6f3ea;font-size:11.5px;text-transform:uppercase;lette
 }
 .mini-btn.on{background:var(--teal);border-color:var(--teal);color:#fff;}
 .mini-btn.warn{color:var(--flame);border-color:#e9c7ba;}
+.dtab-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;}
 
 @media (max-width:860px){
   .sidebar{position:fixed;left:0;top:0;bottom:0;z-index:10;margin-left:-300px;box-shadow:0 0 30px rgba(0,0,0,.3);}
@@ -239,7 +240,15 @@ table.dtab th{background:#f6f3ea;font-size:11.5px;text-transform:uppercase;lette
   .content{padding:22px 16px 70px;}
   .lesson-title{font-size:22px;}
   .userbar{padding:10px 14px;}
-  table.dtab{font-size:12px;}
+  /* Bảng chuyển thành dạng thẻ xếp dọc trên màn hình hẹp — không cần cuộn ngang */
+  .dtab-wrap{overflow-x:visible;}
+  table.dtab{font-size:13px;display:block;width:100%;}
+  table.dtab tr:first-child{display:none;} /* ẩn dòng tiêu đề gốc (th), thay bằng nhãn trên mỗi ô */
+  table.dtab tr{display:block;border:1.5px solid var(--border);border-radius:10px;padding:8px 10px;margin-bottom:10px;background:#fff;}
+  table.dtab td{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;border-top:1px solid #f0ece0;padding:7px 2px;text-align:right;}
+  table.dtab td:first-child{border-top:none;display:block;text-align:left;}
+  table.dtab td:first-child::before{display:block;margin-bottom:5px;}
+  table.dtab td::before{content:attr(data-label);font-weight:700;color:var(--ink-soft);font-size:10.5px;text-transform:uppercase;letter-spacing:.3px;text-align:left;flex-shrink:0;}
 }
 </style>
 </head>
@@ -3585,18 +3594,18 @@ async function loadTeacherList(){
     const rows = await Promise.all(teachers.map(async t=>{
       let count = 0;
       try{ const students = await onlineListStudentsOf(t.username); count = students ? students.length : 0; }catch(e){}
-      return `<tr><td>${t.name}</td><td>${t.username}</td><td>${count} học sinh</td><td><button class="mini-btn warn" data-action="deleteAcc" data-username="${t.username}" data-role="giáo viên">Xoá</button></td></tr>`;
+      return `<tr><td data-label="Họ tên">${t.name}</td><td data-label="Tên đăng nhập">${t.username}</td><td data-label="Số học sinh">${count} học sinh</td><td data-label="Thao tác"><button class="mini-btn warn" data-action="deleteAcc" data-username="${t.username}" data-role="giáo viên">Xoá</button></td></tr>`;
     }));
-    listEl.innerHTML = `<table class="dtab"><tr><th>Họ tên</th><th>Tên đăng nhập</th><th>Số học sinh quản lý</th><th>Thao tác</th></tr>${rows.join('')}</table>`;
+    listEl.innerHTML = `<div class="dtab-wrap"><table class="dtab"><tr><th>Họ tên</th><th>Tên đăng nhập</th><th>Số học sinh quản lý</th><th>Thao tác</th></tr>${rows.join('')}</table></div>`;
   } else {
     const teachers = await getAllUsersByRole('teacher');
     if(teachers.length===0){ listEl.innerHTML = `<p class="qz-intro">Chưa có giáo viên nào. Hãy tạo tài khoản ở trên.</p>`; }
     else{
       const rows = await Promise.all(teachers.map(async t=>{
         const roster = await getRoster(t.username);
-        return `<tr><td>${t.data.name}</td><td>${t.username}</td><td>${roster.length} học sinh</td><td><button class="mini-btn warn" data-action="deleteAcc" data-username="${t.username}" data-role="giáo viên">Xoá</button></td></tr>`;
+        return `<tr><td data-label="Họ tên">${t.data.name}</td><td data-label="Tên đăng nhập">${t.username}</td><td data-label="Số học sinh">${roster.length} học sinh</td><td data-label="Thao tác"><button class="mini-btn warn" data-action="deleteAcc" data-username="${t.username}" data-role="giáo viên">Xoá</button></td></tr>`;
       }));
-      listEl.innerHTML = `<table class="dtab"><tr><th>Họ tên</th><th>Tên đăng nhập</th><th>Số học sinh quản lý</th><th>Thao tác</th></tr>${rows.join('')}</table>`;
+      listEl.innerHTML = `<div class="dtab-wrap"><table class="dtab"><tr><th>Họ tên</th><th>Tên đăng nhập</th><th>Số học sinh quản lý</th><th>Thao tác</th></tr>${rows.join('')}</table></div>`;
     }
   }
   listEl.addEventListener('click', handleAdminDeleteClick);
@@ -3613,8 +3622,8 @@ async function loadParentList(){
     parents = rows.map(r=>({username:r.username, name:r.data.name, teacher_username:r.data.teacher}));
   }
   if(!parents || parents.length===0){ listEl.innerHTML = `<p class="qz-intro">Chưa có phụ huynh nào. Hãy tạo tài khoản ở trên.</p>`; return; }
-  const rows = parents.map(p=>`<tr><td>${p.name}</td><td>${p.username}</td><td>${p.teacher_username||'—'}</td><td><button class="mini-btn warn" data-action="deleteAcc" data-username="${p.username}" data-role="phụ huynh">Xoá</button></td></tr>`).join('');
-  listEl.innerHTML = `<table class="dtab"><tr><th>Họ tên</th><th>Tên đăng nhập</th><th>Xem kết quả của học sinh</th><th>Thao tác</th></tr>${rows}</table>`;
+  const rows = parents.map(p=>`<tr><td data-label="Họ tên">${p.name}</td><td data-label="Tên đăng nhập">${p.username}</td><td data-label="Học sinh liên kết">${p.teacher_username||'—'}</td><td data-label="Thao tác"><button class="mini-btn warn" data-action="deleteAcc" data-username="${p.username}" data-role="phụ huynh">Xoá</button></td></tr>`).join('');
+  listEl.innerHTML = `<div class="dtab-wrap"><table class="dtab"><tr><th>Họ tên</th><th>Tên đăng nhập</th><th>Xem kết quả của học sinh</th><th>Thao tác</th></tr>${rows}</table></div>`;
   listEl.addEventListener('click', handleAdminDeleteClick);
 }
 
@@ -3704,8 +3713,11 @@ function buildQuizRowsHtml(quizLessons, subs, studentUsername){
       : s.passed ? `<span class="pill pass">Đạt</span>`
       : `<span class="pill fail">Chưa đạt</span>`;
     return `<tr>
-      <td>${l.title}</td><td>${s? s.score+'%':'—'}</td><td>${statusPill}</td><td>${s? s.attempts:0}</td>
-      <td>
+      <td data-label="Bài học">${l.title}</td>
+      <td data-label="Điểm">${s? s.score+'%':'—'}</td>
+      <td data-label="Trạng thái">${statusPill}</td>
+      <td data-label="Lần làm">${s? s.attempts:0}</td>
+      <td data-label="Thao tác">
         <button class="mini-btn ${s&&s.unlocked?'on':''}" data-action="toggleUnlock" data-student="${studentUsername}" data-lesson="${l.id}" ${!s?'disabled':''}>${s&&s.unlocked?'Đã mở':'Mở đáp án'}</button>
         <button class="mini-btn warn" data-action="redo" data-student="${studentUsername}" data-lesson="${l.id}" ${!s?'disabled':''}>Yêu cầu làm lại</button>
       </td>
@@ -3738,22 +3750,24 @@ function buildExamSectionHtml(examEntries, subsByLessonId, studentUsername){
         </form>
       </details>` : '';
     return `<tr>
-      <td>${ex.groupLabel}<br><span style="color:var(--ink-soft);">${ex.title}</span>${essayBlock}</td>
-      <td>${s? s.score+'%':'—'}</td><td>${statusPill}</td><td>${s? s.attempts:0}</td>
-      <td>
+      <td data-label="Đề">${ex.groupLabel}<br><span style="color:var(--ink-soft);">${ex.title}</span>${essayBlock}</td>
+      <td data-label="Điểm TN">${s? s.score+'%':'—'}</td>
+      <td data-label="Trạng thái">${statusPill}</td>
+      <td data-label="Lần làm">${s? s.attempts:0}</td>
+      <td data-label="Thao tác">
         <button class="mini-btn ${s&&s.unlocked?'on':''}" data-action="toggleUnlock" data-student="${studentUsername}" data-lesson="${ex.id}" ${!s?'disabled':''}>${s&&s.unlocked?'Đã mở':'Mở đáp án'}</button>
         <button class="mini-btn warn" data-action="redo" data-student="${studentUsername}" data-lesson="${ex.id}" ${!s?'disabled':''}>Yêu cầu làm lại</button>
       </td>
     </tr>`;
   }).join('');
   return `
-    <details style="margin-top:10px;">
-      <summary style="cursor:pointer;font-size:12.8px;font-weight:700;color:var(--teal-dk);">📝 Luyện đề & đề tổng hợp — đã làm ${done}/${examEntries.length}</summary>
+    <div style="margin-top:10px;">
+      <div style="font-size:13px;font-weight:700;color:var(--teal-dk);margin-bottom:6px;">📝 Luyện đề & đề tổng hợp — đã làm ${done}/${examEntries.length}</div>
       <table class="dtab" style="margin-top:6px;">
         <tr><th>Đề</th><th>Điểm TN</th><th>Trạng thái</th><th>Lần làm</th><th>Thao tác</th></tr>
         ${rows}
       </table>
-    </details>`;
+    </div>`;
 }
 function bindEssayGradeForms(listEl, examEntries){
   listEl.querySelectorAll('.essay-grade-form').forEach(form=>{
@@ -3796,11 +3810,14 @@ async function loadStudentList(){
           <summary><span>${u.name} <span style="color:var(--ink-soft);font-weight:400;">(${u.username})</span></span>
             <span class="stu-meta">Đã làm ${done}/${quizLessons.length} · Đạt ${passCount}/${quizLessons.length}</span>
           </summary>
-          <table class="dtab">
-            <tr><th>Bài học</th><th>Điểm</th><th>Trạng thái</th><th>Lần làm</th><th>Thao tác</th></tr>
-            ${quizRows}
-          </table>
           ${examSection}
+          <details style="margin-top:14px;">
+            <summary style="cursor:pointer;font-size:12.8px;font-weight:700;color:var(--ink-soft);">📚 Bài kiểm tra theo bài học (${quizLessons.length} bài) — bấm để xem</summary>
+            <table class="dtab" style="margin-top:6px;">
+              <tr><th>Bài học</th><th>Điểm</th><th>Trạng thái</th><th>Lần làm</th><th>Thao tác</th></tr>
+              ${quizRows}
+            </table>
+          </details>
         </details>`;
     }));
     listEl.innerHTML = cards.join('');
@@ -3827,11 +3844,14 @@ async function loadStudentList(){
         <summary><span>${u? u.name : username} <span style="color:var(--ink-soft);font-weight:400;">(${username})</span></span>
           <span class="stu-meta">Đã làm ${done}/${quizLessons.length} · Đạt ${passCount}/${quizLessons.length}</span>
         </summary>
-        <table class="dtab">
-          <tr><th>Bài học</th><th>Điểm</th><th>Trạng thái</th><th>Lần làm</th><th>Thao tác</th></tr>
-          ${quizRows}
-        </table>
         ${examSection}
+        <details style="margin-top:14px;">
+          <summary style="cursor:pointer;font-size:12.8px;font-weight:700;color:var(--ink-soft);">📚 Bài kiểm tra theo bài học (${quizLessons.length} bài) — bấm để xem</summary>
+          <table class="dtab" style="margin-top:6px;">
+            <tr><th>Bài học</th><th>Điểm</th><th>Trạng thái</th><th>Lần làm</th><th>Thao tác</th></tr>
+            ${quizRows}
+          </table>
+        </details>
       </details>`;
   }));
   listEl.innerHTML = cards.join('');
@@ -3886,18 +3906,18 @@ function renderQuizTableHtml(data){
       : s.passed ? `<span class="pill pass">Đạt</span>`
       : `<span class="pill fail">Chưa đạt</span>`;
     return `<tr>
-      <td>${l.title}</td>
-      <td>${s? s.score+'%':'—'}</td>
-      <td>${statusPill}</td>
-      <td>${s? s.attempts:0}</td>
-      <td>${s&&s.unlocked?'Đã mở':'Đang khoá'}</td>
+      <td data-label="Bài học">${l.title}</td>
+      <td data-label="Điểm cao nhất">${s? s.score+'%':'—'}</td>
+      <td data-label="Trạng thái">${statusPill}</td>
+      <td data-label="Lần làm">${s? s.attempts:0}</td>
+      <td data-label="Đáp án">${s&&s.unlocked?'Đã mở':'Đang khoá'}</td>
     </tr>`;
   }).join('');
   return `<h4>Bài kiểm tra theo bài</h4>
-    <table class="dtab">
+    <div class="dtab-wrap"><table class="dtab">
       <tr><th>Bài học</th><th>Điểm cao nhất</th><th>Trạng thái</th><th>Lần làm</th><th>Đáp án</th></tr>
       ${rows}
-    </table>`;
+    </table></div>`;
 }
 function renderExamTableHtml(data){
   const {examEntries, subsByLessonId} = data;
@@ -3915,19 +3935,19 @@ function renderExamTableHtml(data){
       : `<span class="pill none">Chờ chấm</span>`;
     const feedback = essayFeedbackOf(essaySub, ex);
     return `<tr>
-      <td>${ex.groupLabel}<br><span style="color:var(--ink-soft);">${ex.title}</span>${feedback? `<div class="note" style="margin-top:6px;"><div class="tag">NHẬN XÉT</div>${feedback}</div>`:''}</td>
-      <td>${s? s.score+'%':'—'}</td>
-      <td>${statusPill}</td>
-      <td>${essayStatus}</td>
-      <td>${s? s.attempts:0}</td>
-      <td>${s&&s.unlocked?'Đã mở 🔓':'Đang khoá 🔒'}</td>
+      <td data-label="Đề">${ex.groupLabel}<br><span style="color:var(--ink-soft);">${ex.title}</span>${feedback? `<div class="note" style="margin-top:6px;"><div class="tag">NHẬN XÉT</div>${feedback}</div>`:''}</td>
+      <td data-label="Điểm TN">${s? s.score+'%':'—'}</td>
+      <td data-label="Trạng thái TN">${statusPill}</td>
+      <td data-label="Điểm tự luận">${essayStatus}</td>
+      <td data-label="Lần làm">${s? s.attempts:0}</td>
+      <td data-label="Đáp án mẫu">${s&&s.unlocked?'Đã mở 🔓':'Đang khoá 🔒'}</td>
     </tr>`;
   }).join('');
   return `<h4>📝 Luyện đề & đề tổng hợp</h4>
-    <table class="dtab">
+    <div class="dtab-wrap"><table class="dtab">
       <tr><th>Đề</th><th>Điểm TN</th><th>Trạng thái TN</th><th>Điểm tự luận</th><th>Lần làm</th><th>Đáp án mẫu</th></tr>
       ${examRows}
-    </table>`;
+    </table></div>`;
 }
 
 async function renderStudentDashboard(){
