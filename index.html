@@ -264,6 +264,14 @@ table.dtab th{background:#f6f3ea;font-size:11.5px;text-transform:uppercase;lette
         <div id="importMsg"></div>
       </div>
     </details>
+    <details style="margin-top:10px;">
+      <summary style="cursor:pointer;font-size:12.5px;color:var(--teal-dk);font-weight:700;">👪 Phụ huynh tra cứu kết quả học tập của con</summary>
+      <div style="margin-top:10px;">
+        <div class="field"><label>Tên đăng nhập của học sinh (con bạn)</label><input type="text" id="parentLookupUsername" placeholder="giáo viên/học sinh cung cấp tên đăng nhập này"></div>
+        <button type="button" class="auth-btn secondary" id="parentLookupBtn">Xem kết quả</button>
+        <div id="parentLookupResult" style="margin-top:12px;"></div>
+      </div>
+    </details>
   </div>
 </div>
 
@@ -2647,6 +2655,16 @@ async function storeSet(key, value, shared){
   memStore[key] = value;
   return {key, value, shared};
 }
+async function storeDelete(key, shared){
+  if(STORAGE_MODE==='local'){
+    try{ localStorage.removeItem(key); return true; }catch(e){ return false; }
+  }
+  if(STORAGE_MODE==='window'){
+    try{ await window.storage.delete(key, shared); return true; }catch(e){ return false; }
+  }
+  delete memStore[key];
+  return true;
+}
 async function storeList(prefix, shared){
   if(STORAGE_MODE==='local'){
     const keys=[];
@@ -2738,7 +2756,19 @@ async function onlineCreateAccount(username, password, name, role, teacherUserna
   const hash = await sha256hex(password);
   await sbRpc('create_app_account', {p_username:username, p_password_hash:hash, p_name:name, p_role:role, p_teacher_username: teacherUsername||null});
 }
+async function onlineDeleteAccount(username){
+  await sbRpc('delete_app_account', {p_username:username});
+}
+async function deleteAccount(username){
+  if(ONLINE_MODE){
+    await onlineDeleteAccount(username);
+    return;
+  }
+  await storeDelete('user:'+username, true);
+  await storeDelete('roster:'+username, true);
+}
 async function onlineListTeachers(){ return sbRpc('list_teachers'); }
+async function onlineListParents(){ return sbRpc('list_parents'); }
 async function onlineListStudentsOf(teacherUsername){ return sbRpc('list_students_of', {p_teacher:teacherUsername}); }
 async function onlineGetSubmissionsForStudent(username){
   const rows = await sbFetch('/rest/v1/submissions?student_username=eq.'+encodeURIComponent(username)+'&select=*');
@@ -2798,14 +2828,14 @@ document.getElementById('authForm').addEventListener('submit', async (e)=>{
     if(ONLINE_MODE){
       const u = await onlineVerifyLogin(username, password);
       if(!u){ showAuthError('Sai tên đăng nhập hoặc mật khẩu.'); return; }
-      session = {username:u.username, name:u.name, role:u.role};
+      session = {username:u.username, name:u.name, role:u.role, linkedStudent:u.teacher_username||null};
       enterApp();
       return;
     }
     const u = await loadUser(username);
     if(!u){ showAuthError('Tài khoản không tồn tại. Học sinh liên hệ giáo viên, giáo viên liên hệ admin để được tạo tài khoản.'); return; }
     if(u.password !== password){ showAuthError('Sai mật khẩu.'); return; }
-    session = {username, name:u.name, role:u.role};
+    session = {username, name:u.name, role:u.role, linkedStudent:u.teacher||null};
     enterApp();
   }catch(err){
     console.error(err);
@@ -2854,6 +2884,12 @@ document.getElementById('importBtn').addEventListener('click', async ()=>{
 function enterApp(){
   document.getElementById('authWrap').style.display='none';
   renderUserbar();
+  if(session.role==='parent'){
+    document.getElementById('sidebar').style.display='none';
+    renderParentDashboard();
+    return;
+  }
+  document.getElementById('sidebar').style.display='';
   renderTabs();
   renderChapters();
   currentLesson = null; currentChapterTitle = null;
@@ -3127,11 +3163,53 @@ function essayFeedbackOf(essaySub, exam){
   return essaySub && essaySub.answers && essaySub.answers[exam.essay.length] ? essaySub.answers[exam.essay.length] : '';
 }
 
-async function saveEssayAnswers(examId, examTitle, essayTexts, prevEssaySub){
-  const score = prevEssaySub ? prevEssaySub.score : 0; // điểm tự luận do giáo viên chấm, giữ nguyên nếu đã có
-  const graded = prevEssaySub ? !!prevEssaySub.passed : false;
+/* ---------- Chấm điểm tự động phần tự luận bằng so khớp nội dung với đáp án mẫu ----------
+   Không dùng API AI. Tách "ý chính" (từ khoá) trong đáp án mẫu, kiểm tra bài làm của học sinh
+   có chứa các ý đó không, tính điểm theo tỉ lệ trùng khớp. Giáo viên vẫn xem và có thể chấm
+   lại (ghi đè) bất cứ lúc nào trong Bảng điều khiển. */
+const VN_STOPWORDS = new Set(['là','của','và','các','một','có','để','trong','này','khi','với','được','không','như','vì','nên','cho','mà','nếu','vào','ra','đến','từ','theo','vẫn','sẽ','đã','rất','nhiều','hơn','cũng','chỉ','tại','về','do','những','trên','dưới','sau','trước','giữa','còn','thì','nào','gì','ở','hay','hoặc','vd','ví','dụ','vậy','đây','đó','sự','các','thành','tạo','một','số']);
+function normalizeVN(text){
+  return (text||'').toLowerCase().replace(/[.,;:!?()"'\-–—/\[\]{}]/g,' ').replace(/\s+/g,' ').trim();
+}
+function extractKeywords(text){
+  return [...new Set(normalizeVN(text).split(' ').filter(w=>w.length>=3 && !VN_STOPWORDS.has(w)))];
+}
+function autoGradeOneAnswer(studentText, sampleText){
+  const keywords = extractKeywords(sampleText);
+  if(keywords.length===0) return {score:0, matched:0, total:0};
+  const studentNorm = ' '+normalizeVN(studentText)+' ';
+  let matched = 0;
+  keywords.forEach(w=>{ if(studentNorm.includes(' '+w+' ')) matched++; });
+  const ratio = matched/keywords.length;
+  return {score: Math.round(ratio*10*2)/2, matched, total: keywords.length};
+}
+function autoGradeEssaySet(exam, essayTexts){
+  if(!exam.essay.length) return {score:0, feedback:''};
+  let sum = 0;
+  const details = exam.essay.map((e,i)=>{
+    const r = autoGradeOneAnswer(essayTexts[i]||'', e.ans);
+    sum += r.score;
+    return `Tự luận ${i+1}: ${r.score}/10 (khớp ${r.matched}/${r.total} ý chính với đáp án mẫu)`;
+  });
+  const avg = Math.round((sum/exam.essay.length)*2)/2;
+  const feedback = `[Phần mềm chấm tự động theo mức độ trùng khớp nội dung với đáp án mẫu] ${details.join('; ')}. Giáo viên có thể xem lại và chỉnh điểm nếu cần.`;
+  return {score: avg, feedback};
+}
+
+async function saveEssayAnswers(exam, essayTexts, prevEssaySub){
+  const examId = exam.id, examTitle = exam.title;
+  const prevGraded = prevEssaySub ? !!prevEssaySub.passed : false;
   const prevFeedback = prevEssaySub && prevEssaySub.answers && prevEssaySub.answers[essayTexts.length] ? prevEssaySub.answers[essayTexts.length] : '';
-  const combined = essayTexts.concat([prevFeedback]);
+  // Nếu giáo viên ĐÃ từng chấm tay trước đó, giữ nguyên điểm/nhận xét đó, không ghi đè bằng máy.
+  // Nếu chưa, để phần mềm tự chấm ngay khi học sinh nộp bài.
+  let score, graded, feedback;
+  if(prevGraded){
+    score = prevEssaySub.score; graded = true; feedback = prevFeedback;
+  } else {
+    const auto = autoGradeEssaySet(exam, essayTexts);
+    score = auto.score; graded = true; feedback = auto.feedback;
+  }
+  const combined = essayTexts.concat([feedback]);
   if(ONLINE_MODE){
     await onlineSaveSubmission(session.username, essayIdOf(examId), examTitle+' (tự luận)', score, graded, combined);
     return await fetchSubmission(session.username, essayIdOf(examId));
@@ -3212,7 +3290,7 @@ async function mountExamAttempt(exam, slotEl){
 
 function renderExamForm(exam, slotEl, prevSub, prevEssaySub){
   slotEl.innerHTML = `
-    <p class="qz-intro">Phần trắc nghiệm (${exam.mcq.length} câu) chấm điểm tự động — cần đạt ${Math.round(PASS_THRESHOLD*100)}%. Phần tự luận (${exam.essay.length} câu) gõ câu trả lời bên dưới — giáo viên sẽ chấm điểm và nhận xét riêng; đáp án mẫu khoá 🔒 đến khi giáo viên mở.</p>
+    <p class="qz-intro">Phần trắc nghiệm (${exam.mcq.length} câu) chấm điểm tự động — cần đạt ${Math.round(PASS_THRESHOLD*100)}%. Phần tự luận (${exam.essay.length} câu) gõ câu trả lời bên dưới — phần mềm sẽ tự chấm điểm ngay khi nộp bài (so khớp nội dung với đáp án mẫu); giáo viên có thể xem và chấm lại. Đáp án mẫu khoá 🔒 đến khi giáo viên mở.</p>
     <form id="examForm_${exam.id}">
       ${exam.mcq.map((q,i)=>`
         <div class="qz-q">
@@ -3257,7 +3335,7 @@ function renderExamForm(exam, slotEl, prevSub, prevEssaySub){
       };
       await saveSubmission(session.username, exam.id, newSub);
     }
-    const newEssaySub = await saveEssayAnswers(exam.id, exam.title, essayTexts, prevEssaySub);
+    const newEssaySub = await saveEssayAnswers(exam, essayTexts, prevEssaySub);
     slotEl.innerHTML = renderExamResultSummary(newSub, newEssaySub, exam) +
       `<button class="btn-retake" id="examRetakeBtn2_${exam.id}">Làm lại để ôn tập</button>`;
     document.getElementById('examRetakeBtn2_'+exam.id).onclick = ()=>renderExamForm(exam, slotEl, newSub, newEssaySub);
@@ -3329,23 +3407,26 @@ function renderUserbar(){
   const el = document.getElementById('userbar');
   if(!session){ el.style.display='none'; return; }
   el.style.display='flex';
-  const roleLabel = session.role==='admin' ? 'ADMIN' : session.role==='teacher' ? 'GIÁO VIÊN' : 'HỌC SINH';
-  const dashLabel = session.role==='student' ? 'Kết quả của tôi' : 'Bảng điều khiển';
+  const roleLabel = session.role==='admin' ? 'ADMIN' : session.role==='teacher' ? 'GIÁO VIÊN' : session.role==='parent' ? 'PHỤ HUYNH' : 'HỌC SINH';
+  const dashLabel = (session.role==='student' || session.role==='parent') ? 'Kết quả' : 'Bảng điều khiển';
   el.innerHTML = `
     <div class="ub-left"><span class="ub-role">${roleLabel}</span>${session.name}</div>
     <div class="ub-right">
-      <button class="ub-btn active" id="navLessons">Bài học</button>
-      <button class="ub-btn" id="navDash">${dashLabel}</button>
+      ${session.role==='parent' ? '' : '<button class="ub-btn active" id="navLessons">Bài học</button>'}
+      <button class="ub-btn ${session.role==='parent'?'active':''}" id="navDash">${dashLabel}</button>
       <button class="ub-btn ub-logout" id="logoutBtn">Đăng xuất</button>
     </div>`;
-  document.getElementById('navLessons').onclick = ()=>{
-    setActiveNav('navLessons');
-    renderContent(currentLesson, currentChapterTitle);
-  };
+  if(session.role!=='parent'){
+    document.getElementById('navLessons').onclick = ()=>{
+      setActiveNav('navLessons');
+      renderContent(currentLesson, currentChapterTitle);
+    };
+  }
   document.getElementById('navDash').onclick = ()=>{
     setActiveNav('navDash');
     if(session.role==='admin') renderAdminDashboard();
     else if(session.role==='teacher') renderTeacherDashboard();
+    else if(session.role==='parent') renderParentDashboard();
     else renderStudentDashboard();
   };
   document.getElementById('logoutBtn').onclick = logout;
@@ -3410,6 +3491,26 @@ async function renderAdminDashboard(){
         <div id="teaList"><p class="qz-intro">Đang tải danh sách giáo viên...</p></div>
       </div>
     </div>
+    <div class="dash-section">
+      <div class="dash-card">
+        <h4>Thêm tài khoản phụ huynh</h4>
+        <p class="qz-intro">Tài khoản phụ huynh chỉ xem được kết quả học tập (không làm bài), gắn với đúng 1 học sinh theo tên đăng nhập.</p>
+        <form class="dash-form" id="addParentForm">
+          <div class="field"><label>Tên đăng nhập (cho phụ huynh)</label><input type="text" id="newParUsername" required></div>
+          <div class="field"><label>Họ tên phụ huynh</label><input type="text" id="newParName" required></div>
+          <div class="field"><label>Mật khẩu</label><input type="text" id="newParPassword" required></div>
+          <div class="field"><label>Tên đăng nhập của học sinh (con)</label><input type="text" id="newParStudentUsername" required placeholder="ví dụ: hs_lethaibinh"></div>
+          <button type="submit" class="auth-btn" style="width:auto;padding:10px 20px;">Tạo tài khoản</button>
+        </form>
+        <div id="addParMsg"></div>
+      </div>
+    </div>
+    <div class="dash-section">
+      <div class="dash-card">
+        <h4>Danh sách phụ huynh</h4>
+        <div id="parList"><p class="qz-intro">Đang tải danh sách phụ huynh...</p></div>
+      </div>
+    </div>
     ${!ONLINE_MODE ? syncCardHtml('adm') : ''}`;
 
   document.getElementById('addTeacherForm').addEventListener('submit', async (e)=>{
@@ -3442,8 +3543,36 @@ async function renderAdminDashboard(){
     }
   });
 
+  document.getElementById('addParentForm').addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const username = document.getElementById('newParUsername').value.trim();
+    const name = document.getElementById('newParName').value.trim();
+    const password = document.getElementById('newParPassword').value.trim();
+    const studentUsername = document.getElementById('newParStudentUsername').value.trim();
+    const msg = document.getElementById('addParMsg');
+    if(!username || !name || !password || !studentUsername){ msg.innerHTML = `<div class="dash-msg err">Vui lòng nhập đầy đủ thông tin.</div>`; return; }
+    try{
+      if(ONLINE_MODE){
+        await onlineCreateAccount(username, password, name, 'parent', studentUsername);
+        msg.innerHTML = `<div class="dash-msg ok">Đã tạo tài khoản phụ huynh cho ${name} (tên đăng nhập: ${username}), xem kết quả của học sinh "${studentUsername}".</div>`;
+      } else {
+        const existing = await loadUser(username);
+        if(existing){ msg.innerHTML = `<div class="dash-msg err">Tên đăng nhập đã tồn tại.</div>`; return; }
+        await saveUser(username, {password, name, role:'parent', teacher: studentUsername});
+        const verify = await loadUser(username);
+        if(!verify){ msg.innerHTML = `<div class="dash-msg err">Lưu tài khoản KHÔNG thành công. Vui lòng thử lại.</div>`; return; }
+        msg.innerHTML = `<div class="dash-msg ok">Đã tạo tài khoản phụ huynh cho ${name} (tên đăng nhập: ${username}), xem kết quả của học sinh "${studentUsername}". ${STORAGE_MODE==='local' ? '<b style="color:#b8862f;">Lưu ý: dùng "mã đồng bộ" bên dưới nếu phụ huynh đăng nhập ở thiết bị khác.</b>' : ''}</div>`;
+      }
+      document.getElementById('addParentForm').reset();
+      loadParentList();
+    }catch(err){
+      msg.innerHTML = `<div class="dash-msg err">${err && err.message ? err.message : 'Có lỗi xảy ra.'}</div>`;
+    }
+  });
+
   if(!ONLINE_MODE) bindSyncCard('adm');
   loadTeacherList();
+  loadParentList();
 }
 
 async function loadTeacherList(){
@@ -3456,22 +3585,52 @@ async function loadTeacherList(){
     const rows = await Promise.all(teachers.map(async t=>{
       let count = 0;
       try{ const students = await onlineListStudentsOf(t.username); count = students ? students.length : 0; }catch(e){}
-      return `<tr><td>${t.name}</td><td>${t.username}</td><td>${count} học sinh</td></tr>`;
+      return `<tr><td>${t.name}</td><td>${t.username}</td><td>${count} học sinh</td><td><button class="mini-btn warn" data-action="deleteAcc" data-username="${t.username}" data-role="giáo viên">Xoá</button></td></tr>`;
     }));
-    listEl.innerHTML = `<table class="dtab"><tr><th>Họ tên</th><th>Tên đăng nhập</th><th>Số học sinh quản lý</th></tr>${rows.join('')}</table>`;
-    return;
+    listEl.innerHTML = `<table class="dtab"><tr><th>Họ tên</th><th>Tên đăng nhập</th><th>Số học sinh quản lý</th><th>Thao tác</th></tr>${rows.join('')}</table>`;
+  } else {
+    const teachers = await getAllUsersByRole('teacher');
+    if(teachers.length===0){ listEl.innerHTML = `<p class="qz-intro">Chưa có giáo viên nào. Hãy tạo tài khoản ở trên.</p>`; }
+    else{
+      const rows = await Promise.all(teachers.map(async t=>{
+        const roster = await getRoster(t.username);
+        return `<tr><td>${t.data.name}</td><td>${t.username}</td><td>${roster.length} học sinh</td><td><button class="mini-btn warn" data-action="deleteAcc" data-username="${t.username}" data-role="giáo viên">Xoá</button></td></tr>`;
+      }));
+      listEl.innerHTML = `<table class="dtab"><tr><th>Họ tên</th><th>Tên đăng nhập</th><th>Số học sinh quản lý</th><th>Thao tác</th></tr>${rows.join('')}</table>`;
+    }
   }
-  const teachers = await getAllUsersByRole('teacher');
-  if(teachers.length===0){ listEl.innerHTML = `<p class="qz-intro">Chưa có giáo viên nào. Hãy tạo tài khoản ở trên.</p>`; return; }
-  const rows = await Promise.all(teachers.map(async t=>{
-    const roster = await getRoster(t.username);
-    return `<tr><td>${t.data.name}</td><td>${t.username}</td><td>${roster.length} học sinh</td></tr>`;
-  }));
-  listEl.innerHTML = `
-    <table class="dtab">
-      <tr><th>Họ tên</th><th>Tên đăng nhập</th><th>Số học sinh quản lý</th></tr>
-      ${rows.join('')}
-    </table>`;
+  listEl.addEventListener('click', handleAdminDeleteClick);
+}
+
+async function loadParentList(){
+  const listEl = document.getElementById('parList');
+  let parents = [];
+  if(ONLINE_MODE){
+    try{ parents = await onlineListParents(); }
+    catch(e){ listEl.innerHTML = `<p class="qz-intro">Chưa dùng được (cần thêm hàm <code>list_parents</code> trong Supabase — xem hướng dẫn SQL mình đã gửi). Lỗi: ${e.message}</p>`; return; }
+  } else {
+    const rows = await getAllUsersByRole('parent');
+    parents = rows.map(r=>({username:r.username, name:r.data.name, teacher_username:r.data.teacher}));
+  }
+  if(!parents || parents.length===0){ listEl.innerHTML = `<p class="qz-intro">Chưa có phụ huynh nào. Hãy tạo tài khoản ở trên.</p>`; return; }
+  const rows = parents.map(p=>`<tr><td>${p.name}</td><td>${p.username}</td><td>${p.teacher_username||'—'}</td><td><button class="mini-btn warn" data-action="deleteAcc" data-username="${p.username}" data-role="phụ huynh">Xoá</button></td></tr>`).join('');
+  listEl.innerHTML = `<table class="dtab"><tr><th>Họ tên</th><th>Tên đăng nhập</th><th>Xem kết quả của học sinh</th><th>Thao tác</th></tr>${rows}</table>`;
+  listEl.addEventListener('click', handleAdminDeleteClick);
+}
+
+async function handleAdminDeleteClick(e){
+  const btn = e.target.closest('[data-action="deleteAcc"]');
+  if(!btn) return;
+  const username = btn.dataset.username, roleLabel = btn.dataset.role;
+  if(!confirm(`Xoá tài khoản ${roleLabel} "${username}"? Thao tác này không thể hoàn tác.`)) return;
+  btn.disabled = true; btn.textContent = 'Đang xoá...';
+  try{
+    await deleteAccount(username);
+    renderAdminDashboard();
+  }catch(err){
+    alert('Không xoá được: ' + (err && err.message ? err.message : err) + '\n\nNếu lỗi báo "function delete_app_account does not exist", bạn cần vào Supabase SQL Editor chạy đoạn SQL tạo hàm xoá tài khoản (mình đã gửi hướng dẫn riêng).');
+    btn.disabled = false; btn.textContent = 'Xoá';
+  }
 }
 
 /* ---------- Bảng điều khiển GIÁO VIÊN ---------- */
@@ -3701,25 +3860,25 @@ async function handleDashboardClick(e){
 }
 
 /* ---------- Bảng "Kết quả của tôi" — HỌC SINH ---------- */
-async function renderStudentDashboard(){
-  const el = document.getElementById('content');
-  el.innerHTML = `<h2 class="lesson-title">Kết quả của tôi</h2>
-    <div class="dash-card" id="myResults"><p class="qz-intro">Đang tải...</p></div>
-    <div class="dash-card" id="myExamResults" style="margin-top:16px;"><p class="qz-intro">Đang tải...</p></div>`;
+async function getResultsData(username){
   const quizLessons = allQuizLessons();
   const examEntries = allExamEntries();
   let subs, subsByLessonId = {};
   if(ONLINE_MODE){
     let subMap = {};
-    try{ subMap = await onlineGetSubmissionsForStudent(session.username); }catch(e){}
+    try{ subMap = await onlineGetSubmissionsForStudent(username); }catch(e){}
     subs = quizLessons.map(l=>subMap[l.id]||null);
     subsByLessonId = subMap;
   } else {
-    subs = await Promise.all(quizLessons.map(l=>getSubmission(session.username, l.id)));
-    const examSubsArr = await Promise.all(examEntries.map(ex=>getSubmission(session.username, ex.id)));
-    const essaySubsArr = await Promise.all(examEntries.map(ex=>getSubmission(session.username, essayIdOf(ex.id))));
+    subs = await Promise.all(quizLessons.map(l=>getSubmission(username, l.id)));
+    const examSubsArr = await Promise.all(examEntries.map(ex=>getSubmission(username, ex.id)));
+    const essaySubsArr = await Promise.all(examEntries.map(ex=>getSubmission(username, essayIdOf(ex.id))));
     examEntries.forEach((ex,i)=>{ subsByLessonId[ex.id] = examSubsArr[i]; subsByLessonId[essayIdOf(ex.id)] = essaySubsArr[i]; });
   }
+  return {quizLessons, examEntries, subs, subsByLessonId};
+}
+function renderQuizTableHtml(data){
+  const {quizLessons, subs} = data;
   const rows = quizLessons.map((l,i)=>{
     const s = subs[i];
     const statusPill = !s ? `<span class="pill none">Chưa làm</span>`
@@ -3734,12 +3893,15 @@ async function renderStudentDashboard(){
       <td>${s&&s.unlocked?'Đã mở':'Đang khoá'}</td>
     </tr>`;
   }).join('');
-  document.getElementById('myResults').innerHTML = `<h4>Bài kiểm tra theo bài</h4>
+  return `<h4>Bài kiểm tra theo bài</h4>
     <table class="dtab">
       <tr><th>Bài học</th><th>Điểm cao nhất</th><th>Trạng thái</th><th>Lần làm</th><th>Đáp án</th></tr>
       ${rows}
     </table>`;
-
+}
+function renderExamTableHtml(data){
+  const {examEntries, subsByLessonId} = data;
+  if(!examEntries.length) return `<p class="qz-intro">Chưa có đề luyện tập nào được xuất bản.</p>`;
   const examRows = examEntries.map(ex=>{
     const s = subsByLessonId[ex.id];
     const essaySub = subsByLessonId[essayIdOf(ex.id)];
@@ -3761,12 +3923,61 @@ async function renderStudentDashboard(){
       <td>${s&&s.unlocked?'Đã mở 🔓':'Đang khoá 🔒'}</td>
     </tr>`;
   }).join('');
-  document.getElementById('myExamResults').innerHTML = examEntries.length ? `<h4>📝 Luyện đề & đề tổng hợp</h4>
+  return `<h4>📝 Luyện đề & đề tổng hợp</h4>
     <table class="dtab">
       <tr><th>Đề</th><th>Điểm TN</th><th>Trạng thái TN</th><th>Điểm tự luận</th><th>Lần làm</th><th>Đáp án mẫu</th></tr>
       ${examRows}
-    </table>` : `<p class="qz-intro">Chưa có đề luyện tập nào được xuất bản.</p>`;
+    </table>`;
 }
+
+async function renderStudentDashboard(){
+  const el = document.getElementById('content');
+  el.innerHTML = `<h2 class="lesson-title">Kết quả của tôi</h2>
+    <div class="dash-card" id="myResults"><p class="qz-intro">Đang tải...</p></div>
+    <div class="dash-card" id="myExamResults" style="margin-top:16px;"><p class="qz-intro">Đang tải...</p></div>`;
+  const data = await getResultsData(session.username);
+  document.getElementById('myResults').innerHTML = renderQuizTableHtml(data);
+  document.getElementById('myExamResults').innerHTML = renderExamTableHtml(data);
+}
+
+/* ---------- Bảng "Kết quả" — PHỤ HUYNH (chỉ xem, gắn với 1 học sinh do admin thiết lập) ---------- */
+async function renderParentDashboard(){
+  const el = document.getElementById('content');
+  const childUsername = session.linkedStudent;
+  if(!childUsername){
+    el.innerHTML = `<h2 class="lesson-title">Kết quả học tập</h2><p class="qz-intro">Tài khoản này chưa được gắn với học sinh nào — báo admin kiểm tra lại.</p>`;
+    return;
+  }
+  el.innerHTML = `<h2 class="lesson-title">Kết quả học tập của con</h2>
+    <p style="font-size:12.5px;margin-top:-14px;margin-bottom:18px;color:var(--ink-soft);">Tên đăng nhập học sinh: <b>${childUsername}</b></p>
+    <div class="dash-card" id="myResults"><p class="qz-intro">Đang tải...</p></div>
+    <div class="dash-card" id="myExamResults" style="margin-top:16px;"><p class="qz-intro">Đang tải...</p></div>`;
+  const data = await getResultsData(childUsername);
+  document.getElementById('myResults').innerHTML = renderQuizTableHtml(data);
+  document.getElementById('myExamResults').innerHTML = renderExamTableHtml(data);
+}
+
+/* ---------- Phụ huynh tra cứu kết quả (không cần mật khẩu, chỉ cần tên đăng nhập của con) ---------- */
+document.getElementById('parentLookupBtn').addEventListener('click', async ()=>{
+  const uname = document.getElementById('parentLookupUsername').value.trim();
+  const resEl = document.getElementById('parentLookupResult');
+  if(!uname){ resEl.innerHTML = `<p style="color:#c2502e;font-size:13px;">Vui lòng nhập tên đăng nhập của học sinh.</p>`; return; }
+  resEl.innerHTML = `<p class="qz-intro">Đang tải kết quả...</p>`;
+  try{
+    const data = await getResultsData(uname);
+    const hasAny = data.subs.some(s=>s) || Object.values(data.subsByLessonId).some(s=>s);
+    if(!hasAny){
+      resEl.innerHTML = `<p style="font-size:13px;color:var(--ink-soft);">Chưa tìm thấy kết quả nào cho tên đăng nhập này — kiểm tra lại tên đăng nhập hoặc học sinh chưa làm bài nào.</p>`;
+      return;
+    }
+    resEl.innerHTML = `
+      <div class="dash-card">${renderQuizTableHtml(data)}</div>
+      <div class="dash-card" style="margin-top:12px;">${renderExamTableHtml(data)}</div>
+    `;
+  }catch(err){
+    resEl.innerHTML = `<p style="color:#c2502e;font-size:13px;">Có lỗi khi tra cứu: ${err.message||err}</p>`;
+  }
+});
 
 /* ---------- mobile sidebar toggle ---------- */
 function closeSidebarMobile(){
