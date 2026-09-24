@@ -3839,6 +3839,7 @@ async function renderTeacherDashboard(){
 function buildQuizRowsHtml(quizLessons, subs, studentUsername){
   return quizLessons.map((l,i)=>{
     const s = subs[i];
+    if(!s) return ''; /* chưa nộp thì ẩn */
     const statusPill = !s ? `<span class="pill none">Chưa làm</span>`
       : s.needsRedo ? `<span class="pill fail">Yêu cầu làm lại</span>`
       : s.passed ? `<span class="pill pass">Đạt</span>`
@@ -3856,8 +3857,9 @@ function buildQuizRowsHtml(quizLessons, subs, studentUsername){
   }).join('');
 }
 function buildExamSectionHtml(examEntries, subsByLessonId, studentUsername){
+  examEntries = examEntries.filter(ex=>subsByLessonId[ex.id]); /* chỉ đề đã nộp */
   if(!examEntries.length) return '';
-  const done = examEntries.filter(ex=>subsByLessonId[ex.id]).length;
+  const done = examEntries.length;
   const rows = examEntries.map(ex=>{
     const s = subsByLessonId[ex.id];
     const essaySub = subsByLessonId[essayIdOf(ex.id)];
@@ -3893,7 +3895,7 @@ function buildExamSectionHtml(examEntries, subsByLessonId, studentUsername){
   }).join('');
   return `
     <div style="margin-top:10px;">
-      <div style="font-size:13px;font-weight:700;color:var(--teal-dk);margin-bottom:6px;">📝 Luyện đề & đề tổng hợp — đã làm ${done}/${examEntries.length}</div>
+      <div style="font-size:13px;font-weight:700;color:var(--teal-dk);margin-bottom:6px;">📝 Luyện đề & đề tổng hợp — đã nộp ${done} đề</div>
       <table class="dtab" style="margin-top:6px;">
         <tr><th>Đề</th><th>Điểm TN</th><th>Trạng thái</th><th>Lần làm</th><th>Thao tác</th></tr>
         ${rows}
@@ -3918,6 +3920,20 @@ function bindEssayGradeForms(listEl, examEntries){
   });
 }
 
+function buildStudentCardBody(quizLessons, subs, quizRows, examSection){
+  const quizDone = subs.filter(s=>s).length;
+  const quizBlock = quizDone ? `
+          <div style="margin-top:14px;font-size:13px;font-weight:700;color:var(--ink-soft);">📚 Bài kiểm tra theo bài học (${quizDone} bài đã nộp)</div>
+          <table class="dtab" style="margin-top:6px;">
+            <tr><th>Bài học</th><th>Điểm</th><th>Trạng thái</th><th>Lần làm</th><th>Thao tác</th></tr>
+            ${quizRows}
+          </table>` : '';
+  const body = examSection + quizBlock;
+  return body || `<p class="qz-intro" style="margin-top:10px;">Học sinh chưa nộp bài nào.</p>`;
+}
+function countSubmitted(subs, examEntries, subsByLessonId){
+  return subs.filter(s=>s).length + examEntries.filter(ex=>subsByLessonId[ex.id]).length;
+}
 async function loadStudentList(){
   const listEl = document.getElementById('stuList');
   const quizLessons = allQuizLessons();
@@ -3932,21 +3948,15 @@ async function loadStudentList(){
       let subMap = {};
       try{ subMap = await onlineGetSubmissionsForStudent(u.username); }catch(e){}
       const subs = quizLessons.map(l=>subMap[l.id]||null);
-      const done = subs.filter(s=>s).length;
-      const passCount = subs.filter(s=>s && s.passed && !s.needsRedo).length;
+      const submitted = countSubmitted(subs, examEntries, subMap);
       const quizRows = buildQuizRowsHtml(quizLessons, subs, u.username);
       const examSection = buildExamSectionHtml(examEntries, subMap, u.username);
       return `
         <details class="stu-card">
           <summary><span>${u.name} <span style="color:var(--ink-soft);font-weight:400;">(${u.username})</span></span>
-            <span class="stu-meta">Đã làm ${done}/${quizLessons.length} · Đạt ${passCount}/${quizLessons.length}</span>
+            <span class="stu-meta">Đã nộp ${submitted} bài</span>
           </summary>
-          ${examSection}
-          <div style="margin-top:14px;font-size:13px;font-weight:700;color:var(--ink-soft);">📚 Bài kiểm tra theo bài học (${quizLessons.length} bài)</div>
-          <table class="dtab" style="margin-top:6px;">
-            <tr><th>Bài học</th><th>Điểm</th><th>Trạng thái</th><th>Lần làm</th><th>Thao tác</th></tr>
-            ${quizRows}
-          </table>
+          ${buildStudentCardBody(quizLessons, subs, quizRows, examSection)}
         </details>`;
     }));
     listEl.innerHTML = cards.join('');
@@ -3964,21 +3974,15 @@ async function loadStudentList(){
     const essaySubsArr = await Promise.all(examEntries.map(ex=>getSubmission(username, essayIdOf(ex.id))));
     const subsByLessonId = {};
     examEntries.forEach((ex,i)=>{ subsByLessonId[ex.id]=examSubsArr[i]; subsByLessonId[essayIdOf(ex.id)]=essaySubsArr[i]; });
-    const done = subs.filter(s=>s).length;
-    const passCount = subs.filter(s=>s && s.passed && !s.needsRedo).length;
+    const submitted = countSubmitted(subs, examEntries, subsByLessonId);
     const quizRows = buildQuizRowsHtml(quizLessons, subs, username);
     const examSection = buildExamSectionHtml(examEntries, subsByLessonId, username);
     return `
       <details class="stu-card">
         <summary><span>${u? u.name : username} <span style="color:var(--ink-soft);font-weight:400;">(${username})</span></span>
-          <span class="stu-meta">Đã làm ${done}/${quizLessons.length} · Đạt ${passCount}/${quizLessons.length}</span>
+          <span class="stu-meta">Đã nộp ${submitted} bài</span>
         </summary>
-        ${examSection}
-        <div style="margin-top:14px;font-size:13px;font-weight:700;color:var(--ink-soft);">📚 Bài kiểm tra theo bài học (${quizLessons.length} bài)</div>
-        <table class="dtab" style="margin-top:6px;">
-          <tr><th>Bài học</th><th>Điểm</th><th>Trạng thái</th><th>Lần làm</th><th>Thao tác</th></tr>
-          ${quizRows}
-        </table>
+        ${buildStudentCardBody(quizLessons, subs, quizRows, examSection)}
       </details>`;
   }));
   listEl.innerHTML = cards.join('');
@@ -4022,7 +4026,88 @@ async function getResultsData(username){
     const essaySubsArr = await Promise.all(examEntries.map(ex=>getSubmission(username, essayIdOf(ex.id))));
     examEntries.forEach((ex,i)=>{ subsByLessonId[ex.id] = examSubsArr[i]; subsByLessonId[essayIdOf(ex.id)] = essaySubsArr[i]; });
   }
-  return {quizLessons, examEntries, subs, subsByLessonId};
+  const quizByLessonId = {};
+  quizLessons.forEach((l,i)=>{ quizByLessonId[l.id] = subs[i]; });
+  return {quizLessons, examEntries, subs, subsByLessonId, quizByLessonId};
+}
+/* Bảng kết quả gọn: CHỈ hiện những bài/đề học sinh ĐÃ NỘP. Bài chưa làm được ẩn hoàn toàn. */
+function quizStatusPillHtml(s){
+  return !s ? `<span class="pill none">Chưa làm</span>`
+    : s.needsRedo ? `<span class="pill fail">Cần làm lại</span>`
+    : s.passed ? `<span class="pill pass">Đạt</span>`
+    : `<span class="pill fail">Chưa đạt</span>`;
+}
+function examRowHtml(icon, title, ex, s, subsByLessonId){
+  let essayCell = '—';
+  if(ex.essay && ex.essay.length){
+    const essaySub = subsByLessonId[essayIdOf(ex.id)];
+    essayCell = !essaySub ? 'Chưa nộp' : essaySub.passed ? essaySub.score+'/10' : 'Chờ chấm';
+  }
+  return `<tr>
+    <td data-label="Nội dung">${icon} ${title}</td>
+    <td data-label="Điểm TN">${s.score}%</td>
+    <td data-label="Điểm TL">${essayCell}</td>
+    <td data-label="Trạng thái">${quizStatusPillHtml(s)}</td>
+  </tr>`;
+}
+const RESULT_TABLE_HEAD = '<tr><th>Nội dung</th><th>Điểm TN</th><th>Điểm TL</th><th>Trạng thái</th></tr>';
+function renderGroupedResultsHtml(data){
+  const { quizByLessonId, subsByLessonId } = data;
+  let out = '';
+  Object.keys(DATA).forEach(g=>{
+    const grade = DATA[g];
+    let gradeBody = '';
+    grade.chapters.forEach(c=>{
+      let chapterBody = '';
+      c.lessons.forEach(l=>{
+        let rows = '';
+        if(l.quiz){
+          const s = quizByLessonId[l.id];
+          if(s){
+            rows += `<tr>
+              <td data-label="Nội dung">📖 Bài kiểm tra</td>
+              <td data-label="Điểm TN">${s.score}%</td>
+              <td data-label="Điểm TL">—</td>
+              <td data-label="Trạng thái">${quizStatusPillHtml(s)}</td>
+            </tr>`;
+          }
+        }
+        if(l.practiceExams && l.practiceExams.length){
+          l.practiceExams.forEach(pe=>{
+            const s = subsByLessonId[pe.id];
+            if(s) rows += examRowHtml('📝', pe.title, pe, s, subsByLessonId);
+          });
+        }
+        if(!rows) return; /* bài chưa nộp gì -> ẩn */
+        chapterBody += `
+          <div style="margin-top:12px;">
+            <div style="font-weight:700;font-size:14px;color:#14352b;margin-bottom:4px;">${l.title}</div>
+            <div class="dtab-wrap"><table class="dtab">${RESULT_TABLE_HEAD}${rows}</table></div>
+          </div>`;
+      });
+      if(c.comprehensiveExams && c.comprehensiveExams.length){
+        let ceRows = '';
+        c.comprehensiveExams.forEach(ce=>{
+          const s = subsByLessonId[ce.id];
+          if(s) ceRows += examRowHtml('📘', ce.title, ce, s, subsByLessonId);
+        });
+        if(ceRows){
+          chapterBody += `
+            <div style="margin-top:12px;">
+              <div style="font-weight:700;font-size:14px;color:#14352b;margin-bottom:4px;">📘 Đề tổng hợp chương</div>
+              <div class="dtab-wrap"><table class="dtab">${RESULT_TABLE_HEAD}${ceRows}</table></div>
+            </div>`;
+        }
+      }
+      if(chapterBody){
+        gradeBody += `<details style="margin-top:14px;" open><summary style="cursor:pointer;font-weight:700;color:var(--teal-dk);">${c.title}</summary>${chapterBody}</details>`;
+      }
+    });
+    if(gradeBody){
+      out += `<div style="margin-top:18px;"><h4 style="margin-bottom:2px;">${grade.label}</h4>${gradeBody}</div>`;
+    }
+  });
+  return out || `<p class="qz-intro">Chưa có bài nào được nộp.</p>`;
 }
 function renderQuizTableHtml(data){
   const {quizLessons, subs} = data;
@@ -4080,11 +4165,9 @@ function renderExamTableHtml(data){
 async function renderStudentDashboard(){
   const el = document.getElementById('content');
   el.innerHTML = `<h2 class="lesson-title">Kết quả của tôi</h2>
-    <div class="dash-card" id="myResults"><p class="qz-intro">Đang tải...</p></div>
-    <div class="dash-card" id="myExamResults" style="margin-top:16px;"><p class="qz-intro">Đang tải...</p></div>`;
+    <div class="dash-card" id="myResults"><p class="qz-intro">Đang tải...</p></div>`;
   const data = await getResultsData(session.username);
-  document.getElementById('myResults').innerHTML = renderQuizTableHtml(data);
-  document.getElementById('myExamResults').innerHTML = renderExamTableHtml(data);
+  document.getElementById('myResults').innerHTML = renderGroupedResultsHtml(data);
 }
 
 /* ---------- Bảng "Kết quả" — PHỤ HUYNH (chỉ xem, gắn với 1 học sinh do admin thiết lập) ---------- */
@@ -4097,11 +4180,9 @@ async function renderParentDashboard(){
   }
   el.innerHTML = `<h2 class="lesson-title">Kết quả học tập của con</h2>
     <p style="font-size:12.5px;margin-top:-14px;margin-bottom:18px;color:var(--ink-soft);">Tên đăng nhập học sinh: <b>${childUsername}</b></p>
-    <div class="dash-card" id="myResults"><p class="qz-intro">Đang tải...</p></div>
-    <div class="dash-card" id="myExamResults" style="margin-top:16px;"><p class="qz-intro">Đang tải...</p></div>`;
+    <div class="dash-card" id="myResults"><p class="qz-intro">Đang tải...</p></div>`;
   const data = await getResultsData(childUsername);
-  document.getElementById('myResults').innerHTML = renderQuizTableHtml(data);
-  document.getElementById('myExamResults').innerHTML = renderExamTableHtml(data);
+  document.getElementById('myResults').innerHTML = renderGroupedResultsHtml(data);
 }
 
 /* ---------- Phụ huynh tra cứu kết quả (không cần mật khẩu, chỉ cần tên đăng nhập của con) ---------- */
@@ -4117,10 +4198,7 @@ document.getElementById('parentLookupBtn').addEventListener('click', async ()=>{
       resEl.innerHTML = `<p style="font-size:13px;color:var(--ink-soft);">Chưa tìm thấy kết quả nào cho tên đăng nhập này — kiểm tra lại tên đăng nhập hoặc học sinh chưa làm bài nào.</p>`;
       return;
     }
-    resEl.innerHTML = `
-      <div class="dash-card">${renderQuizTableHtml(data)}</div>
-      <div class="dash-card" style="margin-top:12px;">${renderExamTableHtml(data)}</div>
-    `;
+    resEl.innerHTML = `<div class="dash-card">${renderGroupedResultsHtml(data)}</div>`;
   }catch(err){
     resEl.innerHTML = `<p style="color:#c2502e;font-size:13px;">Có lỗi khi tra cứu: ${err.message||err}</p>`;
   }
